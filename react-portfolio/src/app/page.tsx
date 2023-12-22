@@ -1,7 +1,7 @@
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { MainLayout } from "./mainLayout/mainlayout";
 import { SecondPage } from "../secondPage/secondPage";
-import "./page.scss";
+// import "./page.scss";
 
 export default function Home() {
   return (
