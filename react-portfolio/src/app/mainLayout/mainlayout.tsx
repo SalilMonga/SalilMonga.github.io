@@ -10,7 +10,7 @@ export const MainLayout = () => {
   return (
     <div className="text-center p-10">
       <h2 className="text-5xl py-2 text-teal-600 font-medium">Salil Monga</h2>
-      <h3 className="text-2xl py-2">Developer and designer.</h3>
+      <h3 className="text-2xl py-2">Lorem Ipsum text.</h3>
       <p className="text-md py-5 leading-8 text-gray-800">
         Add a good bio here. Lorem ipsum text
       </p>
