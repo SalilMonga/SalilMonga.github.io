@@ -1,6 +1,7 @@
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { MainLayout } from "./mainLayout/mainlayout";
 import { SecondPage } from "../secondPage/secondPage";
+import "./page.scss";
 
 export default function Home() {
   return (
@@ -14,8 +15,9 @@ export default function Home() {
             </li>
             <li>
               <a
-                href="#"
-                className=" bg-gradient-to-r from-cyan-500 to-purple-500 text-white px-4 py-2 rounded-md ml-4"
+                href="MongaSalil_Resume2023.pdf"
+                target="_blank"
+                className="resumeButton"
               >
                 Resume
               </a>
