@@ -3,18 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  /* --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255; */
+  --background: white;
+  --foreground: black;
 }
 
-@media (prefers-color-scheme: white) {
+[data-theme="dark"] {
+  --background: black;
+  --foreground: white;
+}
+
+/* @media (prefers-color-scheme: white) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}
+} */
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -26,7 +33,7 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-@font-face{
+@font-face {
   font-family: "burtons";
-  src:url("../../public/Burtons.otf");
+  src: url("../../public/Burtons.otf");
 }
