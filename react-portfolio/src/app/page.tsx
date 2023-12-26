@@ -1,16 +1,19 @@
 "use client";
 import { BsFillMoonFill, BsSun } from "react-icons/bs";
+import {
+  AiFillTwitterCircle,
+  AiFillLinkedin,
+  AiFillGithub,
+} from "react-icons/ai";
 import { MainLayout } from "./mainLayout/mainlayout";
-import { SecondPage } from "../secondPage/secondPage";
+import { SecondPage } from "./secondPage/secondPage";
 import "./page.scss";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const toggleDarkMode = () => {
-    // document.documentElement.classList.add("dark");
-    // console.log("documentElement:", document.documentElement.classList);
     setDarkMode(!darkMode);
   };
 
@@ -18,9 +21,27 @@ export default function Home() {
     <div className={`${darkMode && "dark"}`}>
       <main className="bg-white  dark:bg-blue-950  px-10">
         <section className=" min-h-screen">
-          <nav className="py-10 mb-12 flex justify-between">
-            <h1 className="text-xl font-burtons">Developed by Salil</h1>
-            <ul className="flex items-center">
+          <nav className="pb-4 pt-8 flex justify-between">
+            <div className=" group-hover:text-black">
+              <h1 className="text-xl font-burtons dark:text-white">
+                Developed by Salil
+              </h1>
+              <div className=" group-hover:text-black flex gap-8 text-2xl py-1">
+                <a href="https://github.com/SalilMonga" target="_blank">
+                  <AiFillGithub className="dark:fill-white" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/salil-monga/"
+                  target="_blank"
+                >
+                  <AiFillLinkedin className="dark:fill-white" />
+                </a>
+                <a href="">
+                  <AiFillTwitterCircle className="dark:fill-white" />
+                </a>
+              </div>
+            </div>
+            <ul className="flex items-center ">
               <li>
                 <Link
                   href=""
@@ -46,9 +67,7 @@ export default function Home() {
               </li>
             </ul>
           </nav>
-          <div>
-            <MainLayout />
-          </div>
+          <MainLayout />
         </section>
         <section>
           <SecondPage />
