@@ -14,6 +14,7 @@ export const SecondPage = () => {
         <a
           href="https://www.notion.so/a1a172ce497741f9a51a9becddf07aa5?v=018bd15eeead45558c6021bcc519301f"
           className="text-blue-500 hover:text-green-400"
+          target="_blank"
         >
           Kanban
         </a>{" "}
@@ -23,6 +24,7 @@ export const SecondPage = () => {
         <a
           href="https://github.com/SalilMonga/my-portfolio"
           className="text-blue-500 hover:text-green-400"
+          target="_blank"
         >
           Github
         </a>{" "}

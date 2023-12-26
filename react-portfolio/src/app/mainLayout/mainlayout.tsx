@@ -1,8 +1,3 @@
-// import {
-//   AiFillTwitterCircle,
-//   AiFillLinkedin,
-//   AiFillGithub,
-// } from "react-icons/ai";
 import Image from "next/image";
 import deved from "../../../public/dev-ed-wave.png";
 
@@ -27,24 +22,6 @@ export const MainLayout = () => {
       <div className="relative mx-auto bg-gradient-to-b from-purple-500 rounded-full w-80 h-80 mt-20 overflow-hidden">
         <Image src={deved} alt={""} layout="fill" objectFit="cover" />
       </div>
-      {/* <div
-        className=" group-hover:text-blue-200 text-2xl
-        flex
-        justify-center
-        gap-16
-        py-3
-        text-gray-60"
-      >
-        <a href="https://github.com/SalilMonga" target="_blank">
-          <AiFillGithub className="dark:fill-white" />
-        </a>
-        <a href="https://www.linkedin.com/in/salil-monga/" target="_blank">
-          <AiFillLinkedin className="dark:fill-white" />
-        </a>
-        <a href="">
-          <AiFillTwitterCircle className="dark:fill-white" />
-        </a>
-      </div> */}
     </div>
   );
 };
