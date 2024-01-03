@@ -9,9 +9,6 @@ export const MainLayout = () => {
           Salil Monga
         </h2>
       </a>
-      {/* <h3 className="text-2xl py-2 dark:text-white">
-        | Developer | Problem-solver |
-      </h3> */}
       <p className="text-md py-5 leading-8 text-gray-800 dark:text-white">
         My life revolves around finding a missing semi-colon in a thousand lines
         of code after working on a project for days and prompting moments of

@@ -10,9 +10,21 @@ import { SecondPage } from "./secondPage/secondPage";
 import "./page.scss";
 import Link from "next/link";
 import { useState } from "react";
+import { ContactPage } from "./contactPage/contactPage";
+// import { ContactPage } from "./contactPage/contactPage";
+export interface Contact {
+  name: string;
+  email: string;
+  message: string;
+}
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(true);
+  // const contactInfo = {
+  //   name: "",
+  //   email: "",
+  //   description: "",
+  // };
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
@@ -71,6 +83,13 @@ export default function Home() {
         </section>
         <section>
           <SecondPage />
+        </section>
+        <section>
+          {/* <ContactPage contact={contactInfo} /> */}
+          {/* <div className="w-full h-screen flex justify-center items-center">
+            <Link href="./contactPage/contactPage.tsx">Contact me</Link>
+          </div> */}
+          <ContactPage />
         </section>
       </main>
     </div>
