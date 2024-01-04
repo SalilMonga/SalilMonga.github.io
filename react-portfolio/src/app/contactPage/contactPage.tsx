@@ -1,26 +1,15 @@
 "use client";
-import { useState } from "react";
-import { Contact } from "../page";
+// import { useState } from "react";
+// import { Contact } from "../page";
 import "./contactPage.scss";
 
-interface ContactPageProps {
-  contact?: Contact;
-}
+// interface ContactPageProps {
+//   contact?: Contact;
+// }
 
 export const ContactPage = () => {
-  // const [formData, setFormData] = useState<Contact>({
-  //   name: "",
-  //   email: "",
-  //   message: "",
-  // });
-
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    // setFormData({
-    //   name: String(event.target.name.value),
-    //   email: String(event.target.email.value),
-    //   message: String(event.target.message.value),
-    // });
     const data = {
       name: String(event.target.name.value),
       email: String(event.target.email.value),
@@ -29,7 +18,7 @@ export const ContactPage = () => {
     console.log("data:", data);
   };
   return (
-    <div className="mx-auto max-w-2xl px-2 my-10">
+    <div className="my-10 mr-8 max-w-screen-sm">
       <h3 className="text-2xl py-1 dark:text-white">Contact Me</h3>
       <form onSubmit={handleSubmit}>
         <div className="w-full flex flex-col py-2 my-4 ">

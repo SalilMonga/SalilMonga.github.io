@@ -4,7 +4,7 @@ import deved from "../../../public/dev-ed-wave.png";
 export const MainLayout = () => {
   return (
     <div className="text-center p-4">
-      <a href="https://www.linkedin.com/in/salil-monga/" target="_blank">
+      <a href="mailto:monga.monga43@gmail.com" target="_blank">
         <h2 className="hover:text-teal-400 text-5xl py-2 text-cyan-600 font-medium">
           Salil Monga
         </h2>

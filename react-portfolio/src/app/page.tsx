@@ -1,10 +1,6 @@
 "use client";
 import { BsFillMoonFill, BsSun } from "react-icons/bs";
-import {
-  AiFillTwitterCircle,
-  AiFillLinkedin,
-  AiFillGithub,
-} from "react-icons/ai";
+import { AiFillMail, AiFillLinkedin, AiFillGithub } from "react-icons/ai";
 import { MainLayout } from "./mainLayout/mainlayout";
 import { SecondPage } from "./secondPage/secondPage";
 import "./page.scss";
@@ -40,17 +36,22 @@ export default function Home() {
               </h1>
               <div className=" group-hover:text-black flex gap-8 text-2xl py-1">
                 <a href="https://github.com/SalilMonga" target="_blank">
-                  <AiFillGithub className="dark:fill-white" />
+                  <AiFillGithub className="icons" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/salil-monga/"
                   target="_blank"
                 >
-                  <AiFillLinkedin className="dark:fill-white" />
+                  <AiFillLinkedin className="icons" />
                 </a>
-                <a href="">
-                  <AiFillTwitterCircle className="dark:fill-white" />
-                </a>
+                {/* <a
+                  href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=monga.monga43@gmail.com"
+                  target="_blank"
+                > */}
+                {/* remove it and put it in the server somewhere */}
+                {/* <a href="mailto:monga.monga43@gmail.com"> */}
+                <AiFillMail className="icons" />
+                {/* </a> */}
               </div>
             </div>
             <ul className="flex items-center ">
@@ -84,7 +85,7 @@ export default function Home() {
         <section>
           <SecondPage />
         </section>
-        <section>
+        <section className="min-h-screen">
           {/* <ContactPage contact={contactInfo} /> */}
           {/* <div className="w-full h-screen flex justify-center items-center">
             <Link href="./contactPage/contactPage.tsx">Contact me</Link>

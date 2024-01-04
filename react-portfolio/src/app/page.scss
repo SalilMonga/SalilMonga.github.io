@@ -3,4 +3,11 @@
   @apply text-white;
   @apply px-4 py-2 ml-4;
   @apply border-none rounded-md;
+  @apply hover:bg-gradient-to-l from-purple-500 to-cyan-500;
+  // @apply hover:transition duration-700 ease-in-out;
+}
+
+.icons {
+  @apply dark:fill-white dark:hover:fill-black;
+  @apply hover:fill-slate-400;
 }
