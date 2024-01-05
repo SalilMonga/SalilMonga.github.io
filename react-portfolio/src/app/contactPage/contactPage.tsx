@@ -1,7 +1,10 @@
-"use client";
+// "use client";
+import { useState } from "react";
 import "./contactPage.scss";
 
 export const ContactPage = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const data = {
@@ -10,7 +13,23 @@ export const ContactPage = () => {
       message: String(event.target.message.value),
     };
     console.log("data:", data);
+    setLoading(true);
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.ok) {
+      setLoading(false);
+      console.log("Message sent successfully");
+    } else {
+      setError(true);
+      console.log("Message failed to send");
+    }
   };
+
   return (
     <div className="my-10 mr-8 max-w-screen-sm">
       <h3 className="text-2xl py-1 dark:text-white">Contact Me</h3>
@@ -57,7 +76,11 @@ export const ContactPage = () => {
             className="w-full py-1 bg-gray-50 border border-gray-100 dark:bg-blue-100"
           />
         </div>
-        <button type="submit" className="messageButton">
+        <button
+          type="submit"
+          className={`messageButton ${error ? "messageErrorGradient" : ""}`}
+          disabled={error}
+        >
           Send Message
         </button>
       </form>
