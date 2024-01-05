@@ -7,7 +7,6 @@ import "./page.scss";
 import Link from "next/link";
 import { useState } from "react";
 import { ContactPage } from "./contactPage/contactPage";
-// import { ContactPage } from "./contactPage/contactPage";
 export interface Contact {
   name: string;
   email: string;
@@ -16,11 +15,6 @@ export interface Contact {
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(true);
-  // const contactInfo = {
-  //   name: "",
-  //   email: "",
-  //   description: "",
-  // };
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
@@ -44,14 +38,7 @@ export default function Home() {
                 >
                   <AiFillLinkedin className="icons" />
                 </a>
-                {/* <a
-                  href="https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&source=mailto&to=monga.monga43@gmail.com"
-                  target="_blank"
-                > */}
-                {/* remove it and put it in the server somewhere */}
-                {/* <a href="mailto:monga.monga43@gmail.com"> */}
                 <AiFillMail className="icons" />
-                {/* </a> */}
               </div>
             </div>
             <ul className="flex items-center ">
@@ -86,10 +73,6 @@ export default function Home() {
           <SecondPage />
         </section>
         <section className="min-h-screen">
-          {/* <ContactPage contact={contactInfo} /> */}
-          {/* <div className="w-full h-screen flex justify-center items-center">
-            <Link href="./contactPage/contactPage.tsx">Contact me</Link>
-          </div> */}
           <ContactPage />
         </section>
       </main>

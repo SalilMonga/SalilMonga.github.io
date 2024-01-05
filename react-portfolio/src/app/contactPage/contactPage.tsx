@@ -1,11 +1,5 @@
 "use client";
-// import { useState } from "react";
-// import { Contact } from "../page";
 import "./contactPage.scss";
-
-// interface ContactPageProps {
-//   contact?: Contact;
-// }
 
 export const ContactPage = () => {
   const handleSubmit = async (event: any) => {
