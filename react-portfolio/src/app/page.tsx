@@ -1,15 +1,17 @@
 "use client";
 import { BsFillMoonFill, BsSun } from "react-icons/bs";
-import {
-  AiFillTwitterCircle,
-  AiFillLinkedin,
-  AiFillGithub,
-} from "react-icons/ai";
+import { AiFillMail, AiFillLinkedin, AiFillGithub } from "react-icons/ai";
 import { MainLayout } from "./mainLayout/mainlayout";
 import { SecondPage } from "./secondPage/secondPage";
 import "./page.scss";
 import Link from "next/link";
 import { useState } from "react";
+import { ContactPage } from "./contactPage/contactPage";
+export interface Contact {
+  name: string;
+  email: string;
+  message: string;
+}
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(true);
@@ -28,17 +30,15 @@ export default function Home() {
               </h1>
               <div className=" group-hover:text-black flex gap-8 text-2xl py-1">
                 <a href="https://github.com/SalilMonga" target="_blank">
-                  <AiFillGithub className="dark:fill-white" />
+                  <AiFillGithub className="icons" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/salil-monga/"
                   target="_blank"
                 >
-                  <AiFillLinkedin className="dark:fill-white" />
+                  <AiFillLinkedin className="icons" />
                 </a>
-                <a href="">
-                  <AiFillTwitterCircle className="dark:fill-white" />
-                </a>
+                <AiFillMail className="icons" />
               </div>
             </div>
             <ul className="flex items-center ">
@@ -71,6 +71,9 @@ export default function Home() {
         </section>
         <section>
           <SecondPage />
+        </section>
+        <section className="min-h-screen">
+          <ContactPage />
         </section>
       </main>
     </div>
