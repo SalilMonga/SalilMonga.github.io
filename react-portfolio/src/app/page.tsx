@@ -7,11 +7,6 @@ import "./page.scss";
 import Link from "next/link";
 import { useState } from "react";
 import { ContactPage } from "./contactPage/contactPage";
-export interface Contact {
-  name: string;
-  email: string;
-  message: string;
-}
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(true);
