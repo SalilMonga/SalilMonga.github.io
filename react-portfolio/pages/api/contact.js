@@ -30,8 +30,9 @@ export default async function ContactAPI(req, res) {
     //   `,
     // });
     // console.log("Email sent: ", mail.messageId);
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
     // return res.status(200).json({ message: "Email sent successfully!" });
-    throw new Error("This is a test error")
+    throw new Error("Error");
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Email not sent! Please try again later." });

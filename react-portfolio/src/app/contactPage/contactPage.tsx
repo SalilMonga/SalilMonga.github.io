@@ -1,40 +1,55 @@
-// "use client";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import "./contactPage.scss";
 
 export const ContactPage = () => {
+  const [formData, setFormData] = useState({
+    name: String(""),
+    email: String(""),
+    message: String(""),
+  });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    const data = {
+    setFormData({
       name: String(event.target.name.value),
       email: String(event.target.email.value),
       message: String(event.target.message.value),
-    };
-    console.log("data:", data);
+    });
+    console.log("data:", formData);
     setLoading(true);
     const response = await fetch("/api/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(formData),
     });
     if (response.ok) {
-      setLoading(false);
       console.log("Message sent successfully");
     } else {
       setError(true);
       console.log("Message failed to send");
     }
+    setLoading(false);
+  };
+
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    setLoading(false);
+    setError(false);
   };
 
   return (
     <div className="my-10 mr-8 max-w-screen-sm">
       <h3 className="text-2xl py-1 dark:text-white">Contact Me</h3>
       <form onSubmit={handleSubmit}>
-        <div className="w-full flex flex-col py-2 my-4 ">
+        <div className="div-format ">
           <label htmlFor="name" className="text-l  dark:text-white">
             Name
           </label>
@@ -44,11 +59,12 @@ export const ContactPage = () => {
             required
             minLength={3}
             maxLength={150}
+            onChange={handleInputChange}
             autoComplete="off"
-            className="bg-gray-50 border border-gray-100 dark:bg-blue-100"
+            className="input-borders"
           />
         </div>
-        <div className="w-full flex flex-col py-2 my-4">
+        <div className="div-format">
           <label htmlFor="email" className="text-l dark:text-white">
             Email
           </label>
@@ -58,11 +74,12 @@ export const ContactPage = () => {
             required
             minLength={5}
             maxLength={150}
+            onChange={handleInputChange}
             autoComplete="off"
-            className="bg-gray-50 border border-gray-100 dark:bg-blue-100"
+            className="input-borders"
           />
         </div>
-        <div className="w-full flex flex-col py-2 my-4">
+        <div className="div-format">
           <label htmlFor="message" className="text-l dark:text-white">
             Message
           </label>
@@ -71,17 +88,44 @@ export const ContactPage = () => {
             required
             minLength={10}
             maxLength={500}
+            onChange={handleInputChange}
             id="message"
             placeholder="How can I help you?"
-            className="w-full py-1 bg-gray-50 border border-gray-100 dark:bg-blue-100"
+            className="w-full py-1 input-borders"
           />
         </div>
+        {error && (
+          <div className="div-format alert-label">
+            <label htmlFor="message" className="text-l text-red-500">
+              Sorry, there was an error sending your message. Please try again.
+            </label>
+          </div>
+        )}
         <button
           type="submit"
-          className={`messageButton ${error ? "messageErrorGradient" : ""}`}
-          disabled={error}
+          className={`messageButton ${
+            error || loading ? "messageErrorGradient" : ""
+          }`}
+          disabled={error || loading}
         >
-          Send Message
+          {loading ? (
+            <svg
+              className="animate-spin h-5 w-5 mx-10"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 4v16m8-8H4"
+              ></path>
+            </svg>
+          ) : (
+            "Send Message"
+          )}
         </button>
       </form>
     </div>
