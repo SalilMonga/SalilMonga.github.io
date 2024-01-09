@@ -19,7 +19,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/app/*": ["./app/*"]
     }
   },
   "include": [
@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/mainLayout/mainlayout.tsx'"
+    "./app/mainLayout/mainlayout.tsx"
   ],
   "exclude": ["node_modules"]
 }

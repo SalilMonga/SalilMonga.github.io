@@ -1,17 +1,25 @@
 "use client";
 import { BsFillMoonFill, BsSun } from "react-icons/bs";
 import { AiFillMail, AiFillLinkedin, AiFillGithub } from "react-icons/ai";
-import { MainLayout } from "./mainLayout/mainlayout";
-import { SecondPage } from "./secondPage/secondPage";
-import "./page.scss";
+import "./aboutMe.scss";
 import Link from "next/link";
 import { useState } from "react";
-import { ContactPage } from "./contactPage/contactPage";
+import { useRouter } from "next/navigation";
+import "../globals.css";
+import { MainLayout } from "../mainLayout/mainlayout";
+import { ContactPage } from "../contactPage/contactPage";
+import { SecondPage } from "../secondPage/secondPage";
 
 export default function Home() {
+  const router = useRouter();
   const [darkMode, setDarkMode] = useState(true);
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
+  };
+  const handleLinkClick = () => {
+    // Assuming '/app/contactPage/contactPage' is the desired route
+    console.log("router:");
+    router.push("/contactPage/contactPage");
   };
 
   return (
@@ -50,6 +58,22 @@ export default function Home() {
                     <BsFillMoonFill className="cursor-pointer text-xl" />
                   )}
                 </Link>
+              </li>
+              <li>
+                {/* <a
+                  href="/contactPage/contactPage"
+                  target="_blank"
+                  className="resumeButton"
+                > */}
+                <Link
+                  href="/contact"
+                  // onClick={() => router.push("/app/contactPage/contactPage")}
+                  // onClick={handleLinkClick}
+                  className="resumeButton"
+                >
+                  Click Here
+                </Link>
+                {/* </a> */}
               </li>
               <li>
                 <a
