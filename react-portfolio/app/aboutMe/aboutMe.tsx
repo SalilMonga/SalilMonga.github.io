@@ -10,14 +10,13 @@ import { MainLayout } from "../mainLayout/mainlayout";
 import { ContactPage } from "../contactPage/contactPage";
 import { SecondPage } from "../secondPage/secondPage";
 
-export default function Home() {
+export const AboutMe = () => {
   const router = useRouter();
   const [darkMode, setDarkMode] = useState(true);
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
   const handleLinkClick = () => {
-    // Assuming '/app/contactPage/contactPage' is the desired route
     console.log("router:");
     router.push("/contactPage/contactPage");
   };
@@ -97,4 +96,4 @@ export default function Home() {
       </main>
     </div>
   );
-}
+};
