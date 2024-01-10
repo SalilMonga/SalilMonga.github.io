@@ -61,3 +61,18 @@ export const MaterialsList = [
     metalness: 1,
   }),
 ];
+
+const createAudio = (file) => {
+  if (typeof window !== "undefined") {
+    return new Audio(file);
+  }
+  return null;
+};
+
+export const SoundEffectsList = [
+  createAudio("/sounds/sound1.ogg"),
+  createAudio("/sounds/sound2.ogg"),
+  createAudio("/sounds/sound3.ogg"),
+  createAudio("/sounds/sound4.ogg"),
+  createAudio("/sounds/sound5.ogg"),
+];

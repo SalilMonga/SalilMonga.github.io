@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { ContactShadows, Float, Environment } from "@react-three/drei";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { GeometriesList, MaterialsList } from "./assets";
+import { GeometriesList, MaterialsList, SoundEffectsList } from "./assets";
 
 export function Shapes() {
   return (
@@ -31,14 +31,6 @@ export function Shapes() {
     </div>
   );
 }
-
-const SoundEffectsList = [
-  new Audio("/sounds/sound1.ogg"),
-  new Audio("/sounds/sound2.ogg"),
-  new Audio("/sounds/sound3.ogg"),
-  new Audio("/sounds/sound4.ogg"),
-  new Audio("/sounds/sound5.ogg"),
-];
 
 function Geometries() {
   return GeometriesList.map(({ position, rate, geometry }) => (
