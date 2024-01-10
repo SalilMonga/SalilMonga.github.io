@@ -1,5 +1,4 @@
-import Image from "next/image";
-import deved from "../../public/dev-ed-wave.png";
+import Avatar from "./avatar/avatar";
 
 export const MainLayout = () => {
   return (
@@ -16,8 +15,8 @@ export const MainLayout = () => {
         head and looking around for hours when everything finally runs, it just
         makes me feel alive.
       </p>
-      <div className="relative mx-auto bg-gradient-to-b from-purple-500 rounded-full w-80 h-80 mt-20 overflow-hidden">
-        <Image src={deved} alt={""} layout="fill" objectFit="cover" />
+      <div className="flex items-center justify-center mx-auto">
+        <Avatar className="row-start-1 max-w-sm md:col-start-2 md:row-end-3" />
       </div>
     </div>
   );

@@ -47,7 +47,7 @@ export const MaterialsList = [
   new THREE.MeshStandardMaterial({
     color: 0x2c3e50,
     roughness: 0.1,
-    metalness: 0.5,
+    metalness: 0.8,
   }),
   new THREE.MeshStandardMaterial({
     color: 0x9b59b6,
@@ -75,4 +75,14 @@ export const SoundEffectsList = [
   createAudio("/sounds/sound3.ogg"),
   createAudio("/sounds/sound4.ogg"),
   createAudio("/sounds/sound5.ogg"),
+  createAudio("/sounds/sound6.ogg"),
+  createAudio("/sounds/sound7.ogg"),
+  createAudio("/sounds/sound8.ogg"),
+  createAudio("/sounds/sound9.ogg"),
+  createAudio("/sounds/sound10.ogg"),
+  createAudio("/sounds/sound11.ogg"),
+  createAudio("/sounds/sound12.ogg"),
+  createAudio("/sounds/sound13.ogg"),
+  createAudio("/sounds/sound14.ogg"),
+  createAudio("/sounds/sound15.ogg"),
 ];
