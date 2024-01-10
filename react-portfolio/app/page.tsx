@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 import { Bounded } from "../src/component/Bounded";
 import { Shapes } from "./shapes/Shapes";
+import Link from "next/link";
 
 export default function Home() {
   const component = useRef(null);
@@ -65,14 +66,14 @@ export default function Home() {
             className="mb-8 text-[clamp(3rem,20vmin,20rem)] font-extrabold leading-none tracking-tighter"
             aria-label="Salil Monga"
           >
-            <a href="/aboutMe">
+            <Link href="/aboutMe">
               <span className="block text-slate-300">
                 {renderLetters("Salil", "first")}
               </span>
               <span className="-mt-[.2em] block text-slate-500">
                 {renderLetters("Monga", "last")}
               </span>
-            </a>
+            </Link>
           </h1>
           <span className="job-title block bg-gradient-to-tr from-yellow-500 via-yellow-200 to-yellow-500 bg-clip-text text-2xl font-bold uppercase tracking-[.2em] text-transparent opacity-100 sm:text-4xl">
             Full-stack developer
