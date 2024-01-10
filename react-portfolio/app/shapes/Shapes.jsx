@@ -1,9 +1,9 @@
 "use client";
-import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, Float, Environment } from "@react-three/drei";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { GeometriesList, MaterialsList } from "./assets";
 
 export function Shapes() {
   return (
@@ -24,74 +24,36 @@ export function Shapes() {
             blur={1}
             far={9}
           />
-          <Environment preset="studio" />
+          <Environment preset="park" />
+          {/* OPTIONS: apartment, city, dawn, forest, lobby, night, park, studio, sunset, warehouse */}
         </Suspense>
       </Canvas>
     </div>
   );
 }
 
+const SoundEffectsList = [
+  new Audio("/sounds/sound1.ogg"),
+  new Audio("/sounds/sound2.ogg"),
+  new Audio("/sounds/sound3.ogg"),
+  new Audio("/sounds/sound4.ogg"),
+  new Audio("/sounds/sound5.ogg"),
+];
+
 function Geometries() {
-  const geometries = [
-    {
-      position: [0, 0, 0],
-      rate: 0.3,
-      geometry: new THREE.IcosahedronGeometry(3), // Gem
-    },
-    {
-      position: [1, -0.75, 4],
-      rate: 0.4,
-      geometry: new THREE.CapsuleGeometry(0.5, 1.6, 2, 16), // Pill
-    },
-    {
-      position: [-1.4, 2, -4],
-      rate: 0.6,
-      geometry: new THREE.DodecahedronGeometry(1.5), // Soccer ball
-    },
-    {
-      position: [-0.8, -0.75, 5],
-      rate: 0.5,
-      geometry: new THREE.TorusGeometry(0.6, 0.25, 16, 32), // Donut
-    },
-    {
-      position: [1.6, 1.6, -4],
-      rate: 0.7,
-      geometry: new THREE.OctahedronGeometry(1.5), // Diamond
-    },
-  ];
-
-  const materials = [
-    new THREE.MeshNormalMaterial(),
-    new THREE.MeshStandardMaterial({ color: 0x2ecc71, roughness: 0 }),
-    new THREE.MeshStandardMaterial({ color: 0xf1c40f, roughness: 0.4 }),
-    new THREE.MeshStandardMaterial({ color: 0xe74c3c, roughness: 0.1 }),
-    new THREE.MeshStandardMaterial({ color: 0x8e44ad, roughness: 0.1 }),
-    new THREE.MeshStandardMaterial({ color: 0x1abc9c, roughness: 0.1 }),
-    new THREE.MeshStandardMaterial({
-      roughness: 0,
-      metalness: 0.5,
-      color: 0x2980b9,
-    }),
-    new THREE.MeshStandardMaterial({
-      color: 0x2c3e50,
-      roughness: 0.1,
-      metalness: 0.5,
-    }),
-  ];
-
-  return geometries.map(({ position, rate, geometry }) => (
+  return GeometriesList.map(({ position, rate, geometry }) => (
     <Geometry
-      key={JSON.stringify(position)} // Unique key
+      key={JSON.stringify(position)}
       position={position.map((p) => p * 2)}
       geometry={geometry}
-      // soundEffects={soundEffects}
-      materials={materials}
+      soundEffects={SoundEffectsList}
+      materials={MaterialsList}
       rate={rate}
     />
   ));
 }
 
-function Geometry({ rate, position, geometry, materials }) {
+function Geometry({ rate, position, geometry, materials, soundEffects }) {
   const ref = useRef();
   const [visible, setVisible] = useState(true);
   const startingMaterial = getRandomMaterial();
@@ -102,11 +64,11 @@ function Geometry({ rate, position, geometry, materials }) {
 
   function handleClick(e) {
     const mesh = e.object;
-
+    gsap.utils.random(soundEffects).play();
     gsap.to(mesh.rotation, {
-      x: `+=${gsap.utils.random(0, 2)}`,
-      y: `+=${gsap.utils.random(0, 2)}`,
-      z: `+=${gsap.utils.random(0, 2)}`,
+      x: `+=${gsap.utils.random(-2, 2)}`,
+      y: `+=${gsap.utils.random(-2, 2)}`,
+      z: `+=${gsap.utils.random(-2, 2)}`,
       yoyo: true,
       duration: 1.3,
       ease: "elastic.out(1, 0.3)",

@@ -4,21 +4,15 @@ import { AiFillMail, AiFillLinkedin, AiFillGithub } from "react-icons/ai";
 import "./aboutMe.scss";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import "../globals.css";
 import { MainLayout } from "../mainLayout/mainlayout";
 import { ContactPage } from "../contactPage/contactPage";
 import { SecondPage } from "../secondPage/secondPage";
 
 export const AboutMe = () => {
-  const router = useRouter();
   const [darkMode, setDarkMode] = useState(true);
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-  };
-  const handleLinkClick = () => {
-    console.log("router:");
-    router.push("/contactPage/contactPage");
   };
 
   return (
@@ -58,22 +52,7 @@ export const AboutMe = () => {
                   )}
                 </Link>
               </li>
-              <li>
-                {/* <a
-                  href="/contactPage/contactPage"
-                  target="_blank"
-                  className="resumeButton"
-                > */}
-                <Link
-                  href="/contact"
-                  // onClick={() => router.push("/app/contactPage/contactPage")}
-                  // onClick={handleLinkClick}
-                  className="resumeButton"
-                >
-                  Click Here
-                </Link>
-                {/* </a> */}
-              </li>
+              <li></li>
               <li>
                 <a
                   href="MongaSalil_Resume2023.pdf"

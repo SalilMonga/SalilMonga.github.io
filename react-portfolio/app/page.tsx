@@ -59,22 +59,22 @@ export default function Home() {
 
   return (
     <Bounded ref={component}>
-      <div className="grid min-h-[70vh] grid-cols-1 items-center">
+      <div className="grid min-h-[70vh] grid-cols-2 items-center sm:grid-cols-1">
         <Shapes />
         <div className="col-start-1">
-          <h1
-            className="mb-8 text-[clamp(3rem,20vmin,20rem)] font-extrabold leading-none tracking-tighter"
+          <h3
+            className="group mb-8 text-[clamp(2rem,15vmin,20rem)] font-bold leading-none tracking-tighter"
             aria-label="Salil Monga"
           >
             <Link href="/aboutMe">
-              <span className="block text-slate-300">
+              <span className="block text-slate-300 group-hover:text-purple-200">
                 {renderLetters("Salil", "first")}
               </span>
-              <span className="-mt-[.2em] block text-slate-500">
+              <span className="-mt-[.2em] block text-slate-500  group-hover:text-purple-300">
                 {renderLetters("Monga", "last")}
               </span>
             </Link>
-          </h1>
+          </h3>
           <span className="job-title block bg-gradient-to-tr from-yellow-500 via-yellow-200 to-yellow-500 bg-clip-text text-2xl font-bold uppercase tracking-[.2em] text-transparent opacity-100 sm:text-4xl">
             Full-stack developer
           </span>
@@ -83,16 +83,3 @@ export default function Home() {
     </Bounded>
   );
 }
-
-// <ul className="flex items-center ">
-//   <li>
-//     <a href="/contact" className="resumeButton">
-//       Contact Page
-//     </a>
-//   </li>
-//   <li>
-//     <a className="resumeButton" href="/aboutMe">
-//       About Me
-//     </a>
-//   </li>
-// </ul>
