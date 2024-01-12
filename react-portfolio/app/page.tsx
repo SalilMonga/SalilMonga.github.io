@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { Bounded } from "../src/component/Bounded";
 import { Shapes } from "./shapes/Shapes";
 import Link from "next/link";
+import { MdArrowOutward } from "react-icons/md";
 
 export default function Home() {
   const component = useRef(null);
@@ -59,40 +60,37 @@ export default function Home() {
 
   return (
     <Bounded ref={component}>
-      <div className="grid min-h-[70vh] grid-cols-1 items-center">
-        <Shapes />
-        <div className="col-start-1">
-          <h1
-            className="mb-8 text-[clamp(3rem,20vmin,20rem)] font-extrabold leading-none tracking-tighter"
+      <div className="ml-8 flex flex-col-reverse md:flex-row items-center content-center min-h-[70vh]">
+        <div className="w-full sm:w-1/2">
+          <h2
+            className="group mb-4 md:mb-8 text-[clamp(2rem,15vmin,20rem)] font-bold leading-none tracking-tighter"
             aria-label="Salil Monga"
           >
             <Link href="/aboutMe">
-              <span className="block text-slate-300">
+              <span className="block text-slate-300 group-hover:text-purple-200 ">
                 {renderLetters("Salil", "first")}
               </span>
-              <span className="-mt-[.2em] block text-slate-500">
+              <span className="-mt-[.2em] block text-slate-500  group-hover:text-purple-300">
                 {renderLetters("Monga", "last")}
               </span>
             </Link>
-          </h1>
+          </h2>
           <span className="job-title block bg-gradient-to-tr from-yellow-500 via-yellow-200 to-yellow-500 bg-clip-text text-2xl font-bold uppercase tracking-[.2em] text-transparent opacity-100 sm:text-4xl">
             Full-stack developer
           </span>
         </div>
+        <div className="sm:w-1/2">
+          <Shapes />
+        </div>
       </div>
+      {/* TODO: Button for mobile */}
+      {/* <button className="group relative flex w-fit items-center justify-center overflow-hidden rounded-md border-2 border-slate-900 bg-slate-50  px-4 py-2 font-bold transition-transform ease-out  hover:scale-105">
+        <span className="absolute inset-0 z-0 h-full translate-y-9 bg-yellow-300 transition-transform  duration-300 ease-in-out group-hover:translate-y-0" />
+        <span className="relative flex items-center justify-center gap-2">
+          {" "}
+          {"Click Here" && <MdArrowOutward className="inline-block bg-black" />}
+        </span>
+      </button> */}
     </Bounded>
   );
 }
-
-// <ul className="flex items-center ">
-//   <li>
-//     <a href="/contact" className="resumeButton">
-//       Contact Page
-//     </a>
-//   </li>
-//   <li>
-//     <a className="resumeButton" href="/aboutMe">
-//       About Me
-//     </a>
-//   </li>
-// </ul>
