@@ -6,7 +6,6 @@ import { gsap } from "gsap";
 import { GeometriesList, MaterialsList, SoundEffectsList } from "./assets";
 
 export function Shapes() {
-  console.log("Shapes");
   return (
     <div className="row-span-1 row-start-1 -mt-9 aspect-square md:col-span-1 md:col-start-2 md:mt-0">
       <Canvas
@@ -55,9 +54,18 @@ function Geometry({ rate, position, geometry, materials, soundEffects }) {
     return gsap.utils.random(materials);
   }
 
+  const playRandomSound = () => {
+    const randomIndex = Math.floor(
+      gsap.utils.random(0, soundEffects.length - 1)
+    );
+    const selectedSound = soundEffects[randomIndex];
+    selectedSound.play();
+  };
+
   function handleClick(e) {
     const mesh = e.object;
-    gsap.utils.random(soundEffects).play();
+    playRandomSound();
+
     gsap.to(mesh.rotation, {
       x: `+=${gsap.utils.random(-2, 2)}`,
       y: `+=${gsap.utils.random(-2, 2)}`,
