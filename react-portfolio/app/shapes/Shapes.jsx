@@ -56,9 +56,9 @@ function Geometry({ rate, position, geometry, materials, soundEffects }) {
 
   const playRandomSound = () => {
     const randomIndex = Math.floor(
-      gsap.utils.random(0, SoundEffectsList.length - 1)
+      gsap.utils.random(0, soundEffects.length - 1)
     );
-    const selectedSound = SoundEffectsList[randomIndex];
+    const selectedSound = soundEffects[randomIndex];
     selectedSound.play();
   };
 
