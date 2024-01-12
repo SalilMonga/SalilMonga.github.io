@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { Howl, Howler } from "howler";
 
 export const GeometriesList = [
   {
@@ -62,27 +63,47 @@ export const MaterialsList = [
   }),
 ];
 
-const createAudio = (file) => {
-  if (typeof window !== "undefined") {
-    return new Audio(file);
-  }
-  return null;
-};
+// const createAudio = (file) => {
+//   if (typeof window !== "undefined") {
+//     return new Audio(file);
+//   }
+//   return null;
+// };
+
+// export const SoundEffectsList = [
+//   createAudio("/sounds/sound1.ogg"),
+//   createAudio("/sounds/sound2.ogg"),
+//   createAudio("/sounds/sound3.ogg"),
+//   createAudio("/sounds/sound4.ogg"),
+//   createAudio("/sounds/sound5.ogg"),
+//   createAudio("/sounds/sound6.ogg"),
+//   createAudio("/sounds/sound7.ogg"),
+//   createAudio("/sounds/sound8.ogg"),
+//   createAudio("/sounds/sound9.ogg"),
+//   createAudio("/sounds/sound10.ogg"),
+//   createAudio("/sounds/sound11.ogg"),
+//   createAudio("/sounds/sound12.ogg"),
+//   createAudio("/sounds/sound13.ogg"),
+//   createAudio("/sounds/sound14.ogg"),
+//   createAudio("/sounds/testSound.mp3"),
+//   createAudio("/sounds/sound15.ogg"),
+// ];
 
 export const SoundEffectsList = [
-  createAudio("/sounds/sound1.ogg"),
-  createAudio("/sounds/sound2.ogg"),
-  createAudio("/sounds/sound3.ogg"),
-  createAudio("/sounds/sound4.ogg"),
-  createAudio("/sounds/sound5.ogg"),
-  createAudio("/sounds/sound6.ogg"),
-  createAudio("/sounds/sound7.ogg"),
-  createAudio("/sounds/sound8.ogg"),
-  createAudio("/sounds/sound9.ogg"),
-  createAudio("/sounds/sound10.ogg"),
-  createAudio("/sounds/sound11.ogg"),
-  createAudio("/sounds/sound12.ogg"),
-  createAudio("/sounds/sound13.ogg"),
-  createAudio("/sounds/sound14.ogg"),
-  createAudio("/sounds/sound15.ogg"),
+  new Howl({ src: ["/sounds/sound1.ogg"] }),
+  new Howl({ src: ["/sounds/sound2.ogg"] }),
+  new Howl({ src: ["/sounds/sound3.ogg"] }),
+  new Howl({ src: ["/sounds/sound4.ogg"] }),
+  new Howl({ src: ["/sounds/sound5.ogg"] }),
+  new Howl({ src: ["/sounds/sound6.ogg"] }),
+  new Howl({ src: ["/sounds/sound7.ogg"] }),
+  new Howl({ src: ["/sounds/sound8.ogg"] }),
+  new Howl({ src: ["/sounds/sound9.ogg"] }),
+  new Howl({ src: ["/sounds/sound10.ogg"] }),
+  new Howl({ src: ["/sounds/sound11.ogg"] }),
+  new Howl({ src: ["/sounds/sound12.ogg"] }),
+  new Howl({ src: ["/sounds/sound13.ogg"] }),
+  new Howl({ src: ["/sounds/sound14.ogg"] }),
+  new Howl({ src: ["/sounds/sound15.ogg"] }),
+  new Howl({ src: ["/sounds/testSound.mp3"] }),
 ];
