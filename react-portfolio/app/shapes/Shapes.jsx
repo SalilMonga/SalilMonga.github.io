@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { GeometriesList, MaterialsList, SoundEffectsList } from "./assets";
 
 export function Shapes() {
+  console.log("Shapes");
   return (
     <div className="row-span-1 row-start-1 -mt-9 aspect-square md:col-span-1 md:col-start-2 md:mt-0">
       <Canvas
