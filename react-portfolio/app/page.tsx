@@ -3,7 +3,6 @@ import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 import { Bounded } from "../src/component/Bounded";
 import { Shapes } from "./shapes/Shapes";
-import Link from "next/link";
 import { NavButton } from "./navButton/navButton";
 
 export default function Home() {
