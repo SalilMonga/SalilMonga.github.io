@@ -25,9 +25,9 @@ export const AboutMe = () => {
                 Developed by Salil
               </h1>
               <div className=" group-hover:text-black flex gap-8 text-2xl py-1">
-                <a href="https://github.com/SalilMonga" target="_blank">
+                <Link href="https://github.com/SalilMonga" target="_blank">
                   <AiFillGithub className="icons" />
-                </a>
+                </Link>
                 <a
                   href="https://www.linkedin.com/in/salil-monga/"
                   target="_blank"
@@ -54,13 +54,13 @@ export const AboutMe = () => {
               </li>
               <li></li>
               <li>
-                <a
+                <Link
                   href="MongaSalil_Resume2023.pdf"
                   target="_blank"
                   className="resumeButton"
                 >
                   Resume
-                </a>
+                </Link>
               </li>
             </ul>
           </nav>
