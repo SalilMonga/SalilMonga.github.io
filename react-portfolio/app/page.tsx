@@ -69,14 +69,14 @@ export default function Home() {
             className="mb-4 md:mb-8 text-[clamp(2rem,15vmin,20rem)] font-bold leading-none tracking-tighter"
             aria-label="Salil Monga"
           >
-            <Link href="/aboutMe">
+            <a href="/aboutMe">
               <span className="block text-slate-300 group-hover:text-purple-200 ">
                 {renderLetters("Salil", "first")}
               </span>
               <span className="-mt-[.2em] block text-slate-500  group-hover:text-purple-300">
                 {renderLetters("Monga", "last")}
               </span>
-            </Link>
+            </a>
           </h2>
           <span className="job-title block bg-gradient-to-tr from-yellow-500 via-yellow-200 to-yellow-500 bg-clip-text text-2xl font-bold uppercase tracking-[.2em] text-transparent opacity-100 sm:text-4xl">
             Full-stack developer
