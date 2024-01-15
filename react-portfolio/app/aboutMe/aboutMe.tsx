@@ -34,7 +34,9 @@ export const AboutMe = () => {
                 >
                   <AiFillLinkedin className="icons" />
                 </a>
-                <AiFillMail className="icons" />
+                <a href="mailto:monga.monga43@gmail.com" target="_blank">
+                  <AiFillMail className="icons" />
+                </a>
               </div>
             </div>
             <ul className="flex items-center ">

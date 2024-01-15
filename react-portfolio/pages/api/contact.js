@@ -2,6 +2,8 @@ import nodemailer from "nodemailer";
 
 export default async function ContactAPI(req, res) {
   const { name, email, message } = req.body;
+  console.log('reqbody:', req.body)
+
   const user = process.env.user
   //TODO: Add validation
   const transporter = nodemailer.createTransport({
