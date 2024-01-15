@@ -16,7 +16,6 @@ export const ContactPage = () => {
       email: String(event.target.email.value),
       message: String(event.target.message.value),
     });
-    console.log("data:", formData);
     setLoading(true);
     const response = await fetch("/api/contact", {
       method: "POST",
@@ -37,9 +36,10 @@ export const ContactPage = () => {
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
+    const { id, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [id]: value,
     });
     setLoading(false);
     setError(false);
@@ -59,7 +59,7 @@ export const ContactPage = () => {
             required
             minLength={3}
             maxLength={150}
-            onChange={handleInputChange}
+            onBlur={handleInputChange}
             autoComplete="off"
             className="input-borders"
           />
@@ -74,7 +74,7 @@ export const ContactPage = () => {
             required
             minLength={5}
             maxLength={150}
-            onChange={handleInputChange}
+            onBlur={handleInputChange}
             autoComplete="off"
             className="input-borders"
           />
@@ -88,7 +88,7 @@ export const ContactPage = () => {
             required
             minLength={10}
             maxLength={500}
-            onChange={handleInputChange}
+            onBlur={handleInputChange}
             id="message"
             placeholder="How can I help you?"
             className="input-borders w-full py-1"
@@ -106,7 +106,7 @@ export const ContactPage = () => {
           className={`messageButton ${
             error || loading ? "messageErrorGradient" : ""
           }`}
-          disabled={error || loading}
+          // disabled={error || loading}
         >
           {loading ? (
             <svg
