@@ -54,13 +54,9 @@ export const AboutMe = () => {
               </li>
               <li></li>
               <li>
-                <Link
-                  href="MongaSalil_Resume2023.pdf"
-                  target="_blank"
-                  className="resumeButton"
-                >
+                <button className="resumeButton" aria-disabled="true" disabled>
                   Resume
-                </Link>
+                </button>
               </li>
             </ul>
           </nav>
