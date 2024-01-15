@@ -17,7 +17,7 @@ A [simple portfolio website](https://salil-monga-github-io.vercel.app/) to help 
 - cd into the react-portfolio folder
 - run 'npm install'
 - run 'npm run dev'
-- Create a .env file and use set your user variable to the email you want to send the email from and pass will be set to the app-specific password, only then will the contact form work. Read: https://support.google.com/accounts/answer/185833?hl=en to create a app-specific password
+- Create a .env file and use set your user variable to the email you want to send the email from and pass will be set to the app-specific password, only then will the contact form work. Read: [Create an app-specific password for google.](https://support.google.com/accounts/answer/185833?hl=en )
 - go to localhost:3000 to access the local server
 
 #### If you want to make changes
