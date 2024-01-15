@@ -46,10 +46,13 @@ export const ContactPage = () => {
   };
 
   return (
-    <div className="my-10 mr-8 max-w-screen-sm">
-      <h3 className="py-1 text-2xl dark:text-white">Contact Me</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="div-format ">
+    <div className="my-10 mr-6">
+      <h3 className=" py-1 text-2xl dark:text-white">
+        Contact me for my <span className="text-purple-300">resume</span> or
+        other collaboration opportunities!
+      </h3>
+      <form onSubmit={handleSubmit} className="max-w-screen-sm">
+        <div className="div-format">
           <label htmlFor="name" className="text-l  dark:text-white">
             Name
           </label>
@@ -106,7 +109,7 @@ export const ContactPage = () => {
           className={`messageButton ${
             error || loading ? "messageErrorGradient" : ""
           }`}
-          // disabled={error || loading}
+          disabled={error || loading}
         >
           {loading ? (
             <svg
