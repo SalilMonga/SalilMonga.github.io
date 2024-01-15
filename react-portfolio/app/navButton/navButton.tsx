@@ -29,7 +29,7 @@ export const NavButton = () => {
           {isShown ? (
             <GiFullMotorcycleHelmet className="span group-hover:text-purple-200" />
           ) : (
-            <BsArrowRightSquareFill className="span transform rotate-90 group-hover:text-purple-200" />
+            <BsArrowRightSquareFill className="span rotate-90 transform group-hover:text-purple-200" />
           )}
         </span>
       </button>

@@ -24,7 +24,7 @@ export default function Home() {
           transformOrigin: "left top",
           delay: 0.5,
           stagger: { each: 0.1, from: "random" },
-        }
+        },
       ).fromTo(
         ".job-title",
         {
@@ -38,7 +38,7 @@ export default function Home() {
           duration: 1,
           scale: 1,
           ease: "elastic.out(1,0.3)",
-        }
+        },
       );
     }, component);
     return () => ctx.revert();
@@ -60,13 +60,13 @@ export default function Home() {
 
   return (
     <Bounded ref={component}>
-      <div className="ml-8 flex flex-col-reverse md:flex-row items-center content-center min-h-[70vh]">
+      <div className="ml-8 flex min-h-[70vh] flex-col-reverse content-center items-center md:flex-row">
         <div className="group w-full sm:w-1/2">
           <div className="block md:hidden">
             <NavButton />
           </div>
           <h2
-            className="mb-4 md:mb-8 text-[clamp(2rem,15vmin,20rem)] font-bold leading-none tracking-tighter"
+            className="mb-4 text-[clamp(2rem,15vmin,20rem)] font-bold leading-none tracking-tighter md:mb-8"
             aria-label="Salil Monga"
           >
             <Link href="/aboutMe">
