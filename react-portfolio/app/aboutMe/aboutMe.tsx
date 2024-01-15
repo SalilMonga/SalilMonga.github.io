@@ -54,12 +54,17 @@ export const AboutMe = () => {
                   )}
                 </Link>
               </li>
-              <li></li>
-              <li>
-                <button className="resumeButton" aria-disabled="true" disabled>
-                  Resume
-                </button>
-              </li>
+              {/* <li>
+                <Link href="/resumeModal">
+                  <button
+                    className="resumeButton"
+                    aria-disabled="true"
+                    disabled
+                  >
+                    Resume?
+                  </button>
+                </Link>
+              </li> */}
             </ul>
           </nav>
           <MainLayout />
