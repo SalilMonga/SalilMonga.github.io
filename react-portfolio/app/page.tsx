@@ -3,8 +3,8 @@ import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 import { Bounded } from "../src/component/Bounded";
 import { Shapes } from "./shapes/Shapes";
-import Link from "next/link";
 import { NavButton } from "./navButton/navButton";
+import Link from "next/link";
 
 export default function Home() {
   const component = useRef(null);
@@ -24,7 +24,7 @@ export default function Home() {
           transformOrigin: "left top",
           delay: 0.5,
           stagger: { each: 0.1, from: "random" },
-        }
+        },
       ).fromTo(
         ".job-title",
         {
@@ -38,7 +38,7 @@ export default function Home() {
           duration: 1,
           scale: 1,
           ease: "elastic.out(1,0.3)",
-        }
+        },
       );
     }, component);
     return () => ctx.revert();
@@ -60,23 +60,23 @@ export default function Home() {
 
   return (
     <Bounded ref={component}>
-      <div className="ml-8 flex flex-col-reverse md:flex-row items-center content-center min-h-[70vh]">
+      <div className="ml-8 flex min-h-[70vh] flex-col-reverse content-center items-center md:flex-row">
         <div className="group w-full sm:w-1/2">
           <div className="block md:hidden">
             <NavButton />
           </div>
           <h2
-            className="mb-4 md:mb-8 text-[clamp(2rem,15vmin,20rem)] font-bold leading-none tracking-tighter"
+            className="mb-4 text-[clamp(2rem,15vmin,20rem)] font-bold leading-none tracking-tighter md:mb-8"
             aria-label="Salil Monga"
           >
-            <a href="/aboutMe">
+            <Link href="/aboutMe">
               <span className="block text-slate-300 group-hover:text-purple-200 ">
                 {renderLetters("Salil", "first")}
               </span>
               <span className="-mt-[.2em] block text-slate-500  group-hover:text-purple-300">
                 {renderLetters("Monga", "last")}
               </span>
-            </a>
+            </Link>
           </h2>
           <span className="job-title block bg-gradient-to-tr from-yellow-500 via-yellow-200 to-yellow-500 bg-clip-text text-2xl font-bold uppercase tracking-[.2em] text-transparent opacity-100 sm:text-4xl">
             Full-stack developer

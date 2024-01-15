@@ -1,8 +1,8 @@
 export const SecondPage = () => {
   return (
     <div>
-      <h3 className="text-2xl py-1 dark:text-white">About this project</h3>
-      <p className="text-md py-2 leading-8 text-gray-80 dark:text-white">
+      <h3 className="py-1 text-2xl dark:text-white">About this project</h3>
+      <p className="text-md text-gray-80 py-2 leading-8 dark:text-white">
         This portfolio website is designed to help me continue to
         <span className="text-purple-500 dark:text-pink-400"> learn</span> and
         <span className="text-purple-500  dark:text-pink-400">

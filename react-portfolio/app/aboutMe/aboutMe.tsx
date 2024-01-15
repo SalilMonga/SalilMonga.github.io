@@ -17,17 +17,17 @@ export const AboutMe = () => {
 
   return (
     <div className={`${darkMode && "dark"}`}>
-      <main className="bg-white  dark:bg-blue-950  px-10">
+      <main className="bg-white  px-10  dark:bg-blue-950">
         <section className=" min-h-screen">
-          <nav className="pb-4 pt-8 flex justify-between">
+          <nav className="flex justify-between pb-4 pt-8">
             <div className=" group-hover:text-black">
-              <h1 className="text-xl font-burtons dark:text-white">
+              <h1 className="font-burtons text-xl dark:text-white">
                 Developed by Salil
               </h1>
-              <div className=" group-hover:text-black flex gap-8 text-2xl py-1">
-                <a href="https://github.com/SalilMonga" target="_blank">
+              <div className=" flex gap-8 py-1 text-2xl group-hover:text-black">
+                <Link href="https://github.com/SalilMonga" target="_blank">
                   <AiFillGithub className="icons" />
-                </a>
+                </Link>
                 <a
                   href="https://www.linkedin.com/in/salil-monga/"
                   target="_blank"
@@ -54,13 +54,9 @@ export const AboutMe = () => {
               </li>
               <li></li>
               <li>
-                <a
-                  href="MongaSalil_Resume2023.pdf"
-                  target="_blank"
-                  className="resumeButton"
-                >
+                <button className="resumeButton" aria-disabled="true" disabled>
                   Resume
-                </a>
+                </button>
               </li>
             </ul>
           </nav>

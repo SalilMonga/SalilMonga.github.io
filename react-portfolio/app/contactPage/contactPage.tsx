@@ -35,7 +35,7 @@ export const ContactPage = () => {
   };
 
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,
@@ -47,7 +47,7 @@ export const ContactPage = () => {
 
   return (
     <div className="my-10 mr-8 max-w-screen-sm">
-      <h3 className="text-2xl py-1 dark:text-white">Contact Me</h3>
+      <h3 className="py-1 text-2xl dark:text-white">Contact Me</h3>
       <form onSubmit={handleSubmit}>
         <div className="div-format ">
           <label htmlFor="name" className="text-l  dark:text-white">
@@ -91,7 +91,7 @@ export const ContactPage = () => {
             onChange={handleInputChange}
             id="message"
             placeholder="How can I help you?"
-            className="w-full py-1 input-borders"
+            className="input-borders w-full py-1"
           />
         </div>
         {error && (
@@ -110,7 +110,7 @@ export const ContactPage = () => {
         >
           {loading ? (
             <svg
-              className="animate-spin h-5 w-5 mx-10"
+              className="mx-10 h-5 w-5 animate-spin"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
