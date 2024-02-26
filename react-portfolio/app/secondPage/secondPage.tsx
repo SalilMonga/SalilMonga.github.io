@@ -29,7 +29,7 @@ export const SecondPage = () => {
           Kanban{" "}
         </a>
         board and using best practices like github PRs. This is going to be an
-        ongoing project with always evolving design and best practices. Here's
+        ongoing project with always evolving design and best practices. Here is
         the{" "}
         <a
           href="https://github.com/SalilMonga/my-portfolio"
