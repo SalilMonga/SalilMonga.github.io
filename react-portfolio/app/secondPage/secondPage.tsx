@@ -3,12 +3,22 @@ export const SecondPage = () => {
     <div>
       <h3 className="py-1 text-2xl dark:text-white">About this project</h3>
       <p className="text-md text-gray-80 py-2 leading-8 dark:text-white">
-        This portfolio website is designed to help me continue to
-        <span className="text-purple-500 dark:text-pink-400"> learn</span> and
-        <span className="text-purple-500  dark:text-pink-400">
-          {" "}
-          explore
-        </span>{" "}
+        This portfolio website is designed to help me continue to{" "}
+        <a
+          className="text-purple-500 hover:text-pink-400"
+          href="https://nextjs.org/"
+          target="_blank"
+        >
+          learn{" "}
+        </a>
+        and{" "}
+        <a
+          className="text-purple-500  hover:text-pink-400"
+          href="https://gsap.com/"
+          target="_blank"
+        >
+          explore{" "}
+        </a>
         new technology. My aim is to set this project like an actual project
         with a{" "}
         <a
@@ -16,20 +26,19 @@ export const SecondPage = () => {
           className="text-blue-500 hover:text-green-400"
           target="_blank"
         >
-          Kanban
-        </a>{" "}
+          Kanban{" "}
+        </a>
         board and using best practices like github PRs. This is going to be an
-        ongoing project with always evolving design and best practices. As of
-        now, it is a private{" "}
+        ongoing project with always evolving design and best practices. Here's
+        the{" "}
         <a
           href="https://github.com/SalilMonga/my-portfolio"
           className="text-blue-500 hover:text-green-400"
           target="_blank"
         >
-          Github
-        </a>{" "}
-        repo but soon it will be set to public for you to go in and help me
-        develop this. Happy developing!
+          Github{" "}
+        </a>
+        repo. Happy developing!
       </p>
     </div>
   );
