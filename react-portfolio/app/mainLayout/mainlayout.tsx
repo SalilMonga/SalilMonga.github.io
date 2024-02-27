@@ -4,7 +4,7 @@ import Avatar from "./avatar/avatar";
 export const MainLayout = () => {
   const [isShown, setIsShown] = useState(false);
   return (
-    <div className="p-4 text-center">
+    <div className="px-4 pb-10 text-center">
       <a
         href="/"
         onMouseEnter={() => {
@@ -40,7 +40,7 @@ export const MainLayout = () => {
         head and looking around for hours when everything finally runs, it just
         makes me feel alive.
       </p>
-      <div className="mx-auto flex items-center justify-center">
+      <div className="mx-auto flex items-center justify-center py-5">
         <Avatar className="row-start-1 max-w-sm md:col-start-2 md:row-end-3" />
       </div>
     </div>
