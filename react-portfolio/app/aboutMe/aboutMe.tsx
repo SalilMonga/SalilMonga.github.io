@@ -20,7 +20,7 @@ export const AboutMe = () => {
 
   return (
     <div className={`${darkMode && "dark"}`}>
-      <main className="bg-white  px-10  dark:bg-blue-950">
+      <main className="bg-stone-100  px-10  dark:bg-slate-900">
         <section>
           <nav className="flex justify-between pb-4 pt-8">
             <div className=" group-hover:text-black">
@@ -75,7 +75,8 @@ export const AboutMe = () => {
         <section>
           <SecondPage />
         </section>
-        <section>
+        {/* Removing them to work on other sections first */}
+        {/* <section>
           <ContactPage />
         </section>
         <section className="h-screen">
@@ -94,7 +95,7 @@ export const AboutMe = () => {
               </div>
             </div>
           </a>
-        </section>
+        </section> */}
       </main>
     </div>
   );
