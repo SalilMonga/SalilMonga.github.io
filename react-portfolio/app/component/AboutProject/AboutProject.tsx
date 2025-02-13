@@ -1,4 +1,4 @@
-export const SecondPage = () => {
+export const AboutProject = () => {
   return (
     <div>
       <h3 className="py-1 text-2xl dark:text-white">About this project</h3>

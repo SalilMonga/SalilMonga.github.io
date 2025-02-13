@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import clsx from "clsx";
+//figure out how to get a relative path and allow it to automatically pick up the image.
 import photo from "../../../public/photo.jpg";
 // import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
@@ -23,7 +24,7 @@ export default function Avatar({ className }: { className?: string }) {
           opacity: 1,
           // duration: prefersReducedMotion ? 0 : 1.3,
           ease: "power3.inOut",
-        }
+        },
       );
 
       window.onmousemove = (e) => {
@@ -49,7 +50,7 @@ export default function Avatar({ className }: { className?: string }) {
               rotation: gsap.utils.clamp(-2, 2, 5 * componentPercent.x),
               duration: 0.5,
             },
-            0
+            0,
           )
           .to(
             ".highlight",
@@ -58,7 +59,7 @@ export default function Avatar({ className }: { className?: string }) {
               x: -10 + 20 * componentPercent.x,
               duration: 0.5,
             },
-            0
+            0,
           );
       };
     }, component);

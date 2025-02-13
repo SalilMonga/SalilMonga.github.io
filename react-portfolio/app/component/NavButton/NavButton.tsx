@@ -7,7 +7,7 @@ export const NavButton = () => {
   const [isShown, setIsShown] = useState(false);
 
   return (
-    <Link href="/aboutMe" passHref>
+    <Link href="/secondPage" passHref>
       <button
         className="group relative flex w-fit items-start justify-center overflow-hidden rounded-md border-2 border-slate-900 bg-slate-900 px-1 py-2 font-bold transition-transform ease-out 
       hover:scale-105"

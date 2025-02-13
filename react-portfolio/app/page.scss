@@ -1,9 +1,9 @@
 .resumeButton {
   @apply bg-gradient-to-r from-cyan-500 to-purple-500;
   @apply text-white;
-  @apply px-4 py-2 ml-4;
-  @apply border-none rounded-md;
-  @apply hover:bg-gradient-to-l from-purple-500 to-cyan-500;
+  @apply ml-4 px-4 py-2;
+  @apply rounded-md border-none;
+  @apply from-purple-500 to-cyan-500 hover:bg-gradient-to-l;
 }
 
 .icons {

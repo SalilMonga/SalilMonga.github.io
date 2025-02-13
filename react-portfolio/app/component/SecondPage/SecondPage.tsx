@@ -1,18 +1,18 @@
 "use client";
 import { BsFillMoonFill, BsSun } from "react-icons/bs";
 import { AiFillMail, AiFillLinkedin, AiFillGithub } from "react-icons/ai";
-import "./aboutMe.scss";
+import "./SecondPage.scss";
 import Link from "next/link";
 import { useState } from "react";
-import "../globals.css";
-import { MainLayout } from "../mainLayout/mainlayout";
-import { ContactPage } from "../contactPage/contactPage";
-import { SecondPage } from "../secondPage/secondPage";
-import Image from "next/image";
-import constructionPhoto from "../../public/underConstruction.jpeg";
-import LoadingIcons from "react-loading-icons";
+import "../../globals.css";
+import { MainLayout } from "../HeroText/HeroText";
+// import { ContactPage } from "../component/contactPage/contactPage";
+import { AboutProject } from "../AboutProject/AboutProject";
+// import Image from "next/image";
+// import constructionPhoto from "../../public/underConstruction.jpeg";
+// import LoadingIcons from "react-loading-icons"; s
 
-export const AboutMe = () => {
+export const SecondPage = () => {
   const [darkMode, setDarkMode] = useState(true);
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -73,7 +73,7 @@ export const AboutMe = () => {
           <MainLayout />
         </section>
         <section>
-          <SecondPage />
+          <AboutProject />
         </section>
         {/* Removing them to work on other sections first */}
         {/* <section>

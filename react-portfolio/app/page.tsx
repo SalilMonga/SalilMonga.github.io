@@ -1,9 +1,9 @@
 "use client";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
-import { Bounded } from "../src/component/Bounded";
-import { Shapes } from "./shapes/Shapes";
-import { NavButton } from "./navButton/navButton";
+import { Bounded } from "./component/Bounded";
+import { Shapes } from "./component/shapes/Shapes";
+import { NavButton } from "./component/NavButton/NavButton";
 import Link from "next/link";
 
 export default function Home() {
@@ -69,7 +69,7 @@ export default function Home() {
             className="mb-4 text-[clamp(2rem,15vmin,20rem)] font-bold leading-none tracking-tighter md:mb-8"
             aria-label="Salil Monga"
           >
-            <Link href="/aboutMe">
+            <Link href="/secondPage">
               <span className="block text-slate-300 group-hover:text-purple-200 ">
                 {renderLetters("Salil", "first")}
               </span>

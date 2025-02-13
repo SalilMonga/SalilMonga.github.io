@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "./app/mainLayout/mainlayout.tsx"
+    "app/component/HeroText/HeroText.tsx"
   ],
   "exclude": ["node_modules"]
 }
