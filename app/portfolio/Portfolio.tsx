@@ -3,7 +3,7 @@ import { BsFillMoonFill, BsSun } from "react-icons/bs";
 import { AiFillMail, AiFillLinkedin, AiFillGithub } from "react-icons/ai";
 import "./Portfolio.scss";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../globals.css";
 import { MainLayout } from "../mainLayout/mainlayout";
 import { ContactPage } from "../components/contactPage/ContactPage";
@@ -12,19 +12,41 @@ import Image from "next/image";
 import constructionPhoto from "../../public/underConstruction.jpeg";
 import LoadingIcons from "react-loading-icons";
 import Navbar from "../components/ui/Navbar";
+import FloatingNavbar from "../components/ui/FloatingNavbar";
 
 export const Portfolio = () => {
   const [darkMode, setDarkMode] = useState(true);
+  const [showFloatingNav, setShowFloatingNav] = useState(false);
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setShowFloatingNav(true);
+      } else {
+        setShowFloatingNav(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className={`${darkMode && "dark"}`} style={{ minHeight: '100vh', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
-      <Navbar />
+      {/* Main Navbar with fade out */}
+      <div style={{ transition: 'opacity 0.4s', opacity: showFloatingNav ? 0 : 1, pointerEvents: showFloatingNav ? 'none' : 'auto' }}>
+        <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      </div>
+      {/* Floating Navbar with fade in */}
+      <div style={{ transition: 'opacity 0.4s', opacity: showFloatingNav ? 1 : 0, pointerEvents: showFloatingNav ? 'auto' : 'none' }}>
+        <FloatingNavbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      </div>
       <main className="px-10">
         <section>
-          <nav className="flex justify-between pb-4 pt-8">
+          {/* <nav className="flex justify-between pb-4 pt-8">
             <div className=" group-hover:text-black">
               <h1 className="font-burtons text-xl" style={{ color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
                 Developed by Salil
@@ -59,7 +81,7 @@ export const Portfolio = () => {
                   )}
                 </Link>
               </li>
-              {/* <li>
+            <li>
                 <Link href="/resumeModal">
                   <button
                     className="resumeButton"
@@ -69,9 +91,9 @@ export const Portfolio = () => {
                     Resume?
                   </button>
                 </Link>
-              </li> */}
+              </li> 
             </ul>
-          </nav>
+          </nav> */}
           <MainLayout />
         </section>
         <section>
