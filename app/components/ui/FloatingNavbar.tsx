@@ -6,7 +6,7 @@ import { BsFillMoonFill, BsSun } from 'react-icons/bs';
 const navItems = [
   { name: 'About', href: '/Portfolio#about' },
   { name: 'Projects', href: '/Portfolio#projects' },
-  { name: 'Process', href: '/Portfolio#process' },
+  { name: 'Skills', href: '/Portfolio#skills' },
 ];
 
 export default function FloatingNavbar({ darkMode, toggleDarkMode }: { darkMode: boolean, toggleDarkMode: () => void }) {

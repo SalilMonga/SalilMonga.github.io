@@ -48,9 +48,9 @@ export const Portfolio = () => {
       <main className="px-10">
         <div className="w-full max-w-[1500px] mx-auto px-4">
           <HeroSection />
-          <section>
+          {/* <section>
             <SecondPage />
-          </section>
+          </section> */}
           <section>
             <ContactPage />
           </section>

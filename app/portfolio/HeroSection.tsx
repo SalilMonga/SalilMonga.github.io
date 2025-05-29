@@ -25,8 +25,8 @@ export default function HeroSection() {
             Clicking on the name will take you BACK!
           </span>
         </Link>
-        <h2 className="text-xl md:text-2xl font-semibold text-purple-400 mb-2">
-          Full-Stack Developer | AWS | Agile | React | Node.js | TypeScript
+        <h2 className="text-xl font-semibold text-purple-400 mb-2">
+          Full-Stack Developer | TypeScript | React | AWS | Agile
         </h2>
         <p className="text-base md:text-lg text-gray-300 mb-6">
           Disciplined software engineer with expertise in full-stack development, AWS services, and Agile methodologies. Proven problem-solver skilled in designing scalable applications and collaborating with cross-functional teams to deliver high-quality software solutions.
