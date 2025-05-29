@@ -67,10 +67,10 @@ export default function Home() {
               <NavButton />
             </div>
             <h2
-              className="mb-4 text-[clamp(2rem,15vmin,20rem)] font-bold leading-none tracking-tighter md:mb-8"
+              className="mb-4 font-bold leading-none tracking-tighter md:mb-8 text-5xl sm:text-7xl md:text-8xl lg:text-9xl"
               aria-label="Salil Monga"
             >
-              <Link href="/aboutMe" className="group inline-block">
+              <Link href="/Portfolio" className="group inline-block">
                 <span
                   className="block text-slate-100 transition-colors duration-200 group-hover:text-yellow-400"
                 >

@@ -18,7 +18,7 @@ export const Bounded = React.forwardRef<HTMLDivElement, BoundedProps>(
         )}
         {...restProps}
       >
-        <div className="mx-auto w-full max-w-5xl">{children}</div>
+        <div className="mx-auto w-full">{children}</div>
       </Comp>
     );
   }

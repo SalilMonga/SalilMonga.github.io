@@ -1,18 +1,19 @@
 "use client";
 import { BsFillMoonFill, BsSun } from "react-icons/bs";
 import { AiFillMail, AiFillLinkedin, AiFillGithub } from "react-icons/ai";
-import "./aboutMe.scss";
+import "./Portfolio.scss";
 import Link from "next/link";
 import { useState } from "react";
 import "../globals.css";
 import { MainLayout } from "../mainLayout/mainlayout";
-import { ContactPage } from "../contactPage/contactPage";
+import { ContactPage } from "../components/contactPage/ContactPage";
 import { SecondPage } from "../secondPage/secondPage";
 import Image from "next/image";
 import constructionPhoto from "../../public/underConstruction.jpeg";
 import LoadingIcons from "react-loading-icons";
+import Navbar from "../components/ui/Navbar";
 
-export const AboutMe = () => {
+export const Portfolio = () => {
   const [darkMode, setDarkMode] = useState(true);
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -20,6 +21,7 @@ export const AboutMe = () => {
 
   return (
     <div className={`${darkMode && "dark"}`} style={{ minHeight: '100vh', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
+      <Navbar />
       <main className="px-10">
         <section>
           <nav className="flex justify-between pb-4 pt-8">
