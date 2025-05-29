@@ -5,7 +5,7 @@ import animationImg from '../../public/salil-hero-image.jpg';
 
 export default function HeroSection() {
   return (
-    <section className="w-full flex flex-col md:flex-row items-center justify-center min-h-[60vh] gap-8 px-4 py-12">
+    <section className="w-full flex flex-col md:flex-row items-center justify-center min-h-[40vh] gap-20 px-4 py-2">
       {/* Left: Animated Image */}
       <div className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg w-64 h-64 md:w-80 md:h-80 bg-black/10 transition-transform duration-500 hover:scale-105 animate-float">
         <Image
