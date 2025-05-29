@@ -49,57 +49,6 @@ export const Portfolio = () => {
         <div className="w-full max-w-[1500px] mx-auto px-4">
           <HeroSection />
           <section>
-            {/* <nav className="flex justify-between pb-4 pt-8">
-              <div className=" group-hover:text-black">
-                <h1 className="font-burtons text-xl" style={{ color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
-                  Developed by Salil
-                </h1>
-                <div className=" flex gap-8 py-1 text-2xl group-hover:text-black">
-                  <Link href="https://github.com/SalilMonga" target="_blank">
-                    <AiFillGithub className="icons" />
-                  </Link>
-                  <a
-                    href="https://www.linkedin.com/in/salil-monga/"
-                    target="_blank"
-                  >
-                    <AiFillLinkedin className="icons" />
-                  </a>
-                  <a href="mailto:monga.monga43@gmail.com" target="_blank">
-                    <AiFillMail className="icons" />
-                  </a>
-                </div>
-              </div>
-              <ul className="flex items-center ">
-                <li>
-                  <Link
-                    href=""
-                    onClick={() => {
-                      toggleDarkMode();
-                    }}
-                  >
-                    {darkMode ? (
-                      <BsSun className="cursor-pointer text-xl" style={{ color: 'var(--color-text-dark)' }} />
-                    ) : (
-                      <BsFillMoonFill className="cursor-pointer text-xl" style={{ color: 'var(--color-text-light)' }} />
-                    )}
-                  </Link>
-                </li>
-              <li>
-                  <Link href="/resumeModal">
-                    <button
-                      className="resumeButton"
-                      aria-disabled="true"
-                      disabled
-                    >
-                      Resume?
-                    </button>
-                  </Link>
-                </li> 
-              </ul>
-            </nav> */}
-            {/* <MainLayout /> */}
-          </section>
-          <section>
             <SecondPage />
           </section>
           <section>
