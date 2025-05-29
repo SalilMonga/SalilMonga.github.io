@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST="{\"../node_modules/@react-three/drei/core/FaceLandmarker.js -> @mediapipe/tasks-vision\":{\"id\":\"../node_modules/@react-three/drei/core/FaceLandmarker.js -> @mediapipe/tasks-vision\",\"files\":[]}}"

@@ -1,31 +1,36 @@
-# Portfolio Project
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-A [simple portfolio website](https://salil-monga-github-io.vercel.app/) to help me continue to explore what I have learned and new tech that is being released. This project is open to everyone, if you want to learn something and collaborate with me you are welcome to send me a message. This is a continuous development project and I will aim to keep on learning and evolving design elements. It will also include best coding practices and AGILE methodology.
+## Getting Started
 
-### Thank you for contributing!
+First, run the development server:
 
-### How to set up the project on your local machine
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-#### Pre-requirements
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- npm v10.2 (or higher)
-- node v18.19 (or higher)
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-#### If all the requirements are met you can:
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-- Clone this repo
-- cd into the react-portfolio folder
-- run 'npm install'
-- run 'npm run dev'
-- Create a .env file and use set your user variable to the email you want to send the email from and pass will be set to the app-specific password, only then will the contact form work. Read: [Create an app-specific password for google.](https://support.google.com/accounts/answer/185833?hl=en )
-- go to localhost:3000 to access the local server
+## Learn More
 
-#### If you want to make changes
+To learn more about Next.js, take a look at the following resources:
 
-- If an issue already exists, assign it to yourself.
-- Otherwise create an issue(use format 'T-###| Add task info here').
-- Create a new branch using the format T-###.
-- Once the changes are made, create a PR(pull request).
-- Ensure the Title has the format T-### | What is this PR for.
-- Make sure you add any descriptions and screenshots as necessary.
-- Once Salil Monga approves the PR, you can merge!
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
