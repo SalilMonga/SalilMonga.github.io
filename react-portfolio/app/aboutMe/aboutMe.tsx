@@ -19,12 +19,12 @@ export const AboutMe = () => {
   };
 
   return (
-    <div className={`${darkMode && "dark"}`}>
-      <main className="bg-white  px-10  dark:bg-blue-950">
+    <div className={`${darkMode && "dark"}`} style={{ minHeight: '100vh', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
+      <main className="px-10">
         <section>
           <nav className="flex justify-between pb-4 pt-8">
             <div className=" group-hover:text-black">
-              <h1 className="font-burtons text-xl dark:text-white">
+              <h1 className="font-burtons text-xl" style={{ color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
                 Developed by Salil
               </h1>
               <div className=" flex gap-8 py-1 text-2xl group-hover:text-black">
@@ -51,9 +51,9 @@ export const AboutMe = () => {
                   }}
                 >
                   {darkMode ? (
-                    <BsSun className="cursor-pointer text-xl text-white" />
+                    <BsSun className="cursor-pointer text-xl" style={{ color: 'var(--color-text-dark)' }} />
                   ) : (
-                    <BsFillMoonFill className="cursor-pointer text-xl" />
+                    <BsFillMoonFill className="cursor-pointer text-xl" style={{ color: 'var(--color-text-light)' }} />
                   )}
                 </Link>
               </li>
@@ -86,7 +86,7 @@ export const AboutMe = () => {
                 alt={""}
                 className="rounded-3xl py-2"
               />
-              <div className="rounded-md bg-gradient-to-r from-green-500 via-yellow-100 to-blue-500 py-2">
+              <div className="rounded-md py-2" style={{ background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
                 This part is under construction
               </div>
               <div className="py-2">

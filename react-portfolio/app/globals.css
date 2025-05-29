@@ -10,6 +10,19 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --color-bg-light: #F8FAFC; /* slate-50 */
+  --color-bg-light-alt: #F3F4F6; /* gray-100 */
+  --color-text-light: #111827; /* gray-900 */
+  --color-accent: #2563EB; /* blue-600 */
+  --color-accent-alt: #7C3AED; /* purple-600 */
+  --color-gradient-light: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+
+  --color-bg-dark: #18181B; /* zinc-900 */
+  --color-bg-dark-alt: #0F172A; /* slate-900 */
+  --color-text-dark: #F1F5F9; /* slate-100 */
+  --color-accent-dark: #60A5FA; /* blue-400 */
+  --color-accent-dark-alt: #A78BFA; /* purple-400 */
+  --color-gradient-dark: linear-gradient(135deg, #18181b 0%, #23272f 100%);
 }
 
 @media (prefers-color-scheme: white) {
@@ -23,4 +36,14 @@
 @font-face {
   font-family: "burtons";
   src: url("../public/Burtons.otf");
+}
+
+body {
+  background: var(--color-bg-light);
+  color: var(--color-text-light);
+}
+
+.dark body {
+  background: var(--color-bg-dark);
+  color: var(--color-text-dark);
 }
