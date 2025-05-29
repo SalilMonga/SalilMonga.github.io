@@ -31,7 +31,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: { darkMode: boolean
           className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-purple-400 rounded"
           style={{ color: navText }}
         >
-          <span className="text-2xl font-bold tracking-tight">Salil Monga</span>
+          <span className="text-2xl font-bold tracking-tight">Salil's Portfolio</span>
         </Link>
         {/* Desktop Nav */}
         <ul className="hidden md:flex gap-8 ml-8" role="menubar">

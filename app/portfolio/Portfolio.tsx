@@ -13,6 +13,7 @@ import constructionPhoto from "../../public/underConstruction.jpeg";
 import LoadingIcons from "react-loading-icons";
 import Navbar from "../components/ui/Navbar";
 import FloatingNavbar from "../components/ui/FloatingNavbar";
+import HeroSection from "./HeroSection";
 
 export const Portfolio = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -45,6 +46,7 @@ export const Portfolio = () => {
         <FloatingNavbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </div>
       <main className="px-10">
+        <HeroSection />
         <section>
           {/* <nav className="flex justify-between pb-4 pt-8">
             <div className=" group-hover:text-black">
@@ -94,7 +96,7 @@ export const Portfolio = () => {
               </li> 
             </ul>
           </nav> */}
-          <MainLayout />
+          {/* <MainLayout /> */}
         </section>
         <section>
           <SecondPage />

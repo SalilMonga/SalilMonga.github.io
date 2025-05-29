@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import clsx from "clsx";
-import photo from "../../../public/photo.jpg";
+import photo from "../../../public/salil-hero-image.jpg";
 // import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 export default function Avatar({ className }: { className?: string }) {
