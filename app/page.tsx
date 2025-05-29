@@ -1,7 +1,7 @@
 "use client";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
-import { Bounded } from "../src/component/Bounded";
+import { Bounded } from "./components/Bounded";
 import { Shapes } from "./shapes/Shapes";
 import { NavButton } from "./navButton/navButton";
 import Link from "next/link";
