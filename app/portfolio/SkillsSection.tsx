@@ -1,3 +1,4 @@
+import { useRef, useEffect, useState, RefObject } from 'react';
 import { FaCode, FaDatabase, FaServer, FaCloud, FaGitAlt, FaReact, FaNodeJs, FaPython, FaJava, FaCss3Alt, FaJira, FaJenkins, FaGit, FaAws, FaRegGem } from 'react-icons/fa';
 import { SiTypescript, SiNextdotjs, SiFlutter, SiStorybook, SiJest, SiSplunk, SiDatadog, SiBamboo, SiFirebase } from 'react-icons/si';
 
@@ -39,16 +40,52 @@ const marqueeSkills2 = [
   { name: 'Waterfall Methodology', icon: <FaCode className="mr-2" /> },
 ];
 
+function useSmoothMarquee(ref: RefObject<HTMLDivElement>, direction: number = 1) {
+  const [isHovering, setIsHovering] = useState(false);
+  useEffect(() => {
+    const marquee = ref.current;
+    if (!marquee) return;
+    let reqId: number;
+    let pos = 0;
+    let speed = 0.5 * direction; // px per frame
+    let targetSpeed = speed;
+    const content = marquee.firstChild as HTMLElement;
+    const contentWidth = content.scrollWidth / 2;
+    function animate() {
+      // Smoothly interpolate speed
+      speed += (targetSpeed - speed) * 0.05;
+      pos += speed;
+      if (direction === 1 && pos >= contentWidth) pos = 0;
+      if (direction === -1 && pos <= -contentWidth) pos = 0;
+      content.style.transform = `translateX(${direction === 1 ? -pos : pos}px)`;
+      reqId = requestAnimationFrame(animate);
+    }
+    animate();
+    function handleMouseEnter() { targetSpeed = 0.08 * direction; setIsHovering(true); }
+    function handleMouseLeave() { targetSpeed = 0.5 * direction; setIsHovering(false); }
+    marquee.addEventListener('mouseenter', handleMouseEnter);
+    marquee.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      cancelAnimationFrame(reqId);
+      marquee.removeEventListener('mouseenter', handleMouseEnter);
+      marquee.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [ref, direction]);
+}
+
 export default function SkillsSection() {
+  const marquee1Ref = useRef(null);
+  const marquee2Ref = useRef(null);
+  useSmoothMarquee(marquee1Ref, 1);
+  useSmoothMarquee(marquee2Ref, -1);
   return (
     <section id="skills" className="py-10">
       <div className="w-full max-w-5xl mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 text-neutral-900 dark:text-neutral-100">Skills</h2>
-        {/* Marquee Group for group hover */}
         <div className="skills-marquee-group">
           {/* Marquee Row 1 */}
-          <div className="skills-marquee overflow-hidden relative w-full mb-4">
-            <div className="marquee-content flex gap-4 w-max">
+          <div className="skills-marquee overflow-hidden relative w-full mb-4" ref={marquee1Ref}>
+            <div className="flex gap-4 w-max will-change-transform">
               {marqueeSkills1.concat(marqueeSkills1).map((skill, idx) => (
                 <span
                   key={skill.name + idx}
@@ -61,8 +98,8 @@ export default function SkillsSection() {
             </div>
           </div>
           {/* Marquee Row 2 (reverse direction) */}
-          <div className="skills-marquee overflow-hidden relative w-full">
-            <div className="marquee-content reverse-marquee flex gap-4 w-max">
+          <div className="skills-marquee overflow-hidden relative w-full" ref={marquee2Ref}>
+            <div className="flex gap-4 w-max will-change-transform">
               {marqueeSkills2.concat(marqueeSkills2).map((skill, idx) => (
                 <span
                   key={skill.name + idx}

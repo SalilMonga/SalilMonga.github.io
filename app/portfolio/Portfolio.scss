@@ -15,7 +15,7 @@
   animation: marquee 32s linear infinite;
 }
 .skills-marquee-group:hover .marquee-content {
-  animation-play-state: paused;
+  animation-duration: 120s;
 }
 .skills-marquee .reverse-marquee {
   animation-direction: reverse;
