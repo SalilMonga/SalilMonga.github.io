@@ -35,7 +35,7 @@ export default function FloatingNavbar({ darkMode, toggleDarkMode }: { darkMode:
 
   return (
     <nav
-      className={`fixed left-1/2 top-6 z-50 flex -translate-x-1/2 items-center rounded-full px-2 py-1 gap-2 ${shadow}`}
+      className={`fixed left-1/2 top-3 z-50 flex -translate-x-1/2 items-center rounded-full px-2 py-1 gap-1 text-sm md:top-6 md:px-4 md:py-2 md:gap-2 md:text-base ${shadow}`}
       style={{ background: navBg, color: navText, border: darkMode ? 'none' : '1px solid #eee' }}
       aria-label="Floating navigation"
     >
@@ -43,22 +43,22 @@ export default function FloatingNavbar({ darkMode, toggleDarkMode }: { darkMode:
       <button
         onClick={toggleDarkMode}
         aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-        className={`flex items-center justify-center w-10 h-10 rounded-full font-bold text-xl mr-2 shadow transition-colors ${darkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}
+        className={`flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full font-bold text-lg md:text-xl mr-1 md:mr-2 shadow transition-colors ${darkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}
       >
-        {darkMode ? <BsSun className="w-6 h-6" /> : <BsFillMoonFill className="w-6 h-6" />}
+        {darkMode ? <BsSun className="w-5 h-5" /> : <BsFillMoonFill className="w-5 h-5" />}
       </button>
       {navItems.map((item) => (
         <Link
           key={item.name}
           href={item.href}
-          className={`px-4 py-2 rounded-full font-medium transition-colors duration-200 ${darkMode ? 'text-white hover:bg-purple-500 focus:bg-purple-600' : 'text-black hover:bg-purple-100 focus:bg-purple-200'}`}
+          className={`px-2 py-1 md:px-4 md:py-2 rounded-full font-medium transition-colors duration-200 ${darkMode ? 'text-white hover:bg-purple-500 focus:bg-purple-600' : 'text-black hover:bg-purple-100 focus:bg-purple-200'}`}
         >
           {item.name}
         </Link>
       ))}
       <div className="relative">
         <button
-          className={`ml-2 w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-200 text-2xl ${darkMode ? 'bg-purple-400 text-white hover:bg-purple-500 focus:bg-purple-500' : 'bg-purple-500 text-white hover:bg-purple-400 focus:bg-purple-400'}`}
+          className={`ml-1 md:ml-2 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full transition-colors duration-200 text-xl md:text-2xl ${darkMode ? 'bg-purple-400 text-white hover:bg-purple-500 focus:bg-purple-500' : 'bg-purple-500 text-white hover:bg-purple-400 focus:bg-purple-400'}`}
           onClick={() => setShowPopover((v) => !v)}
           aria-haspopup="true"
           aria-expanded={showPopover}
@@ -66,21 +66,25 @@ export default function FloatingNavbar({ darkMode, toggleDarkMode }: { darkMode:
           <BsThreeDots />
         </button>
         {showPopover && (
-          <div
-            ref={popoverRef}
-            className={`absolute left-1/2 -translate-x-1/2 mt-2 flex gap-4 rounded-lg p-4 shadow-lg border z-50 ${darkMode ? 'bg-[rgba(30,30,30,0.98)] border-purple-200' : 'bg-white border-purple-300'}`}
-            role="menu"
-          >
-            <Link href="https://github.com/SalilMonga" target="_blank" aria-label="GitHub" onClick={() => setShowPopover(false)}>
-              <AiFillGithub className={`w-7 h-7 transition-colors ${darkMode ? 'text-white hover:text-purple-400' : 'text-black hover:text-purple-500'}`} />
-            </Link>
-            <Link href="https://www.linkedin.com/in/salil-monga/" target="_blank" aria-label="LinkedIn" onClick={() => setShowPopover(false)}>
-              <AiFillLinkedin className={`w-7 h-7 transition-colors ${darkMode ? 'text-white hover:text-purple-400' : 'text-black hover:text-purple-500'}`} />
-            </Link>
-            <a href="mailto:monga.monga43@gmail.com" target="_blank" aria-label="Email" onClick={() => setShowPopover(false)}>
-              <AiFillMail className={`w-7 h-7 transition-colors ${darkMode ? 'text-white hover:text-purple-400' : 'text-black hover:text-purple-500'}`} />
-            </a>
-          </div>
+          <>
+            {/* Popover: Always anchored below the button, both mobile and desktop */}
+            <div
+              ref={popoverRef}
+              className={`absolute mt-2 rounded-lg p-4 shadow-lg border z-50 flex gap-6 justify-center bg-white dark:bg-[rgba(30,30,30,0.98)] border-purple-300 dark:border-purple-200
+                left-auto right-0 md:left-1/2 md:-translate-x-1/2 md:right-auto`}
+              role="menu"
+            >
+              <Link href="https://github.com/SalilMonga" target="_blank" aria-label="GitHub" onClick={() => setShowPopover(false)}>
+                <AiFillGithub className="w-7 h-7 transition-colors hover:text-purple-600 dark:hover:text-purple-400" />
+              </Link>
+              <Link href="https://www.linkedin.com/in/salil-monga/" target="_blank" aria-label="LinkedIn" onClick={() => setShowPopover(false)}>
+                <AiFillLinkedin className="w-7 h-7 transition-colors hover:text-purple-600 dark:hover:text-purple-400" />
+              </Link>
+              <a href="mailto:monga.monga43@gmail.com" target="_blank" aria-label="Email" onClick={() => setShowPopover(false)}>
+                <AiFillMail className="w-7 h-7 transition-colors hover:text-purple-600 dark:hover:text-purple-400" />
+              </a>
+            </div>
+          </>
         )}
       </div>
     </nav>
