@@ -44,10 +44,10 @@ export const Portfolio = () => {
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </div>
       {/* Floating Navbar with fade in */}
-      <div style={{ transition: 'opacity 0.4s', opacity: showFloatingNav ? 1 : 0, pointerEvents: showFloatingNav ? 'auto' : 'none' }}>
+      <div className={`hidden md:block`} style={{ transition: 'opacity 0.4s', opacity: showFloatingNav ? 1 : 0, pointerEvents: showFloatingNav ? 'auto' : 'none' }}>
         <FloatingNavbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </div>
-      <main className="px-10">
+      <main className="px-10 pt-16 md:pt-0">
         <div className="w-full max-w-[1500px] mx-auto px-4">
           <HeroSection />
           <ProjectSection />

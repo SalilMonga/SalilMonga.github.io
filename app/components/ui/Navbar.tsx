@@ -26,7 +26,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: { darkMode: boolean
         style={{ background: navBg, color: navText, borderBottom: `2px solid rgba(255,255,255,0.18)` }}
       >
         <nav
-          className="w-full flex items-center justify-between px-8 py-3"
+          className="w-full flex items-center justify-between px-4 py-2 md:px-8 md:py-3"
           aria-label="Main navigation"
         >
           <div className="w-full flex items-center justify-between">
@@ -36,7 +36,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: { darkMode: boolean
               className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-purple-400 rounded"
               style={{ color: navText }}
             >
-              <span className="text-2xl font-bold tracking-tight">Salil&apos;s Portfolio</span>
+              <span className="text-xl md:text-2xl font-bold tracking-tight">Salil&apos;s Portfolio</span>
             </Link>
             {/* Desktop Nav */}
             <ul className="hidden md:flex gap-8 ml-8" role="menubar">
@@ -55,7 +55,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: { darkMode: boolean
               ))}
             </ul>
             {/* Right-side utilities: Dark Mode toggle and Social Icons */}
-            <div className="flex items-center gap-4 ml-8">
+            <div className="hidden md:flex items-center gap-4 ml-8">
               <button
                 onClick={toggleDarkMode}
                 aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -86,25 +86,38 @@ export default function Navbar({ darkMode, toggleDarkMode }: { darkMode: boolean
           </button>
           {/* Mobile Nav Menu */}
           {menuOpen && (
-            <ul className="absolute right-4 top-16 w-48 rounded shadow-lg md:hidden flex flex-col gap-2 p-4 z-50"
-              style={{ background: navBg, color: navText }}
-              role="menubar"
-            >
-              {navigationLinks.map((link) => (
-                <li key={link.name} role="none">
-                  <Link
-                    href={link.href}
-                    className={`block rounded px-4 py-2 text-base font-medium transition-colors duration-200 ${darkMode ? 'hover:bg-purple-500 focus:bg-purple-600' : 'hover:bg-purple-100 focus:bg-purple-200'} hover:text-white focus:text-white focus:outline-none focus:ring-2 focus:ring-purple-400`}
-                    role="menuitem"
-                    tabIndex={0}
-                    style={{ color: navText }}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="fixed inset-0 z-50 bg-black/60 md:hidden" onClick={() => setMenuOpen(false)} />
+          )}
+          {menuOpen && (
+            <div className="absolute left-0 top-16 w-full rounded-b-2xl shadow-lg md:hidden flex flex-col gap-2 p-6 z-50" style={{ background: navBg, color: navText }}>
+              <ul className="flex flex-col gap-4" role="menubar">
+                {navigationLinks.map((link) => (
+                  <li key={link.name} role="none">
+                    <Link
+                      href={link.href}
+                      className={`block rounded px-4 py-3 text-lg font-medium transition-colors duration-200 text-center ${darkMode ? 'hover:bg-purple-500 focus:bg-purple-600' : 'hover:bg-purple-100 focus:bg-purple-200'} hover:text-white focus:text-white focus:outline-none focus:ring-2 focus:ring-purple-400`}
+                      role="menuitem"
+                      tabIndex={0}
+                      style={{ color: navText }}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex justify-center gap-6 mt-6">
+                <Link href="https://github.com/SalilMonga" target="_blank" aria-label="GitHub" onClick={() => setMenuOpen(false)}>
+                  <AiFillGithub className={`w-7 h-7 transition-colors ${darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600'}`} />
+                </Link>
+                <Link href="https://www.linkedin.com/in/salil-monga/" target="_blank" aria-label="LinkedIn" onClick={() => setMenuOpen(false)}>
+                  <AiFillLinkedin className={`w-7 h-7 transition-colors ${darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600'}`} />
+                </Link>
+                <a href="mailto:monga.monga43@gmail.com" target="_blank" aria-label="Email" onClick={() => setMenuOpen(false)}>
+                  <AiFillMail className={`w-7 h-7 transition-colors ${darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600'}`} />
+                </a>
+              </div>
+            </div>
           )}
         </nav>
       </div>
