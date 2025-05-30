@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { AiFillGithub, AiFillLinkedin, AiFillMail } from 'react-icons/ai';
-import { BsFillMoonFill, BsSun } from 'react-icons/bs';
+import { BsFillMoonFill, BsSun, BsThreeDots } from 'react-icons/bs';
 
 const navItems = [
-  { name: 'About', href: '/Portfolio#about' },
-  { name: 'Projects', href: '/Portfolio#projects' },
-  { name: 'Skills', href: '/Portfolio#skills' },
+  { name: 'About', href: '#about' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Contact', href: '#contact' },
 ];
 
 export default function FloatingNavbar({ darkMode, toggleDarkMode }: { darkMode: boolean, toggleDarkMode: () => void }) {
@@ -57,13 +58,12 @@ export default function FloatingNavbar({ darkMode, toggleDarkMode }: { darkMode:
       ))}
       <div className="relative">
         <button
-          className={`ml-2 px-4 py-2 rounded-full font-medium transition-colors duration-200 flex items-center gap-2 ${darkMode ? 'bg-purple-400 text-white hover:bg-purple-500 focus:bg-purple-500' : 'bg-purple-500 text-white hover:bg-purple-400 focus:bg-purple-400'}`}
+          className={`ml-2 w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-200 text-2xl ${darkMode ? 'bg-purple-400 text-white hover:bg-purple-500 focus:bg-purple-500' : 'bg-purple-500 text-white hover:bg-purple-400 focus:bg-purple-400'}`}
           onClick={() => setShowPopover((v) => !v)}
           aria-haspopup="true"
           aria-expanded={showPopover}
         >
-          Contact
-          <span className="inline-block bg-white text-purple-400 rounded-full w-6 h-6 flex items-center justify-center font-bold ml-1">C</span>
+          <BsThreeDots />
         </button>
         {showPopover && (
           <div

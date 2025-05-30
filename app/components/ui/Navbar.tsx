@@ -4,9 +4,10 @@ import { AiFillGithub, AiFillLinkedin, AiFillMail } from 'react-icons/ai';
 import { BsFillMoonFill, BsSun } from 'react-icons/bs';
 
 const navigationLinks = [
-  { name: 'About', href: '/Portfolio#about' },
-  { name: 'Projects', href: '/Portfolio#projects' },
-  { name: 'Skills', href: '/Portfolio#skills' },
+  { name: 'About', href: '#about' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar({ darkMode, toggleDarkMode }: { darkMode: boolean, toggleDarkMode: () => void }) {

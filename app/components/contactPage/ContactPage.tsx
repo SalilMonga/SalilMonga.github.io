@@ -46,7 +46,7 @@ export const ContactPage = () => {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-16 pb-16">
+    <div id="contact" className="w-full max-w-5xl mx-auto px-4 py-16 pb-16">
       <h3 className="text-2xl font-extrabold mb-8 text-neutral-900 dark:text-white text-left">
         Contact me for my <span className="text-purple-400">resume</span> or other collaboration opportunities!
       </h3>
