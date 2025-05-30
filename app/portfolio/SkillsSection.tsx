@@ -78,11 +78,36 @@ export default function SkillsSection() {
   const marquee2Ref = useRef(null);
   useSmoothMarquee(marquee1Ref, 1);
   useSmoothMarquee(marquee2Ref, -1);
+  const [showAllSkills, setShowAllSkills] = useState(false);
+  const allSkills = [...marqueeSkills1, ...marqueeSkills2];
+  const mobileSkillsToShow = showAllSkills ? allSkills : allSkills.slice(0, 8);
   return (
     <section id="skills" className="py-10">
       <div className="w-full max-w-5xl mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 text-neutral-900 dark:text-neutral-100">Skills</h2>
-        <div className="skills-marquee-group">
+        {/* Static grid for mobile */}
+        <div className="flex flex-wrap gap-4 sm:hidden">
+          {mobileSkillsToShow.map((skill, idx) => (
+            <span
+              key={skill.name + idx}
+              className="flex items-center bg-gray-100 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 text-gray-900 dark:text-white px-5 py-3 rounded-lg font-medium text-base gap-2 shadow cursor-pointer"
+            >
+              {skill.icon}
+              {skill.name}
+            </span>
+          ))}
+        </div>
+        {/* Toggle for mobile skills list */}
+        <div className="sm:hidden mt-4">
+          <button
+            className="text-purple-600 dark:text-purple-400 underline font-medium focus:outline-none"
+            onClick={() => setShowAllSkills((v) => !v)}
+          >
+            {showAllSkills ? 'Show less' : 'Not satisfied? Need more of my skillset?'}
+          </button>
+        </div>
+        {/* Marquee for sm and up */}
+        <div className="skills-marquee-group hidden sm:block">
           {/* Marquee Row 1 */}
           <div className="skills-marquee overflow-hidden relative w-full mb-4" ref={marquee1Ref}>
             <div className="flex gap-4 w-max will-change-transform">
