@@ -1,0 +1,26 @@
+.resumeButton {
+  @apply bg-gradient-to-r from-cyan-500 to-purple-500;
+  @apply text-white;
+  @apply px-4 py-2 ml-4;
+  @apply border-none rounded-md;
+  @apply hover:bg-gradient-to-l from-purple-500 to-cyan-500;
+}
+
+.icons {
+  @apply dark:fill-white dark:hover:fill-black;
+  @apply hover:fill-slate-400;
+}
+
+.skills-marquee .marquee-content {
+  animation: marquee 32s linear infinite;
+}
+.skills-marquee-group:hover .marquee-content {
+  animation-duration: 120s;
+}
+.skills-marquee .reverse-marquee {
+  animation-direction: reverse;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
