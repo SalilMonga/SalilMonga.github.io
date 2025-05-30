@@ -14,6 +14,8 @@ import LoadingIcons from "react-loading-icons";
 import Navbar from "../components/ui/Navbar";
 import FloatingNavbar from "../components/ui/FloatingNavbar";
 import HeroSection from "./HeroSection";
+import ProjectSection from "./ProjectSection";
+import SkillsSection from "./SkillsSection";
 
 export const Portfolio = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -48,29 +50,9 @@ export const Portfolio = () => {
       <main className="px-10">
         <div className="w-full max-w-[1500px] mx-auto px-4">
           <HeroSection />
-          {/* <section>
-            <SecondPage />
-          </section> */}
-          <section>
-            <ContactPage />
-          </section>
-          <section className="h-screen">
-            <a href="https://www.youtube.com/shorts/r6oM6ip9oHU" target="_blank">
-              <div className="mx-auto flex flex-col items-center justify-center py-5">
-                <Image
-                  src={constructionPhoto}
-                  alt={""}
-                  className="rounded-3xl py-2"
-                />
-                <div className="rounded-md py-2" style={{ background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
-                  This part is under construction
-                </div>
-                <div className="py-2">
-                  <LoadingIcons.BallTriangle />
-                </div>
-              </div>
-            </a>
-          </section>
+          <ProjectSection />
+          <SkillsSection />
+          <ContactPage />
         </div>
       </main>
     </div>

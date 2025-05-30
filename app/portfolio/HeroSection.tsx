@@ -18,17 +18,17 @@ export default function HeroSection() {
       {/* Right: Text Block */}
       <div className="flex flex-col items-center md:items-start text-center md:text-left max-w-xl">
         <Link href="/" className="group">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-2 group-hover:text-purple-400 transition-colors">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-900 dark:text-white mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
             Salil Monga
           </h1>
-          <span className="block text-sm text-gray-400 mb-4 group-hover:text-purple-300 transition-colors">
+          <span className="block text-sm text-neutral-500 dark:text-gray-400 mb-4 group-hover:text-purple-400 dark:group-hover:text-purple-300 transition-colors">
             Clicking on the name will take you BACK!
           </span>
         </Link>
-        <h2 className="text-xl font-semibold text-purple-400 mb-2">
+        <h2 className="text-xl font-semibold text-purple-600 dark:text-purple-400 mb-2">
           Full-Stack Developer | TypeScript | React | AWS | Agile
         </h2>
-        <p className="text-base md:text-lg text-gray-300 mb-6">
+        <p className="text-base md:text-lg text-neutral-700 dark:text-gray-300 mb-6">
           Disciplined software engineer with expertise in full-stack development, AWS services, and Agile methodologies. Proven problem-solver skilled in designing scalable applications and collaborating with cross-functional teams to deliver high-quality software solutions.
         </p>
         <Link href="#projects">
