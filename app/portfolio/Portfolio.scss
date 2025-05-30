@@ -10,3 +10,17 @@
   @apply dark:fill-white dark:hover:fill-black;
   @apply hover:fill-slate-400;
 }
+
+.skills-marquee .marquee-content {
+  animation: marquee 32s linear infinite;
+}
+.skills-marquee-group:hover .marquee-content {
+  animation-play-state: paused;
+}
+.skills-marquee .reverse-marquee {
+  animation-direction: reverse;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
