@@ -89,7 +89,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: { darkMode: boolean
             <div className="fixed inset-0 z-50 bg-black/60 md:hidden" onClick={() => setMenuOpen(false)} />
           )}
           {menuOpen && (
-            <div className="absolute left-0 top-16 w-full rounded-b-2xl shadow-lg md:hidden flex flex-col gap-2 p-6 z-50" style={{ background: navBg, color: navText }}>
+            <div className="absolute left-0 right-0 top-16 w-full rounded-b-2xl shadow-lg md:hidden flex flex-col gap-2 p-6 px-4 z-50" style={{ background: navBg, color: navText }}>
               <ul className="flex flex-col gap-4" role="menubar">
                 {navigationLinks.map((link) => (
                   <li key={link.name} role="none">
@@ -106,7 +106,7 @@ export default function Navbar({ darkMode, toggleDarkMode }: { darkMode: boolean
                   </li>
                 ))}
               </ul>
-              <div className="flex justify-center gap-6 mt-6">
+              <div className="flex justify-center gap-6 mt-6 w-full">
                 <Link href="https://github.com/SalilMonga" target="_blank" aria-label="GitHub" onClick={() => setMenuOpen(false)}>
                   <AiFillGithub className={`w-7 h-7 transition-colors ${darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600'}`} />
                 </Link>
