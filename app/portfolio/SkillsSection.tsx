@@ -89,7 +89,7 @@ export default function SkillsSection() {
               {marqueeSkills1.concat(marqueeSkills1).map((skill, idx) => (
                 <span
                   key={skill.name + idx}
-                  className="flex items-center bg-neutral-800 border border-neutral-700 text-white px-5 py-3 rounded-lg font-medium text-base gap-2 shadow hover:scale-105 transition-transform duration-200 cursor-pointer"
+                  className="flex items-center bg-gray-100 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 text-gray-900 dark:text-white px-5 py-3 rounded-lg font-medium text-base gap-2 shadow hover:scale-105 transition-transform duration-200 cursor-pointer"
                 >
                   {skill.icon}
                   {skill.name}
@@ -103,7 +103,7 @@ export default function SkillsSection() {
               {marqueeSkills2.concat(marqueeSkills2).map((skill, idx) => (
                 <span
                   key={skill.name + idx}
-                  className="flex items-center bg-neutral-800 border border-neutral-700 text-white px-5 py-3 rounded-lg font-medium text-base gap-2 shadow hover:scale-105 transition-transform duration-200 cursor-pointer"
+                  className="flex items-center bg-gray-100 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 text-gray-900 dark:text-white px-5 py-3 rounded-lg font-medium text-base gap-2 shadow hover:scale-105 transition-transform duration-200 cursor-pointer"
                 >
                   {skill.icon}
                   {skill.name}

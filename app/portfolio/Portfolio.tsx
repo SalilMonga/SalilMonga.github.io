@@ -38,7 +38,7 @@ export const Portfolio = () => {
   }, []);
 
   return (
-    <div className={`${darkMode && "dark"}`} style={{ minHeight: '100vh', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
+    <div className={`${darkMode && "dark"} min-h-screen`} style={{ minHeight: '100vh', width: '100vw', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', backgroundAttachment: 'fixed', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
       {/* Main Navbar with fade out */}
       <div style={{ transition: 'opacity 0.4s', opacity: showFloatingNav ? 0 : 1, pointerEvents: showFloatingNav ? 'none' : 'auto' }}>
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />

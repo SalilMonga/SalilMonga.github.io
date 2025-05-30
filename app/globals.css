@@ -39,11 +39,17 @@
 }
 
 body {
-  background: var(--color-bg-light);
+  background: transparent;
   color: var(--color-text-light);
 }
 
 .dark body {
-  background: var(--color-bg-dark);
+  background: transparent;
   color: var(--color-text-dark);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
