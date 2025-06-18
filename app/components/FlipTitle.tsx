@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
 const titles = [
@@ -21,8 +21,6 @@ function FlipUnit({ words, delay = 0 }: { words: string[], delay?: number }) {
   const topRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const indexRef = useRef(0);
-
-
 
   const triggerFlip = () => {
     const newIndex = (indexRef.current + 1) % words.length;
