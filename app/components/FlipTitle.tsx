@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 const titles = [
@@ -16,58 +16,64 @@ const titles = [
   "UI Engineer",
 ];
 
-
 function FlipUnit({ words, delay = 0 }: { words: string[], delay?: number }) {
   const topRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
-  const indexRef = useRef(0);
+  const [index, setIndex] = useState(0);
+  const [isFlipping, setIsFlipping] = useState(false);
+
+  // For layout: render the current word invisibly to reserve space
+  const [layoutFirst, layoutSecond] = words[index].split(" ");
+  const nextIndex = (index + 1) % words.length;
 
   const triggerFlip = () => {
-    const newIndex = (indexRef.current + 1) % words.length;
+    if (isFlipping || !topRef.current || !bottomRef.current) return;
+    setIsFlipping(true);
 
-    if (!topRef.current || !bottomRef.current) return;
+    // Show the bottom word just before the flip
+    gsap.set(bottomRef.current, { opacity: 1 });
 
-
-    const tl = gsap.timeline({
-      onComplete: () => {
-        gsap.set(topRef.current, { rotateX: 0 });
-        gsap.set(bottomRef.current, { opacity: 0 });
-
-        indexRef.current = newIndex;
-      },
-    });
-
-    // tl.set(bottomRef.current, { opacity: 1 }); // Make bottom visible just before flip
-
-    tl.to(topRef.current, {
+    gsap.to(topRef.current, {
       rotateX: -90,
       duration: 0.3,
       ease: "power1.in",
       transformOrigin: "bottom center",
+      onComplete: () => {
+        // Reset top, hide bottom, update index
+        gsap.set(topRef.current, { rotateX: 0 });
+        gsap.set(bottomRef.current, { opacity: 0 });
+        setIndex((prev) => (prev + 1) % words.length);
+        setIsFlipping(false);
+      },
     });
   };
 
-
-
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
-
     const timeoutId = setTimeout(() => {
       triggerFlip();
       intervalId = setInterval(triggerFlip, 6000);
     }, delay);
-
     return () => {
       clearTimeout(timeoutId);
       clearInterval(intervalId);
     };
-  }, []);
-
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [delay]);
 
   return (
     <div className="relative inline-block h-[60px] cursor-pointer" onClick={triggerFlip}>
-      <div className="relative w-fit h-[60px] grid place-items-center"
+      {/* Invisible word for layout, statically positioned */}
+      <div
+        aria-hidden="true"
+        style={{ visibility: "hidden", pointerEvents: "none", height: 0 }}
+        className="text-3xl md:text-5xl font-bold font-mono tracking-wide uppercase"
+      >
+        <span>{layoutFirst + ' '}</span>
+        <span>{layoutSecond}</span>
+      </div>
+      {/* Animated stack: absolutely positioned top and bottom words */}
+      <div className="absolute left-0 top-0 w-full h-full grid place-items-center"
         style={{ perspective: "1000px", minWidth: "max-content" }}>
         {/* Top Half - rotates down */}
         <div
@@ -76,11 +82,13 @@ function FlipUnit({ words, delay = 0 }: { words: string[], delay?: number }) {
           style={{
             backfaceVisibility: "hidden",
             transformOrigin: "bottom center",
+            position: "absolute",
+            width: "100%",
           }}
         >
           {/* Current Word */}
           {(() => {
-            const [first, second] = words[indexRef.current].split(" ");
+            const [first, second] = words[index].split(" ");
             return (
               <div className="inline-flex gap-x-2">
                 <span className="text-slate-100 transition-colors duration-200 group-hover:text-yellow-400">{first + ' '}</span>
@@ -89,7 +97,6 @@ function FlipUnit({ words, delay = 0 }: { words: string[], delay?: number }) {
             );
           })()}
         </div>
-
         {/* Bottom Half - shows next word behind the flip */}
         <div
           ref={bottomRef}
@@ -98,13 +105,15 @@ function FlipUnit({ words, delay = 0 }: { words: string[], delay?: number }) {
             backfaceVisibility: "hidden",
             transformOrigin: "top center",
             transform: "rotateX(90deg)",
-            opacity: 0, // Start hidden
+            opacity: 0,
             pointerEvents: "none",
+            position: "absolute",
+            width: "100%",
           }}
         >
           {/* Next Word */}
           {(() => {
-            const [first, second] = words[indexRef.current].split(" ");
+            const [first, second] = words[nextIndex].split(" ");
             return (
               <div className="inline-flex gap-x-2">
                 <span className="text-slate-100 transition-colors duration-200 group-hover:text-yellow-400">{first + ' '}</span>
@@ -113,7 +122,6 @@ function FlipUnit({ words, delay = 0 }: { words: string[], delay?: number }) {
             );
           })()}
         </div>
-
       </div>
     </div>
   );
