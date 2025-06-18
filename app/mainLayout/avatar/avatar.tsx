@@ -11,7 +11,7 @@ export default function Avatar({ className }: { className?: string }) {
   // const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       gsap.fromTo(
         ".avatar",
         {
@@ -33,11 +33,11 @@ export default function Avatar({ className }: { className?: string }) {
         ).getBoundingClientRect();
         const componentCenterX = componentRect.left + componentRect.width / 2;
 
-        let componentPercent = {
+        const componentPercent = {
           x: (e.clientX - componentCenterX) / componentRect.width / 2,
         };
 
-        let distFromCenterX = 1 - Math.abs(componentPercent.x);
+        const distFromCenterX = 1 - Math.abs(componentPercent.x);
 
         gsap
           .timeline({

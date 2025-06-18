@@ -15,7 +15,6 @@ export default function Navbar({ darkMode, toggleDarkMode }: { darkMode: boolean
 
   const navBg = darkMode ? 'var(--color-gradient-dark)' : '#fff';
   const navText = darkMode ? 'var(--color-text-dark)' : '#222';
-  const borderColor = darkMode ? 'rgba(255,255,255,0.08)' : '#e5e7eb';
 
   return (
     <header

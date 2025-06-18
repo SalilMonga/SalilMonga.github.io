@@ -5,12 +5,13 @@ import { Bounded } from "./components/Bounded";
 import { Shapes } from "./shapes/Shapes";
 import { NavButton } from "./navButton/navButton";
 import Link from "next/link";
+import FlipTitle from "./components/FlipTitle";
 
 export default function Home() {
   const component = useRef(null);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       const tl = gsap.timeline();
       tl.fromTo(
         ".name-animation",
@@ -67,7 +68,7 @@ export default function Home() {
               <NavButton />
             </div>
             <h2
-              className="mb-4 font-bold leading-none tracking-tighter md:mb-8 text-5xl sm:text-7xl md:text-8xl lg:text-9xl"
+              className="mb-2 font-bold leading-none tracking-tighter md:mb-4 text-5xl sm:text-7xl md:text-8xl lg:text-9xl"
               aria-label="Salil Monga"
             >
               <Link href="/portfolio" className="group inline-block">
@@ -84,7 +85,7 @@ export default function Home() {
               </Link>
             </h2>
             <span className="job-title block text-2xl font-bold uppercase tracking-[.2em] opacity-100 sm:text-4xl" style={{ color: '#eab308' }}>
-              Full-stack developer
+              <FlipTitle />
             </span>
           </div>
           <div className="sm:w-1/2">

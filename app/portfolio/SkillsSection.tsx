@@ -41,7 +41,7 @@ const marqueeSkills2 = [
 ];
 
 function useSmoothMarquee(ref: RefObject<HTMLDivElement>, direction: number = 1) {
-  const [isHovering, setIsHovering] = useState(false);
+  // const [isHovering, setIsHovering] = useState(false);
   useEffect(() => {
     const marquee = ref.current;
     if (!marquee) return;
@@ -61,8 +61,8 @@ function useSmoothMarquee(ref: RefObject<HTMLDivElement>, direction: number = 1)
       reqId = requestAnimationFrame(animate);
     }
     animate();
-    function handleMouseEnter() { targetSpeed = 0.08 * direction; setIsHovering(true); }
-    function handleMouseLeave() { targetSpeed = 0.5 * direction; setIsHovering(false); }
+    function handleMouseEnter() { targetSpeed = 0.08 * direction; }
+    function handleMouseLeave() { targetSpeed = 0.5 * direction; }
     marquee.addEventListener('mouseenter', handleMouseEnter);
     marquee.addEventListener('mouseleave', handleMouseLeave);
     return () => {
