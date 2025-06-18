@@ -1,16 +1,8 @@
 "use client";
-import { BsFillMoonFill, BsSun } from "react-icons/bs";
-import { AiFillMail, AiFillLinkedin, AiFillGithub } from "react-icons/ai";
 import "./Portfolio.scss";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import "../globals.css";
-import { MainLayout } from "../mainLayout/mainlayout";
 import { ContactPage } from "../components/contactPage/ContactPage";
-import { SecondPage } from "../secondPage/secondPage";
-import Image from "next/image";
-import constructionPhoto from "../../public/underConstruction.jpeg";
-import LoadingIcons from "react-loading-icons";
 import Navbar from "../components/ui/Navbar";
 import FloatingNavbar from "../components/ui/FloatingNavbar";
 import HeroSection from "./HeroSection";
