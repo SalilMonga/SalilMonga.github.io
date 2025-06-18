@@ -20,7 +20,6 @@ const titles = [
 function FlipUnit({ words, delay = 0 }: { words: string[], delay?: number }) {
   const topRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
-  const [index, setIndex] = useState(0);
   const indexRef = useRef(0);
 
 
@@ -37,7 +36,6 @@ function FlipUnit({ words, delay = 0 }: { words: string[], delay?: number }) {
         gsap.set(bottomRef.current, { opacity: 0 });
 
         indexRef.current = newIndex;
-        setIndex(newIndex);
       },
     });
 
