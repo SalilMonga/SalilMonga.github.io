@@ -3,16 +3,15 @@ import { gsap } from "gsap";
 
 const titles = [
   "Software Developer",
-  "Debug Magician",
-  "Code Whisperer",
-  "Realtime Tinkerer",
   "Fullstack Explorer",
+  "Immersive Engineer",
+  "Realtime Tinkerer",
   "Frontend Mechanic",
   "Backend Wrangler",
+  "Code Whisperer",
+  "Debug Magician",
   "XR Researcher",
-  "Immersive Engineer",
   "Logic Crafter",
-  "Performance Tweaker",
   "UI Engineer",
 ];
 
@@ -30,29 +29,38 @@ function FlipUnit({ words, delay = 0 }: { words: string[], delay?: number }) {
     if (isFlipping || !topRef.current || !bottomRef.current) return;
     setIsFlipping(true);
 
-    // Show the bottom word just before the flip
-    gsap.set(bottomRef.current, { opacity: 1 });
+    // Start with bottom word hidden
+    gsap.set(bottomRef.current, { opacity: 0 });
 
-    gsap.to(topRef.current, {
-      rotateX: -90,
-      duration: 0.3,
-      ease: "power1.in",
-      transformOrigin: "bottom center",
+    const tl = gsap.timeline({
       onComplete: () => {
-        // Reset top, hide bottom, update index
         gsap.set(topRef.current, { rotateX: 0 });
         gsap.set(bottomRef.current, { opacity: 0 });
         setIndex((prev) => (prev + 1) % words.length);
         setIsFlipping(false);
       },
     });
+
+    // Animate top word down
+    tl.to(topRef.current, {
+      rotateX: -90,
+      duration: 0.3,
+      ease: "power1.in",
+      transformOrigin: "bottom center",
+    })
+      // Fade in bottom word after top word is out
+      .to(bottomRef.current, {
+        opacity: 1,
+        duration: 0.05,
+        ease: "power1.out",
+      }, ">-") // start immediately after previous
   };
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
     const timeoutId = setTimeout(() => {
       triggerFlip();
-      intervalId = setInterval(triggerFlip, 6000);
+      intervalId = setInterval(triggerFlip, 4000);
     }, delay);
     return () => {
       clearTimeout(timeoutId);
