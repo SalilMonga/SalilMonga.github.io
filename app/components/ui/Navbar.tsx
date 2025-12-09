@@ -28,7 +28,13 @@ export default function Navbar({
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false);
   const [settingsMenuClosing, setSettingsMenuClosing] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
+  const [pillStyle, setPillStyle] = useState({ left: 0, width: 0, height: 0, top: 0, opacity: 0 });
+  const [mobilePillStyle, setMobilePillStyle] = useState({ top: 0, height: 0, opacity: 0 });
   const settingsMenuRef = useRef<HTMLDivElement>(null);
+  const navLinksRef = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
+  const navContainerRef = useRef<HTMLUListElement>(null);
+  const mobileNavLinksRef = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
+  const mobileNavContainerRef = useRef<HTMLDivElement>(null);
 
   const navBg = darkMode ? 'rgba(30,30,30,0.95)' : '#fff';
   const navText = darkMode ? 'var(--color-text-dark)' : '#222';
@@ -54,6 +60,66 @@ export default function Navbar({
     }
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [settingsMenuOpen]);
+
+  // Update pill position when active section changes (Desktop)
+  useEffect(() => {
+    const updatePillPosition = () => {
+      const activeLink = navLinksRef.current[activeSection];
+      const container = navContainerRef.current;
+
+      if (activeLink && container) {
+        const containerRect = container.getBoundingClientRect();
+        const linkRect = activeLink.getBoundingClientRect();
+
+        setPillStyle({
+          left: linkRect.left - containerRect.left,
+          width: linkRect.width,
+          height: linkRect.height,
+          top: linkRect.top - containerRect.top,
+          opacity: 1
+        });
+      }
+    };
+
+    // Initial update with slight delay to ensure DOM is ready
+    const timeoutId = setTimeout(updatePillPosition, 50);
+
+    // Update after the navbar transition completes (0.5s as per the navbar transition)
+    const transitionTimeoutId = setTimeout(updatePillPosition, 550);
+
+    // Update on window resize
+    window.addEventListener('resize', updatePillPosition);
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearTimeout(transitionTimeoutId);
+      window.removeEventListener('resize', updatePillPosition);
+    };
+  }, [activeSection, isCompact]);
+
+  // Update pill position for mobile menu
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const updateMobilePillPosition = () => {
+      const activeLink = mobileNavLinksRef.current[activeSection];
+      const container = mobileNavContainerRef.current;
+
+      if (activeLink && container) {
+        const containerRect = container.getBoundingClientRect();
+        const linkRect = activeLink.getBoundingClientRect();
+
+        setMobilePillStyle({
+          top: linkRect.top - containerRect.top,
+          height: linkRect.height,
+          opacity: 1
+        });
+      }
+    };
+
+    // Small delay to ensure menu is rendered
+    setTimeout(updateMobilePillPosition, 10);
+  }, [activeSection, menuOpen]);
 
   // Scroll spy to track active section
   useEffect(() => {
@@ -194,29 +260,50 @@ export default function Navbar({
             </Link>
 
             {/* Desktop Nav */}
-            <ul className="hidden md:flex" role="menubar" style={{
-              gap: isCompact ? '0.75rem' : '2rem',
-              marginLeft: isCompact ? '1.5rem' : '0',
-              transition: 'gap 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), margin-left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-            }}>
+            <ul
+              ref={navContainerRef}
+              className="hidden md:flex relative"
+              role="menubar"
+              style={{
+                gap: isCompact ? '0.75rem' : '2rem',
+                marginLeft: isCompact ? '1.5rem' : '0',
+                transition: 'gap 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), margin-left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              }}
+            >
+              {/* Animated background pill */}
+              <div
+                className="absolute rounded-full bg-purple-500 pointer-events-none"
+                style={{
+                  left: `${pillStyle.left}px`,
+                  width: `${pillStyle.width}px`,
+                  height: `${pillStyle.height}px`,
+                  top: `${pillStyle.top}px`,
+                  opacity: pillStyle.opacity,
+                  transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                  zIndex: 0,
+                }}
+              />
+
               {navigationLinks.map((link) => {
-                const isActive = activeSection === link.href.substring(1); // Remove the '#' from href
+                const isActive = activeSection === link.href.substring(1);
                 return (
-                  <li key={link.name} role="none">
+                  <li key={link.name} role="none" style={{ position: 'relative', zIndex: 1 }}>
                     <Link
+                      ref={(el) => {
+                        navLinksRef.current[link.href.substring(1)] = el;
+                      }}
                       href={link.href}
-                      className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400 ${
-                        isActive
-                          ? darkMode
-                            ? 'bg-purple-500 text-white'
-                            : 'bg-purple-500 text-white'
-                          : darkMode
-                          ? 'hover:bg-purple-500 hover:text-white'
-                          : 'hover:bg-purple-100 hover:text-white'
+                      className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-400 ${
+                        darkMode
+                          ? 'hover:bg-purple-500/30'
+                          : 'hover:bg-purple-100/30'
                       }`}
                       role="menuitem"
                       tabIndex={0}
-                      style={{ color: isActive ? 'white' : navText }}
+                      style={{
+                        color: isActive ? 'white' : navText,
+                        position: 'relative',
+                      }}
                       onClick={(e) => {
                         if (link.name === 'About') {
                           e.preventDefault();
@@ -465,20 +552,37 @@ export default function Navbar({
                 }}
               >
                 {/* Nav Links */}
-                <div className="px-3 py-2">
+                <div ref={mobileNavContainerRef} className="px-3 py-2 relative">
+                  {/* Animated background pill for mobile */}
+                  <div
+                    className="absolute left-3 right-3 rounded-lg bg-purple-500 pointer-events-none"
+                    style={{
+                      top: `${mobilePillStyle.top}px`,
+                      height: `${mobilePillStyle.height}px`,
+                      opacity: mobilePillStyle.opacity,
+                      transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                      zIndex: 0,
+                    }}
+                  />
+
                   {navigationLinks.map((link) => {
                     const isActive = activeSection === link.href.substring(1);
                     return (
                       <Link
                         key={link.name}
+                        ref={(el) => {
+                          mobileNavLinksRef.current[link.href.substring(1)] = el;
+                        }}
                         href={link.href}
-                        className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors ${
-                          isActive
-                            ? 'bg-purple-500 text-white'
-                            : darkMode
-                            ? 'hover:bg-neutral-700'
-                            : 'hover:bg-gray-100'
+                        className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors relative ${
+                          darkMode
+                            ? 'hover:bg-neutral-700/30'
+                            : 'hover:bg-gray-100/30'
                         }`}
+                        style={{
+                          color: isActive ? 'white' : undefined,
+                          zIndex: 1,
+                        }}
                         onClick={(e) => {
                           if (link.name === 'About') {
                             e.preventDefault();
