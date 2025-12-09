@@ -27,6 +27,7 @@ export default function Navbar({
   const [menuOpen, setMenuOpen] = useState(false);
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false);
   const [settingsMenuClosing, setSettingsMenuClosing] = useState(false);
+  const [activeSection, setActiveSection] = useState('about');
   const settingsMenuRef = useRef<HTMLDivElement>(null);
 
   const navBg = darkMode ? 'rgba(30,30,30,0.95)' : '#fff';
@@ -53,6 +54,74 @@ export default function Navbar({
     }
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [settingsMenuOpen]);
+
+  // Scroll spy to track active section
+  useEffect(() => {
+    const sections = ['about', 'featured-projects', 'skills', 'contact'];
+
+    const updateActiveSection = () => {
+      // Check if we're at the very bottom of the page
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 10;
+
+      if (isAtBottom) {
+        setActiveSection('contact');
+        return;
+      }
+
+      // Check if we're at the top of the page
+      if (window.scrollY < 100) {
+        setActiveSection('about');
+        return;
+      }
+
+      // Find which section is currently most prominent
+      // We'll check which section's top is closest to the top 30% of the viewport
+      const scrollPosition = window.scrollY + window.innerHeight * 0.3;
+
+      let closestSection = 'about';
+      let closestDistance = Infinity;
+
+      sections.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const elementTop = rect.top + window.scrollY;
+          const distance = Math.abs(scrollPosition - elementTop);
+
+          if (distance < closestDistance && rect.top < window.innerHeight * 0.5) {
+            closestDistance = distance;
+            closestSection = id;
+          }
+        }
+      });
+
+      setActiveSection(closestSection);
+    };
+
+    // Update on scroll
+    const handleScroll = () => {
+      updateActiveSection();
+    };
+
+    // Initial update
+    updateActiveSection();
+
+    // Add scroll listener with throttling for performance
+    let ticking = false;
+    const scrollListener = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', scrollListener, { passive: true });
+
+    return () => window.removeEventListener('scroll', scrollListener);
+  }, []);
 
   return (
     <header
@@ -89,7 +158,7 @@ export default function Navbar({
             {/* Logo/Name - Show full text when not compact, initials when compact */}
             <Link
               href="/"
-              className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-purple-400 rounded"
+              className="flex items-center focus:outline-none focus:ring-2 focus:ring-purple-400 rounded"
               style={{ color: navText }}
               onClick={(e) => {
                 e.preventDefault();
@@ -125,29 +194,41 @@ export default function Navbar({
             </Link>
 
             {/* Desktop Nav */}
-            <ul className="hidden md:flex gap-2 ml-4" role="menubar" style={{
+            <ul className="hidden md:flex" role="menubar" style={{
               gap: isCompact ? '0.75rem' : '2rem',
-              transition: 'gap 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              marginLeft: isCompact ? '1.5rem' : '0',
+              transition: 'gap 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), margin-left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
             }}>
-              {navigationLinks.map((link) => (
-                <li key={link.name} role="none">
-                  <Link
-                    href={link.href}
-                    className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200 ${darkMode ? 'hover:bg-purple-500 focus:bg-purple-600' : 'hover:bg-purple-100 focus:bg-purple-200'} hover:text-white focus:text-white focus:outline-none focus:ring-2 focus:ring-purple-400`}
-                    role="menuitem"
-                    tabIndex={0}
-                    style={{ color: navText }}
-                    onClick={(e) => {
-                      if (link.name === 'About') {
-                        e.preventDefault();
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                      }
-                    }}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+              {navigationLinks.map((link) => {
+                const isActive = activeSection === link.href.substring(1); // Remove the '#' from href
+                return (
+                  <li key={link.name} role="none">
+                    <Link
+                      href={link.href}
+                      className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400 ${
+                        isActive
+                          ? darkMode
+                            ? 'bg-purple-500 text-white'
+                            : 'bg-purple-500 text-white'
+                          : darkMode
+                          ? 'hover:bg-purple-500 hover:text-white'
+                          : 'hover:bg-purple-100 hover:text-white'
+                      }`}
+                      role="menuitem"
+                      tabIndex={0}
+                      style={{ color: isActive ? 'white' : navText }}
+                      onClick={(e) => {
+                        if (link.name === 'About') {
+                          e.preventDefault();
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                      }}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
 
             {/* Three Dots Settings Menu */}
@@ -339,7 +420,7 @@ export default function Navbar({
               <div className="flex items-center gap-4 w-full justify-center">
                 <Link
                   href="/"
-                  className="flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-purple-400 rounded"
+                  className="flex items-center focus:outline-none focus:ring-2 focus:ring-purple-400 rounded"
                   onClick={(e) => {
                     e.preventDefault();
                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -385,22 +466,31 @@ export default function Navbar({
               >
                 {/* Nav Links */}
                 <div className="px-3 py-2">
-                  {navigationLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors ${darkMode ? 'hover:bg-neutral-700' : 'hover:bg-gray-100'}`}
-                      onClick={(e) => {
-                        if (link.name === 'About') {
-                          e.preventDefault();
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }
-                        setMenuOpen(false);
-                      }}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
+                  {navigationLinks.map((link) => {
+                    const isActive = activeSection === link.href.substring(1);
+                    return (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors ${
+                          isActive
+                            ? 'bg-purple-500 text-white'
+                            : darkMode
+                            ? 'hover:bg-neutral-700'
+                            : 'hover:bg-gray-100'
+                        }`}
+                        onClick={(e) => {
+                          if (link.name === 'About') {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }
+                          setMenuOpen(false);
+                        }}
+                      >
+                        {link.name}
+                      </Link>
+                    );
+                  })}
                 </div>
 
                 <div className={`h-px ${darkMode ? 'bg-neutral-700' : 'bg-gray-200'}`} />
