@@ -15,20 +15,47 @@ export default function BackgroundAnimation() {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    // Generate random particles
-    const particleCount = 30; // More particles for better visibility
+    // Generate random particles with collision detection
+    const particleCount = 18;
     const newParticles: Particle[] = [];
+    const minDistance = 12; // Minimum distance between particles (in percentage)
+
+    const isValidPosition = (x: number, y: number): boolean => {
+      for (const particle of newParticles) {
+        const dx = x - particle.x;
+        const dy = y - particle.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < minDistance) {
+          return false;
+        }
+      }
+      return true;
+    };
 
     for (let i = 0; i < particleCount; i++) {
-      newParticles.push({
-        id: i,
-        x: Math.random() * 100, // Random position across screen
-        y: Math.random() * 100,
-        size: Math.random() * 40 + 25, // 25-65px (slightly larger)
-        duration: Math.random() * 40 + 40, // 40-80s drift
-        delay: Math.random() * 10, // 0-10s delay
-        rotation: Math.random() * 360, // Random initial rotation
-      });
+      let x: number, y: number;
+      let attempts = 0;
+      const maxAttempts = 50;
+
+      // Try to find a valid position
+      do {
+        x = Math.random() * 100;
+        y = Math.random() * 100;
+        attempts++;
+      } while (!isValidPosition(x, y) && attempts < maxAttempts);
+
+      // Only add if we found a valid position
+      if (attempts < maxAttempts) {
+        newParticles.push({
+          id: i,
+          x,
+          y,
+          size: Math.random() * 40 + 30, // 30-70px
+          duration: Math.random() * 15 + 25, // 25-40s faster drift
+          delay: Math.random() * 8, // 0-8s delay
+          rotation: Math.random() * 360, // Random initial rotation
+        });
+      }
     }
 
     setParticles(newParticles);
@@ -45,7 +72,7 @@ export default function BackgroundAnimation() {
             top: `${particle.y}%`,
             width: `${particle.size}px`,
             height: `${particle.size}px`,
-            animation: `float ${particle.duration}s ease-in-out infinite ${particle.delay}s, pulse ${particle.duration / 2}s ease-in-out infinite ${particle.delay}s, rotate ${particle.duration * 1.5}s linear infinite ${particle.delay}s`,
+            animation: `float ${particle.duration}s ease-in-out infinite ${particle.delay}s, pulse ${particle.duration / 2}s ease-in-out infinite ${particle.delay}s`,
             transform: `rotate(${particle.rotation}deg)`,
           }}
         >
@@ -127,13 +154,13 @@ export default function BackgroundAnimation() {
             transform: translate(0, 0) rotate(0deg);
           }
           25% {
-            transform: translate(20px, -30px) rotate(90deg);
+            transform: translate(30px, -40px) rotate(90deg);
           }
           50% {
-            transform: translate(-15px, -60px) rotate(180deg);
+            transform: translate(-20px, -80px) rotate(180deg);
           }
           75% {
-            transform: translate(-30px, -30px) rotate(270deg);
+            transform: translate(-40px, -40px) rotate(270deg);
           }
         }
 
@@ -143,15 +170,6 @@ export default function BackgroundAnimation() {
           }
           50% {
             opacity: 0.25;
-          }
-        }
-
-        @keyframes rotate {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
           }
         }
       `}</style>

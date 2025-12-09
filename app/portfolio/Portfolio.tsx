@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import "../globals.css";
 import { ContactPage } from "../components/contactPage/ContactPage";
 import Navbar from "../components/ui/Navbar";
-import FloatingNavbar from "../components/ui/FloatingNavbar";
-import BackgroundAnimation from "../components/ui/BackgroundAnimation";
+import BackgroundAnimationGears from "../components/ui/BackgroundAnimation";
+import BackgroundAnimationBlueprint from "../components/ui/BackgroundAnimationBlueprint";
 import HeroSection from "./HeroSection";
 import FeaturedProjectsSection from "./FeaturedProjectsSection";
 // import ProjectSection from "./ProjectSection";
@@ -13,7 +13,8 @@ import SkillsSection from "./SkillsSection";
 
 export const Portfolio = () => {
   const [darkMode, setDarkMode] = useState(true);
-  const [showFloatingNav, setShowFloatingNav] = useState(true); // Force show for debugging
+  const [showFloatingNav, setShowFloatingNav] = useState(false);
+  const [animationStyle, setAnimationStyle] = useState('gears'); // 'gears', 'blueprint', or 'none'
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -21,7 +22,7 @@ export const Portfolio = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
+      if (window.scrollY > 30) {
         setShowFloatingNav(true);
       } else {
         setShowFloatingNav(false);
@@ -34,17 +35,21 @@ export const Portfolio = () => {
   return (
     <div className={`${darkMode && "dark"} min-h-screen`} style={{ minHeight: '100vh', width: '100vw', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', backgroundAttachment: 'fixed', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
       {/* Background Animation */}
-      <BackgroundAnimation />
+      {animationStyle === 'gears' && <BackgroundAnimationGears />}
+      {animationStyle === 'blueprint' && <BackgroundAnimationBlueprint />}
+      {/* No animation if animationStyle === 'none' */}
 
-      {/* Main Navbar with fade out */}
-      <div style={{ transition: 'opacity 0.4s', opacity: showFloatingNav ? 0 : 1, pointerEvents: showFloatingNav ? 'none' : 'auto' }}>
-        <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      {/* Morphing Navbar */}
+      <div className="relative z-50">
+        <Navbar
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+          animationStyle={animationStyle}
+          setAnimationStyle={setAnimationStyle}
+          isCompact={showFloatingNav}
+        />
       </div>
-      {/* Floating Navbar with fade in */}
-      <div className="z-50" style={{ transition: 'opacity 0.4s', opacity: showFloatingNav ? 1 : 0, pointerEvents: showFloatingNav ? 'auto' : 'none' }}>
-        <FloatingNavbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      </div>
-      <main className="relative z-10 px-10 pt-16 md:pt-0">
+      <main className="relative z-10 px-10 pt-24 md:pt-28">
         <div className="w-full max-w-[1500px] mx-auto px-4">
           <HeroSection />
           <FeaturedProjectsSection />
