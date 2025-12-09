@@ -30,7 +30,14 @@ export default function Navbar({
   const [activeSection, setActiveSection] = useState('about');
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0, height: 0, top: 0, opacity: 0 });
   const [mobilePillStyle, setMobilePillStyle] = useState({ top: 0, height: 0, opacity: 0 });
+  const [showDesktopPulse, setShowDesktopPulse] = useState(true);
+  const [showDesktopTooltip, setShowDesktopTooltip] = useState(false);
+  const [showMobileTooltip, setShowMobileTooltip] = useState(false);
+  const [showMobileBadge, setShowMobileBadge] = useState(false);
+  const [highlightAnimation, setHighlightAnimation] = useState(false);
   const settingsMenuRef = useRef<HTMLDivElement>(null);
+  const desktopButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileButtonRef = useRef<HTMLButtonElement>(null);
   const navLinksRef = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
   const navContainerRef = useRef<HTMLUListElement>(null);
   const mobileNavLinksRef = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
@@ -39,13 +46,61 @@ export default function Navbar({
   const navBg = darkMode ? 'rgba(30,30,30,0.95)' : '#fff';
   const navText = darkMode ? 'var(--color-text-dark)' : '#222';
 
+  // Desktop pulse animation - runs for 10 seconds on load
+  useEffect(() => {
+    const pulseTimer = setTimeout(() => {
+      setShowDesktopPulse(false);
+    }, 10000);
+
+    return () => clearTimeout(pulseTimer);
+  }, []);
+
+  // Mobile first-time tooltip logic
+  useEffect(() => {
+    const hasSeenTooltip = localStorage.getItem('portfolioMenuTooltipSeen');
+
+    if (!hasSeenTooltip) {
+      setShowMobileBadge(true);
+
+      const tooltipTimer = setTimeout(() => {
+        setShowMobileTooltip(true);
+      }, 2000);
+
+      return () => clearTimeout(tooltipTimer);
+    }
+  }, []);
+
+  // Dismiss mobile tooltip
+  const dismissMobileTooltip = () => {
+    setShowMobileTooltip(false);
+    setShowMobileBadge(false);
+    localStorage.setItem('portfolioMenuTooltipSeen', 'true');
+  };
+
   // Handle closing animation
   const closeMenu = () => {
     setSettingsMenuClosing(true);
+    setHighlightAnimation(false);
     setTimeout(() => {
       setSettingsMenuOpen(false);
       setSettingsMenuClosing(false);
     }, 300); // Match animation duration
+  };
+
+  // Handle opening menu - show animation highlight on first open
+  const handleMenuOpen = () => {
+    setSettingsMenuOpen(true);
+
+    const hasSeenAnimationHighlight = localStorage.getItem('portfolioAnimationHighlightSeen');
+    if (!hasSeenAnimationHighlight) {
+      setHighlightAnimation(true);
+      localStorage.setItem('portfolioAnimationHighlightSeen', 'true');
+
+      // Remove highlight after 5 seconds
+      setTimeout(() => {
+        setHighlightAnimation(false);
+      }, 5000);
+    }
   };
 
   // Close settings menu when clicking outside
@@ -323,13 +378,57 @@ export default function Navbar({
               marginLeft: isCompact ? '1.5rem' : '0',
               transition: 'margin-left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
             }}>
-              <button
-                onClick={() => setSettingsMenuOpen(!settingsMenuOpen)}
-                aria-label="Open settings menu"
-                className={`flex items-center justify-center w-8 h-8 rounded-full transition-all duration-200 ${darkMode ? 'bg-purple-500 text-white hover:bg-purple-600' : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}`}
-              >
-                <BsThreeDots className="w-4 h-4" />
-              </button>
+              <div className="relative">
+                {/* Pulsing ring animation - positioned around the button */}
+                {showDesktopPulse && (
+                  <div
+                    className="absolute rounded-full pointer-events-none z-0"
+                    style={{
+                      top: '-4px',
+                      left: '-4px',
+                      right: '-4px',
+                      bottom: '-4px',
+                      animation: 'pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                      border: '2px solid',
+                      borderColor: darkMode ? 'rgba(168, 85, 247, 0.6)' : 'rgba(168, 85, 247, 0.7)',
+                    }}
+                  />
+                )}
+
+                <button
+                  ref={desktopButtonRef}
+                  onClick={() => {
+                    if (settingsMenuOpen) {
+                      closeMenu();
+                    } else {
+                      handleMenuOpen();
+                    }
+                  }}
+                  onMouseEnter={() => setShowDesktopTooltip(true)}
+                  onMouseLeave={() => setShowDesktopTooltip(false)}
+                  aria-label="Open settings menu"
+                  className={`flex items-center justify-center w-8 h-8 rounded-full transition-all duration-200 relative z-10 ${darkMode ? 'bg-purple-500 text-white hover:bg-purple-600' : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}`}
+                >
+                  <BsThreeDots className="w-4 h-4" />
+                </button>
+
+                {/* Hover Tooltip */}
+                {showDesktopTooltip && !settingsMenuOpen && (
+                  <div
+                    className={`absolute right-0 mt-2 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap pointer-events-none z-50 ${darkMode ? 'bg-neutral-700 text-white' : 'bg-gray-800 text-white'}`}
+                    style={{
+                      animation: 'fadeIn 0.2s ease-out',
+                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                    }}
+                  >
+                    Customize animations, dark mode & more
+                    {/* Tooltip arrow */}
+                    <div
+                      className={`absolute top-0 right-3 w-2 h-2 transform -translate-y-1/2 rotate-45 ${darkMode ? 'bg-neutral-700' : 'bg-gray-800'}`}
+                    />
+                  </div>
+                )}
+              </div>
 
               {settingsMenuOpen && (
                 <>
@@ -391,13 +490,28 @@ export default function Navbar({
                       <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-3">
                         Background Animation
                       </div>
-                      <div className="flex justify-center gap-6">
+                      <div className="flex justify-center gap-6 relative">
+                        {/* Highlight effect behind the middle icon */}
+                        {highlightAnimation && (
+                          <div
+                            className="absolute rounded-full bg-purple-500/20 ring-2 ring-purple-500 ring-opacity-50 pointer-events-none"
+                            style={{
+                              top: '50%',
+                              left: '50%',
+                              transform: 'translate(-50%, -50%)',
+                              width: '48px',
+                              height: '48px',
+                              animation: 'gentleGlow 2s ease-in-out infinite',
+                              zIndex: 0,
+                            }}
+                          />
+                        )}
                         <button
                           onClick={() => {
                             setAnimationStyle('gears');
                           }}
                           aria-label="Floating Gears"
-                          className={`transition-all ${animationStyle === 'gears' ? 'scale-125' : 'hover:scale-110'}`}
+                          className={`relative z-10 transition-all ${animationStyle === 'gears' ? 'scale-125' : 'hover:scale-110'}`}
                         >
                           <svg className={`w-6 h-6 ${animationStyle === 'gears' ? (darkMode ? 'text-purple-400' : 'text-purple-600') : (darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600')}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -409,7 +523,7 @@ export default function Navbar({
                             setAnimationStyle('blueprint');
                           }}
                           aria-label="Blueprint Grid"
-                          className={`transition-all ${animationStyle === 'blueprint' ? 'scale-125' : 'hover:scale-110'}`}
+                          className={`relative z-10 transition-all ${animationStyle === 'blueprint' ? 'scale-125' : 'hover:scale-110'}`}
                         >
                           <svg className={`w-6 h-6 ${animationStyle === 'blueprint' ? (darkMode ? 'text-purple-400' : 'text-purple-600') : (darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600')}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" />
@@ -420,7 +534,7 @@ export default function Navbar({
                             setAnimationStyle('none');
                           }}
                           aria-label="No Animation"
-                          className={`transition-all ${animationStyle === 'none' ? 'scale-125' : 'hover:scale-110'}`}
+                          className={`relative z-10 transition-all ${animationStyle === 'none' ? 'scale-125' : 'hover:scale-110'}`}
                         >
                           <svg className={`w-6 h-6 ${animationStyle === 'none' ? (darkMode ? 'text-purple-400' : 'text-purple-600') : (darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600')}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
@@ -492,13 +606,71 @@ export default function Navbar({
                   </span>
                 </Link>
 
-                <button
-                  onClick={() => setMenuOpen(!menuOpen)}
-                  aria-label="Open menu"
-                  className={`flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 ${darkMode ? 'bg-purple-500 text-white hover:bg-purple-600' : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}`}
-                >
-                  <BsThreeDots className="w-5 h-5" />
-                </button>
+                <div className="relative">
+                  {/* Pulsing ring animation - same as desktop */}
+                  {showMobileBadge && (
+                    <div
+                      className="absolute rounded-full pointer-events-none z-0"
+                      style={{
+                        top: '-4px',
+                        left: '-4px',
+                        right: '-4px',
+                        bottom: '-4px',
+                        animation: 'pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        border: '2px solid',
+                        borderColor: darkMode ? 'rgba(168, 85, 247, 0.6)' : 'rgba(168, 85, 247, 0.7)',
+                      }}
+                    />
+                  )}
+
+                  <button
+                    ref={mobileButtonRef}
+                    onClick={() => {
+                      if (!menuOpen) {
+                        handleMenuOpen();
+                      }
+                      setMenuOpen(!menuOpen);
+                      if (showMobileTooltip) {
+                        dismissMobileTooltip();
+                      }
+                    }}
+                    aria-label="Open menu"
+                    className={`relative z-10 flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 ${darkMode ? 'bg-purple-500 text-white hover:bg-purple-600' : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}`}
+                  >
+                    <BsThreeDots className="w-5 h-5" />
+                  </button>
+
+                  {/* Mobile Tooltip */}
+                  {showMobileTooltip && !menuOpen && (
+                    <div
+                      className={`absolute top-12 right-0 px-4 py-3 rounded-lg text-sm font-medium shadow-xl z-50 ${darkMode ? 'bg-neutral-700 text-white' : 'bg-gray-800 text-white'}`}
+                      style={{
+                        animation: 'slideInFromTop 0.3s ease-out',
+                        minWidth: '200px',
+                      }}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="font-semibold mb-1">✨ Try customizing!</p>
+                          <p className="text-xs opacity-90">Tap here to change animations & more</p>
+                        </div>
+                        <button
+                          onClick={dismissMobileTooltip}
+                          className="text-white/70 hover:text-white transition-colors"
+                          aria-label="Dismiss tooltip"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                      {/* Tooltip arrow */}
+                      <div
+                        className={`absolute -top-2 right-3 w-3 h-3 transform rotate-45 ${darkMode ? 'bg-neutral-700' : 'bg-gray-800'}`}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 
@@ -524,13 +696,70 @@ export default function Navbar({
                   </span>
                 </Link>
 
-                <button
-                  onClick={() => setMenuOpen(!menuOpen)}
-                  aria-label="Open menu"
-                  className={`flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 ${darkMode ? 'bg-purple-500 text-white hover:bg-purple-600' : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}`}
-                >
-                  <BsThreeDots className="w-5 h-5" />
-                </button>
+                <div className="relative">
+                  {/* Pulsing ring animation - same as desktop */}
+                  {showMobileBadge && (
+                    <div
+                      className="absolute rounded-full pointer-events-none z-0"
+                      style={{
+                        top: '-4px',
+                        left: '-4px',
+                        right: '-4px',
+                        bottom: '-4px',
+                        animation: 'pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        border: '2px solid',
+                        borderColor: darkMode ? 'rgba(168, 85, 247, 0.6)' : 'rgba(168, 85, 247, 0.7)',
+                      }}
+                    />
+                  )}
+
+                  <button
+                    onClick={() => {
+                      if (!menuOpen) {
+                        handleMenuOpen();
+                      }
+                      setMenuOpen(!menuOpen);
+                      if (showMobileTooltip) {
+                        dismissMobileTooltip();
+                      }
+                    }}
+                    aria-label="Open menu"
+                    className={`relative z-10 flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 ${darkMode ? 'bg-purple-500 text-white hover:bg-purple-600' : 'bg-purple-100 text-purple-800 hover:bg-purple-200'}`}
+                  >
+                    <BsThreeDots className="w-5 h-5" />
+                  </button>
+
+                  {/* Mobile Tooltip - Compact Mode */}
+                  {showMobileTooltip && !menuOpen && (
+                    <div
+                      className={`fixed top-20 left-1/2 -translate-x-1/2 px-4 py-3 rounded-lg text-sm font-medium shadow-xl z-50 ${darkMode ? 'bg-neutral-700 text-white' : 'bg-gray-800 text-white'}`}
+                      style={{
+                        animation: 'slideInFromTop 0.3s ease-out',
+                        minWidth: '200px',
+                      }}
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="font-semibold mb-1">✨ Try customizing!</p>
+                          <p className="text-xs opacity-90">Tap here to change animations & more</p>
+                        </div>
+                        <button
+                          onClick={dismissMobileTooltip}
+                          className="text-white/70 hover:text-white transition-colors"
+                          aria-label="Dismiss tooltip"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </div>
+                      {/* Tooltip arrow */}
+                      <div
+                        className={`absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 transform rotate-45 ${darkMode ? 'bg-neutral-700' : 'bg-gray-800'}`}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>
@@ -538,7 +767,10 @@ export default function Navbar({
           {/* Mobile Menu */}
           {menuOpen && (
             <>
-              <div className="fixed inset-0 z-50 bg-black/60 md:hidden" onClick={() => setMenuOpen(false)} />
+              <div className="fixed inset-0 z-50 bg-black/60 md:hidden" onClick={() => {
+                setMenuOpen(false);
+                setHighlightAnimation(false);
+              }} />
               <div
                 className={`md:hidden rounded-xl shadow-2xl overflow-hidden ${darkMode ? 'bg-neutral-800 border border-neutral-700' : 'bg-white border border-gray-200'}`}
                 style={{
@@ -589,6 +821,7 @@ export default function Navbar({
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                           }
                           setMenuOpen(false);
+                          setHighlightAnimation(false);
                         }}
                       >
                         {link.name}
@@ -605,7 +838,10 @@ export default function Navbar({
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`flex items-center gap-3 px-4 py-3 transition-colors ${darkMode ? 'hover:bg-neutral-700' : 'hover:bg-gray-50'}`}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setHighlightAnimation(false);
+                  }}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -643,11 +879,26 @@ export default function Navbar({
                   <div className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-3">
                     Background Animation
                   </div>
-                  <div className="flex justify-center gap-6">
+                  <div className="flex justify-center gap-6 relative">
+                    {/* Highlight effect behind the middle icon */}
+                    {highlightAnimation && (
+                      <div
+                        className="absolute rounded-full bg-purple-500/20 ring-2 ring-purple-500 ring-opacity-50 pointer-events-none"
+                        style={{
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                          width: '48px',
+                          height: '48px',
+                          animation: 'gentleGlow 2s ease-in-out infinite',
+                          zIndex: 0,
+                        }}
+                      />
+                    )}
                     <button
                       onClick={() => setAnimationStyle('gears')}
                       aria-label="Floating Gears"
-                      className={`transition-all ${animationStyle === 'gears' ? 'scale-125' : 'hover:scale-110'}`}
+                      className={`relative z-10 transition-all ${animationStyle === 'gears' ? 'scale-125' : 'hover:scale-110'}`}
                     >
                       <svg className={`w-6 h-6 ${animationStyle === 'gears' ? (darkMode ? 'text-purple-400' : 'text-purple-600') : (darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600')}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -657,7 +908,7 @@ export default function Navbar({
                     <button
                       onClick={() => setAnimationStyle('blueprint')}
                       aria-label="Blueprint Grid"
-                      className={`transition-all ${animationStyle === 'blueprint' ? 'scale-125' : 'hover:scale-110'}`}
+                      className={`relative z-10 transition-all ${animationStyle === 'blueprint' ? 'scale-125' : 'hover:scale-110'}`}
                     >
                       <svg className={`w-6 h-6 ${animationStyle === 'blueprint' ? (darkMode ? 'text-purple-400' : 'text-purple-600') : (darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600')}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z" />
@@ -666,7 +917,7 @@ export default function Navbar({
                     <button
                       onClick={() => setAnimationStyle('none')}
                       aria-label="No Animation"
-                      className={`transition-all ${animationStyle === 'none' ? 'scale-125' : 'hover:scale-110'}`}
+                      className={`relative z-10 transition-all ${animationStyle === 'none' ? 'scale-125' : 'hover:scale-110'}`}
                     >
                       <svg className={`w-6 h-6 ${animationStyle === 'none' ? (darkMode ? 'text-purple-400' : 'text-purple-600') : (darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600')}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
@@ -763,6 +1014,56 @@ export default function Navbar({
           to {
             opacity: 0;
             transform: translateX(-50%) translateY(-10px) scale(0.95);
+          }
+        }
+
+        /* Pulse ring animation for desktop and mobile */
+        @keyframes pulseRing {
+          0% {
+            transform: scale(1);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.1);
+            opacity: 0.7;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        /* Fade in animation for tooltip */
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-5px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Slide in from top for mobile tooltip */
+        @keyframes slideInFromTop {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Gentle glow effect for animation section highlight */
+        @keyframes gentleGlow {
+          0%, 100% {
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+          }
+          50% {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5), 0 0 30px rgba(168, 85, 247, 0.3);
           }
         }
       `}</style>
