@@ -5,7 +5,7 @@ import { BsFillMoonFill, BsSun } from 'react-icons/bs';
 
 const navigationLinks = [
   { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
+  { name: 'Projects', href: '#featured-projects' },
   { name: 'Skills', href: '#skills' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -53,8 +53,16 @@ export default function Navbar({ darkMode, toggleDarkMode }: { darkMode: boolean
                 </li>
               ))}
             </ul>
-            {/* Right-side utilities: Dark Mode toggle and Social Icons */}
+            {/* Right-side utilities: Resume, Dark Mode toggle and Social Icons */}
             <div className="hidden md:flex items-center gap-4 ml-8">
+              <a
+                href="/salil-monga-resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`px-4 py-2 rounded-full font-medium transition-colors duration-200 ${darkMode ? 'bg-neutral-700 text-white hover:bg-neutral-600 focus:bg-neutral-600' : 'bg-neutral-200 text-neutral-800 hover:bg-neutral-300 focus:bg-neutral-300'}`}
+              >
+                Resume
+              </a>
               <button
                 onClick={toggleDarkMode}
                 aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -105,6 +113,15 @@ export default function Navbar({ darkMode, toggleDarkMode }: { darkMode: boolean
                   </li>
                 ))}
               </ul>
+              <a
+                href="/salil-monga-resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMenuOpen(false)}
+                className={`block rounded px-4 py-3 text-lg font-bold text-center transition-colors duration-200 ${darkMode ? 'bg-neutral-700 text-white hover:bg-neutral-600' : 'bg-neutral-200 text-neutral-800 hover:bg-neutral-300'}`}
+              >
+                Download Resume
+              </a>
               <div className="flex justify-center gap-6 mt-6 w-full">
                 <Link href="https://github.com/SalilMonga" target="_blank" aria-label="GitHub" onClick={() => setMenuOpen(false)}>
                   <AiFillGithub className={`w-7 h-7 transition-colors ${darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600'}`} />

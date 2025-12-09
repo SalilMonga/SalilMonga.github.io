@@ -5,7 +5,7 @@ import { BsFillMoonFill, BsSun, BsThreeDots } from 'react-icons/bs';
 
 const navItems = [
   { name: 'About', href: '#about' },
-  { name: 'Projects', href: '#projects' },
+  { name: 'Projects', href: '#featured-projects' },
   { name: 'Skills', href: '#skills' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -56,6 +56,14 @@ export default function FloatingNavbar({ darkMode, toggleDarkMode }: { darkMode:
           {item.name}
         </Link>
       ))}
+      <a
+        href="/salil-monga-resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`px-2 py-1 md:px-4 md:py-2 rounded-full font-medium transition-colors duration-200 ${darkMode ? 'bg-neutral-700 text-white hover:bg-neutral-600' : 'bg-neutral-200 text-black hover:bg-neutral-300'}`}
+      >
+        Resume
+      </a>
       <div className="relative">
         <button
           className={`ml-1 md:ml-2 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full transition-colors duration-200 text-xl md:text-2xl ${darkMode ? 'bg-purple-400 text-white hover:bg-purple-500 focus:bg-purple-500' : 'bg-purple-500 text-white hover:bg-purple-400 focus:bg-purple-400'}`}

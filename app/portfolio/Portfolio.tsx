@@ -6,7 +6,8 @@ import { ContactPage } from "../components/contactPage/ContactPage";
 import Navbar from "../components/ui/Navbar";
 import FloatingNavbar from "../components/ui/FloatingNavbar";
 import HeroSection from "./HeroSection";
-import ProjectSection from "./ProjectSection";
+import FeaturedProjectsSection from "./FeaturedProjectsSection";
+// import ProjectSection from "./ProjectSection";
 import SkillsSection from "./SkillsSection";
 
 export const Portfolio = () => {
@@ -42,7 +43,8 @@ export const Portfolio = () => {
       <main className="px-10 pt-16 md:pt-0">
         <div className="w-full max-w-[1500px] mx-auto px-4">
           <HeroSection />
-          <ProjectSection />
+          <FeaturedProjectsSection />
+          {/* <ProjectSection /> */}
           <SkillsSection />
           <ContactPage />
         </div>

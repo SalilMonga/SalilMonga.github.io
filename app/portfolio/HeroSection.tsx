@@ -26,16 +26,19 @@ export default function HeroSection() {
           </span>
         </Link>
         <h2 className="text-xl font-semibold text-purple-600 dark:text-purple-400 mb-2">
-          Full-Stack Developer | TypeScript | React | AWS | Agile
+          Full-Stack Engineer · XR Developer · Builder of 0→1 Products
         </h2>
-        <p className="text-base md:text-lg text-neutral-700 dark:text-gray-300 mb-6">
-          Disciplined software engineer with expertise in full-stack development, AWS services, and Agile methodologies. Proven problem-solver skilled in designing scalable applications and collaborating with cross-functional teams to deliver high-quality software solutions.
+        <p className="text-base md:text-lg text-neutral-700 dark:text-gray-300 mb-4">
+          I design and ship real products—from social apps used on campus to VR training systems for industrial robots. I care about thoughtful UX, reliable systems, and getting things into people&apos;s hands quickly.
         </p>
-        <Link href="#projects">
+        <p className="text-sm text-neutral-600 dark:text-gray-400 mb-6 italic">
+          Currently exploring roles where I can build, experiment, and own end-to-end features.
+        </p>
+        <a href="/salil-monga-resume.pdf" target="_blank" rel="noopener noreferrer">
           <button className="px-8 py-3 rounded-full bg-purple-500 text-white font-bold text-lg shadow hover:bg-purple-600 transition-colors">
-            View Projects
+            Download Resume
           </button>
-        </Link>
+        </a>
       </div>
     </section>
   );
