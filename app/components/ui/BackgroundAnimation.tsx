@@ -52,7 +52,7 @@ export default function BackgroundAnimation() {
           y,
           size: Math.random() * 40 + 30, // 30-70px
           duration: Math.random() * 15 + 25, // 25-40s faster drift
-          delay: Math.random() * 8, // 0-8s delay
+          delay: Math.random() * 2, // 0-2s delay (reduced for faster visibility)
           rotation: Math.random() * 360, // Random initial rotation
         });
       }

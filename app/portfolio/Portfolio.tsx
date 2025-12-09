@@ -21,6 +21,9 @@ export const Portfolio = () => {
   };
 
   useEffect(() => {
+    // Scroll to top on mount
+    window.scrollTo(0, 0);
+
     const handleScroll = () => {
       if (window.scrollY > 30) {
         setShowFloatingNav(true);

@@ -55,7 +55,7 @@ export default function BackgroundAnimationBlueprint() {
         id: i,
         x,
         y,
-        delay: Math.random() * 8,
+        delay: Math.random() * 2, // Reduced from 8s to 2s for faster visibility
       });
     }
     setPulsePoints(points);
