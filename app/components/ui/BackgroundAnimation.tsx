@@ -76,7 +76,6 @@ export default function BackgroundAnimation() {
                 const outerRadius = 18;
                 const toothWidth = 8;
 
-                const angleRad = (angle * Math.PI) / 180;
                 const leftAngleRad = ((angle - toothWidth) * Math.PI) / 180;
                 const rightAngleRad = ((angle + toothWidth) * Math.PI) / 180;
 
