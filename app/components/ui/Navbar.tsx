@@ -509,6 +509,7 @@ export default function Navbar({
                         <button
                           onClick={() => {
                             setAnimationStyle('gears');
+                            closeMenu();
                           }}
                           aria-label="Floating Gears"
                           className={`relative z-10 transition-all ${animationStyle === 'gears' ? 'scale-125' : 'hover:scale-110'}`}
@@ -521,6 +522,7 @@ export default function Navbar({
                         <button
                           onClick={() => {
                             setAnimationStyle('blueprint');
+                            closeMenu();
                           }}
                           aria-label="Blueprint Grid"
                           className={`relative z-10 transition-all ${animationStyle === 'blueprint' ? 'scale-125' : 'hover:scale-110'}`}
@@ -532,12 +534,13 @@ export default function Navbar({
                         <button
                           onClick={() => {
                             setAnimationStyle('none');
+                            closeMenu();
                           }}
                           aria-label="No Animation"
                           className={`relative z-10 transition-all ${animationStyle === 'none' ? 'scale-125' : 'hover:scale-110'}`}
                         >
                           <svg className={`w-6 h-6 ${animationStyle === 'none' ? (darkMode ? 'text-purple-400' : 'text-purple-600') : (darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600')}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-12.728 12.728M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
                         </button>
                       </div>
@@ -556,7 +559,9 @@ export default function Navbar({
                           href="https://github.com/SalilMonga"
                           target="_blank"
                           aria-label="GitHub"
-                          onClick={closeMenu}
+                          onClick={() => {
+                            closeMenu();
+                          }}
                           className="transition-transform hover:scale-110"
                         >
                           <AiFillGithub className={`w-6 h-6 ${darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600'}`} />
@@ -565,7 +570,9 @@ export default function Navbar({
                           href="https://www.linkedin.com/in/salil-monga/"
                           target="_blank"
                           aria-label="LinkedIn"
-                          onClick={closeMenu}
+                          onClick={() => {
+                            closeMenu();
+                          }}
                           className="transition-transform hover:scale-110"
                         >
                           <AiFillLinkedin className={`w-6 h-6 ${darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600'}`} />
@@ -574,7 +581,9 @@ export default function Navbar({
                           href="mailto:monga.monga43@gmail.com"
                           target="_blank"
                           aria-label="Email"
-                          onClick={closeMenu}
+                          onClick={() => {
+                            closeMenu();
+                          }}
                           className="transition-transform hover:scale-110"
                         >
                           <AiFillMail className={`w-6 h-6 ${darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600'}`} />
@@ -896,7 +905,11 @@ export default function Navbar({
                       />
                     )}
                     <button
-                      onClick={() => setAnimationStyle('gears')}
+                      onClick={() => {
+                        setAnimationStyle('gears');
+                        setMenuOpen(false);
+                        setHighlightAnimation(false);
+                      }}
                       aria-label="Floating Gears"
                       className={`relative z-10 transition-all ${animationStyle === 'gears' ? 'scale-125' : 'hover:scale-110'}`}
                     >
@@ -906,7 +919,11 @@ export default function Navbar({
                       </svg>
                     </button>
                     <button
-                      onClick={() => setAnimationStyle('blueprint')}
+                      onClick={() => {
+                        setAnimationStyle('blueprint');
+                        setMenuOpen(false);
+                        setHighlightAnimation(false);
+                      }}
                       aria-label="Blueprint Grid"
                       className={`relative z-10 transition-all ${animationStyle === 'blueprint' ? 'scale-125' : 'hover:scale-110'}`}
                     >
@@ -915,7 +932,11 @@ export default function Navbar({
                       </svg>
                     </button>
                     <button
-                      onClick={() => setAnimationStyle('none')}
+                      onClick={() => {
+                        setAnimationStyle('none');
+                        setMenuOpen(false);
+                        setHighlightAnimation(false);
+                      }}
                       aria-label="No Animation"
                       className={`relative z-10 transition-all ${animationStyle === 'none' ? 'scale-125' : 'hover:scale-110'}`}
                     >
