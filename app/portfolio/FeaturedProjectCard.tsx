@@ -67,6 +67,9 @@ export default function FeaturedProjectCard({
     });
   };
 
+  // Check if there are any links
+  const hasLinks = links.github || links.demo || links.appStore || links.instagram;
+
   return (
     <div
       ref={cardRef}
@@ -150,7 +153,7 @@ export default function FeaturedProjectCard({
         </div>
 
         {/* Links */}
-        <div className="flex flex-wrap gap-3 mt-4">
+        <div className={`flex flex-wrap gap-3 mt-4 ${!hasLinks ? 'min-h-[35px]' : ''}`}>
           {links.github && (
             <Link
               href={links.github}
