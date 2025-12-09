@@ -25,6 +25,7 @@ export default function Navbar({
   isCompact?: boolean
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuClosing, setMenuClosing] = useState(false);
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false);
   const [settingsMenuClosing, setSettingsMenuClosing] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
@@ -77,13 +78,23 @@ export default function Navbar({
     localStorage.setItem('portfolioMenuTooltipSeen', 'true');
   };
 
-  // Handle closing animation
+  // Handle closing animation (Desktop)
   const closeMenu = () => {
     setSettingsMenuClosing(true);
     setHighlightAnimation(false);
     setTimeout(() => {
       setSettingsMenuOpen(false);
       setSettingsMenuClosing(false);
+    }, 300); // Match animation duration
+  };
+
+  // Handle closing animation (Mobile)
+  const closeMobileMenu = () => {
+    setMenuClosing(true);
+    setHighlightAnimation(false);
+    setTimeout(() => {
+      setMenuOpen(false);
+      setMenuClosing(false);
     }, 300); // Match animation duration
   };
 
@@ -776,10 +787,15 @@ export default function Navbar({
           {/* Mobile Menu */}
           {menuOpen && (
             <>
-              <div className="fixed inset-0 z-50 bg-black/60 md:hidden" onClick={() => {
-                setMenuOpen(false);
-                setHighlightAnimation(false);
-              }} />
+              <div
+                className="fixed inset-0 z-50 bg-black/60 md:hidden"
+                onClick={closeMobileMenu}
+                style={{
+                  animation: menuClosing
+                    ? 'fadeOut 0.3s ease-out forwards'
+                    : 'backdropFadeIn 0.3s ease-out',
+                }}
+              />
               <div
                 className={`md:hidden rounded-xl shadow-2xl overflow-hidden ${darkMode ? 'bg-neutral-800 border border-neutral-700' : 'bg-white border border-gray-200'}`}
                 style={{
@@ -789,7 +805,9 @@ export default function Navbar({
                   transform: 'translateX(-50%)',
                   width: '16rem',
                   zIndex: 50,
-                  animation: 'slideDown 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  animation: menuClosing
+                    ? 'slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+                    : 'slideDown 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
                 }}
               >
                 {/* Nav Links */}
@@ -829,8 +847,7 @@ export default function Navbar({
                             e.preventDefault();
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                           }
-                          setMenuOpen(false);
-                          setHighlightAnimation(false);
+                          closeMobileMenu();
                         }}
                       >
                         {link.name}
@@ -847,10 +864,7 @@ export default function Navbar({
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`flex items-center gap-3 px-4 py-3 transition-colors ${darkMode ? 'hover:bg-neutral-700' : 'hover:bg-gray-50'}`}
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setHighlightAnimation(false);
-                  }}
+                  onClick={closeMobileMenu}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -907,8 +921,7 @@ export default function Navbar({
                     <button
                       onClick={() => {
                         setAnimationStyle('gears');
-                        setMenuOpen(false);
-                        setHighlightAnimation(false);
+                        closeMobileMenu();
                       }}
                       aria-label="Floating Gears"
                       className={`relative z-10 transition-all ${animationStyle === 'gears' ? 'scale-125' : 'hover:scale-110'}`}
@@ -921,8 +934,7 @@ export default function Navbar({
                     <button
                       onClick={() => {
                         setAnimationStyle('blueprint');
-                        setMenuOpen(false);
-                        setHighlightAnimation(false);
+                        closeMobileMenu();
                       }}
                       aria-label="Blueprint Grid"
                       className={`relative z-10 transition-all ${animationStyle === 'blueprint' ? 'scale-125' : 'hover:scale-110'}`}
@@ -934,8 +946,7 @@ export default function Navbar({
                     <button
                       onClick={() => {
                         setAnimationStyle('none');
-                        setMenuOpen(false);
-                        setHighlightAnimation(false);
+                        closeMobileMenu();
                       }}
                       aria-label="No Animation"
                       className={`relative z-10 transition-all ${animationStyle === 'none' ? 'scale-125' : 'hover:scale-110'}`}
@@ -959,7 +970,7 @@ export default function Navbar({
                       href="https://github.com/SalilMonga"
                       target="_blank"
                       aria-label="GitHub"
-                      onClick={() => setMenuOpen(false)}
+                      onClick={closeMobileMenu}
                       className="transition-transform hover:scale-110"
                     >
                       <AiFillGithub className={`w-6 h-6 ${darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600'}`} />
@@ -968,7 +979,7 @@ export default function Navbar({
                       href="https://www.linkedin.com/in/salil-monga/"
                       target="_blank"
                       aria-label="LinkedIn"
-                      onClick={() => setMenuOpen(false)}
+                      onClick={closeMobileMenu}
                       className="transition-transform hover:scale-110"
                     >
                       <AiFillLinkedin className={`w-6 h-6 ${darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600'}`} />
@@ -977,7 +988,7 @@ export default function Navbar({
                       href="mailto:monga.monga43@gmail.com"
                       target="_blank"
                       aria-label="Email"
-                      onClick={() => setMenuOpen(false)}
+                      onClick={closeMobileMenu}
                       className="transition-transform hover:scale-110"
                     >
                       <AiFillMail className={`w-6 h-6 ${darkMode ? 'hover:text-purple-400' : 'hover:text-purple-600'}`} />
@@ -1063,6 +1074,25 @@ export default function Navbar({
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+
+        /* Backdrop fade animations */
+        @keyframes backdropFadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes fadeOut {
+          from {
+            opacity: 1;
+          }
+          to {
+            opacity: 0;
           }
         }
 
