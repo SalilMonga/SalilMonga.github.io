@@ -58,7 +58,7 @@ export default function Navbar({
 
   // Mobile first-time tooltip logic
   useEffect(() => {
-    const hasSeenTooltip = localStorage.getItem('portfolioMenuTooltipSeen');
+    const hasSeenTooltip = sessionStorage.getItem('portfolioMenuTooltipSeen');
 
     if (!hasSeenTooltip) {
       setShowMobileBadge(true);
@@ -75,7 +75,7 @@ export default function Navbar({
   const dismissMobileTooltip = () => {
     setShowMobileTooltip(false);
     setShowMobileBadge(false);
-    localStorage.setItem('portfolioMenuTooltipSeen', 'true');
+    sessionStorage.setItem('portfolioMenuTooltipSeen', 'true');
   };
 
   // Handle closing animation (Desktop)
@@ -102,10 +102,10 @@ export default function Navbar({
   const handleMenuOpen = () => {
     setSettingsMenuOpen(true);
 
-    const hasSeenAnimationHighlight = localStorage.getItem('portfolioAnimationHighlightSeen');
+    const hasSeenAnimationHighlight = sessionStorage.getItem('portfolioAnimationHighlightSeen');
     if (!hasSeenAnimationHighlight) {
       setHighlightAnimation(true);
-      localStorage.setItem('portfolioAnimationHighlightSeen', 'true');
+      sessionStorage.setItem('portfolioAnimationHighlightSeen', 'true');
 
       // Remove highlight after 5 seconds
       setTimeout(() => {
