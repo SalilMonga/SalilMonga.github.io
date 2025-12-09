@@ -5,7 +5,7 @@ const featuredProjects = [
     title: 'Cupe Connect',
     tagline: 'Real-Time Social App for College Campuses',
     description:
-      'Co-founded and led engineering for a Gen-Z social app that helps students connect in real time on campus. Built from scratch using Flutter, standing up a real-time backend and shipping the first pilot at NYU. Implemented real-time messaging, geospatial features, and Mapbox rendering with 99%+ crash-free sessions and sub-200ms perceived latency.',
+      'Co-founded and led engineering for a real-time social app that helps students connect on campus. Built from scratch using Flutter, standing up a real-time backend and shipping to 100+ users at NYU pilot with 99%+ crash-free sessions.',
     role: 'Founding Engineer / CTO',
     impact: [
       '100+ students joined during first-day NYU pilot',
@@ -21,29 +21,10 @@ const featuredProjects = [
     imagePlaceholder: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400',
   },
   {
-    title: 'XR Cobot Training Platform',
-    tagline: 'VR Safety Training for UR5 Collaborative Robots',
-    description:
-      'Built a VR training prototype that teaches operators how to safely work with a UR5 cobot in industrial settings. Created a physics-accurate digital twin with inverse kinematics and interaction tooling for simulation-based operator training. Designed to help companies onboard workers faster and reduce safety incidents before anyone touches a physical robot.',
-    role: 'Sole XR Developer and System Designer',
-    impact: [
-      'Built physics-accurate digital twin of UR5 cobot with inverse kinematics',
-      'Designed around real-world safety standards and usage patterns',
-      'Implemented interactive training steps in VR with OpenXR',
-      'Created modular training content system with web backend',
-    ],
-    techStack: ['Unity', 'C#', 'OpenXR', 'Meta Quest', 'Blender', 'Next.js', 'TypeScript', 'PostgreSQL'],
-    links: {
-      github: 'https://github.com/SalilMonga',
-    },
-    imagePlaceholder: 'bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-600',
-    ongoing: true,
-  },
-  {
     title: 'SpendWise',
     tagline: 'AI-Powered Personal Finance Management',
     description:
-      'Built an intelligent budget tracking application that combines AI-powered chatbot assistance with comprehensive expense management. Users can track spending, set budgets, and get personalized financial insights through natural language conversations. Features real-time analytics, category-based tracking, and smart notifications to help users maintain financial wellness.',
+      'Built an intelligent budget tracking application that combines AI-powered chatbot assistance with comprehensive expense management. Users can track spending and get personalized insights through natural language.',
     role: 'Full-Stack Developer',
     impact: [
       'Implemented AI chatbot for natural language expense tracking',
@@ -58,10 +39,29 @@ const featuredProjects = [
     imagePlaceholder: 'bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500',
   },
   {
+    title: 'XR Cobot Training Platform',
+    tagline: 'VR Safety Training for UR5 Collaborative Robots',
+    description:
+      'Built a VR training prototype that teaches operators how to safely work with a UR5 cobot in industrial settings. Created a physics-accurate digital twin to help companies reduce safety incidents.',
+    role: 'Sole XR Developer and System Designer',
+    impact: [
+      'Built physics-accurate digital twin of UR5 cobot with inverse kinematics',
+      'Designed around real-world safety standards and usage patterns',
+      'Implemented interactive training steps in VR with OpenXR',
+      'Created modular training content system with web backend',
+    ],
+    techStack: ['Unity', 'C#', 'OpenXR', 'Meta Quest', 'Blender', 'Next.js', 'TypeScript', 'PostgreSQL'],
+    links: {
+    },
+    imagePlaceholder: 'bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-600',
+    ongoing: true,
+  },
+
+  {
     title: 'Industrial XR Training LMS',
     tagline: 'Enterprise XR Learning Management System',
     description:
-      'Built a comprehensive XR training management tool from concept to MVP for an enterprise SaaS platform. Created a companion web portal that allows users to directly inject 3D assets into Unity VR applications. Implemented role-based authentication, secure data models, and structured training workflows. Migrated infrastructure from Supabase to Azure, establishing CI/CD pipelines for improved deployment reliability.',
+      'Built a comprehensive XR training management tool from concept to MVP for an enterprise SaaS platform. Created a web portal that injects 3D assets directly into Unity VR applications.',
     role: 'Full-Stack Engineer',
     impact: [
       'Designed and implemented complete system from concept to MVP',

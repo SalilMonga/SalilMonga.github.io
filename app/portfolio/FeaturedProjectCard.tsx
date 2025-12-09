@@ -153,7 +153,7 @@ export default function FeaturedProjectCard({
         </div>
 
         {/* Links */}
-        <div className={`flex flex-wrap gap-3 mt-4 ${!hasLinks ? 'min-h-[35px]' : ''}`}>
+        <div className={'flex flex-wrap gap-3 mt-4'}>
           {links.github && (
             <Link
               href={links.github}
