@@ -45,7 +45,7 @@ export default function BackgroundAnimation() {
       } while (!isValidPosition(x, y) && attempts < maxAttempts);
 
       // Only add if we found a valid position
-      if (attempts < maxAttempts) {
+      if (isValidPosition(x, y)) {
         newParticles.push({
           id: i,
           x,
@@ -73,7 +73,7 @@ export default function BackgroundAnimation() {
             width: `${particle.size}px`,
             height: `${particle.size}px`,
             animation: `float ${particle.duration}s ease-in-out infinite ${particle.delay}s, pulse ${particle.duration / 2}s ease-in-out infinite ${particle.delay}s`,
-            transform: `rotate(${particle.rotation}deg)`,
+            ['--initial-rotation' as any]: `${particle.rotation}deg`,
           }}
         >
           {/* Hexagon/Gear shape */}
@@ -151,16 +151,16 @@ export default function BackgroundAnimation() {
       <style jsx>{`
         @keyframes float {
           0%, 100% {
-            transform: translate(0, 0) rotate(0deg);
+            transform: translate(0, 0) rotate(var(--initial-rotation, 0deg));
           }
           25% {
-            transform: translate(30px, -40px) rotate(90deg);
+            transform: translate(30px, -40px) rotate(calc(var(--initial-rotation, 0deg) + 90deg));
           }
           50% {
-            transform: translate(-20px, -80px) rotate(180deg);
+            transform: translate(-20px, -80px) rotate(calc(var(--initial-rotation, 0deg) + 180deg));
           }
           75% {
-            transform: translate(-40px, -40px) rotate(270deg);
+            transform: translate(-40px, -40px) rotate(calc(var(--initial-rotation, 0deg) + 270deg));
           }
         }
 

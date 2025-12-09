@@ -31,6 +31,10 @@ export const Portfolio = () => {
         setShowFloatingNav(false);
       }
     };
+
+    // Call handleScroll on mount to set initial state
+    handleScroll();
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
