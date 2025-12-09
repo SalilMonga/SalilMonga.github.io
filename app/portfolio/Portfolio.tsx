@@ -5,6 +5,7 @@ import "../globals.css";
 import { ContactPage } from "../components/contactPage/ContactPage";
 import Navbar from "../components/ui/Navbar";
 import FloatingNavbar from "../components/ui/FloatingNavbar";
+import BackgroundAnimation from "../components/ui/BackgroundAnimation";
 import HeroSection from "./HeroSection";
 import FeaturedProjectsSection from "./FeaturedProjectsSection";
 // import ProjectSection from "./ProjectSection";
@@ -32,6 +33,9 @@ export const Portfolio = () => {
 
   return (
     <div className={`${darkMode && "dark"} min-h-screen`} style={{ minHeight: '100vh', width: '100vw', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', backgroundAttachment: 'fixed', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
+      {/* Background Animation */}
+      <BackgroundAnimation />
+
       {/* Main Navbar with fade out */}
       <div style={{ transition: 'opacity 0.4s', opacity: showFloatingNav ? 0 : 1, pointerEvents: showFloatingNav ? 'none' : 'auto' }}>
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
@@ -40,7 +44,7 @@ export const Portfolio = () => {
       <div className="z-50" style={{ transition: 'opacity 0.4s', opacity: showFloatingNav ? 1 : 0, pointerEvents: showFloatingNav ? 'auto' : 'none' }}>
         <FloatingNavbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </div>
-      <main className="px-10 pt-16 md:pt-0">
+      <main className="relative z-10 px-10 pt-16 md:pt-0">
         <div className="w-full max-w-[1500px] mx-auto px-4">
           <HeroSection />
           <FeaturedProjectsSection />

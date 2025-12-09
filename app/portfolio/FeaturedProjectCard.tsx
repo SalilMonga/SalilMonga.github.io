@@ -68,7 +68,7 @@ export default function FeaturedProjectCard({
   };
 
   // Check if there are any links
-  const hasLinks = links.github || links.demo || links.appStore || links.instagram;
+  // const hasLinks = links.github || links.demo || links.appStore || links.instagram;
 
   return (
     <div
