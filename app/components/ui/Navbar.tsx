@@ -33,6 +33,7 @@ export default function Navbar({
   const [mobilePillStyle, setMobilePillStyle] = useState({ top: 0, height: 0, opacity: 0 });
   const [showDesktopPulse, setShowDesktopPulse] = useState(true);
   const [showDesktopTooltip, setShowDesktopTooltip] = useState(false);
+  const [showDesktopBanner, setShowDesktopBanner] = useState(false);
   const [showMobileTooltip, setShowMobileTooltip] = useState(false);
   const [showMobileBadge, setShowMobileBadge] = useState(false);
   const [highlightAnimation, setHighlightAnimation] = useState(false);
@@ -55,6 +56,25 @@ export default function Navbar({
 
     return () => clearTimeout(pulseTimer);
   }, []);
+
+  // Desktop banner - shows after 3 seconds if user hasn't clicked menu
+  useEffect(() => {
+    const hasSeenBanner = sessionStorage.getItem('portfolioDesktopMenuBannerSeen');
+
+    if (!hasSeenBanner) {
+      const bannerTimer = setTimeout(() => {
+        setShowDesktopBanner(true);
+      }, 3000);
+
+      return () => clearTimeout(bannerTimer);
+    }
+  }, []);
+
+  // Dismiss desktop banner
+  const dismissDesktopBanner = () => {
+    setShowDesktopBanner(false);
+    sessionStorage.setItem('portfolioDesktopMenuBannerSeen', 'true');
+  };
 
   // Mobile first-time tooltip logic
   useEffect(() => {
@@ -101,6 +121,11 @@ export default function Navbar({
   // Handle opening menu - show animation highlight on first open
   const handleMenuOpen = () => {
     setSettingsMenuOpen(true);
+
+    // Dismiss desktop banner when menu is opened
+    if (showDesktopBanner) {
+      dismissDesktopBanner();
+    }
 
     const hasSeenAnimationHighlight = sessionStorage.getItem('portfolioAnimationHighlightSeen');
     if (!hasSeenAnimationHighlight) {
@@ -436,6 +461,50 @@ export default function Navbar({
                     {/* Tooltip arrow */}
                     <div
                       className={`absolute top-0 right-3 w-2 h-2 transform -translate-y-1/2 rotate-45 ${darkMode ? 'bg-neutral-700' : 'bg-gray-800'}`}
+                    />
+                  </div>
+                )}
+
+                {/* Desktop Banner - appears after 3 seconds */}
+                {showDesktopBanner && !settingsMenuOpen && (
+                  <div
+                    className={`absolute right-0 mt-2 px-4 py-3 rounded-xl text-sm font-medium shadow-2xl z-50 border ${darkMode ? 'bg-gradient-to-br from-neutral-900/98 to-neutral-950/98 text-white border-neutral-700/50' : 'bg-gradient-to-br from-purple-50/98 to-white/98 text-gray-800 border-purple-200'}`}
+                    style={{
+                      animation: 'bannerSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                      minWidth: '260px',
+                      maxWidth: '280px',
+                      backdropFilter: 'blur(10px)',
+                    }}
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0 mt-0.5">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${darkMode ? 'bg-purple-500/20' : 'bg-purple-100'}`}>
+                          <svg className={`w-4 h-4 ${darkMode ? 'text-purple-400' : 'text-purple-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="flex-1 pr-2">
+                        <p className={`font-semibold mb-1 ${darkMode ? 'text-gray-100' : 'text-purple-900'}`}>
+                          Explore customization
+                        </p>
+                        <p className={`text-xs leading-relaxed ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                          Click the menu to customize animations, toggle dark mode, and more!
+                        </p>
+                      </div>
+                      <button
+                        onClick={dismissDesktopBanner}
+                        className={`flex-shrink-0 transition-colors rounded-full p-1 ${darkMode ? 'text-gray-500 hover:text-gray-300 hover:bg-white/5' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'}`}
+                        aria-label="Dismiss banner"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                    {/* Banner arrow pointing to button */}
+                    <div
+                      className={`absolute -top-2 right-4 w-3 h-3 transform rotate-45 ${darkMode ? 'bg-gradient-to-br from-neutral-900 to-neutral-950 border-t border-l border-neutral-700/50' : 'bg-gradient-to-br from-purple-50 to-white border-t border-l border-purple-200'}`}
                     />
                   </div>
                 )}
@@ -1074,6 +1143,18 @@ export default function Navbar({
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+
+        /* Banner slide in animation for desktop */
+        @keyframes bannerSlideIn {
+          from {
+            opacity: 0;
+            transform: translateY(-15px) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
           }
         }
 
