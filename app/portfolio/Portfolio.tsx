@@ -39,8 +39,28 @@ export const Portfolio = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Set background color on html and body elements based on dark mode
+  useEffect(() => {
+    const htmlElement = document.documentElement;
+    const bodyElement = document.body;
+
+    if (darkMode) {
+      htmlElement.style.backgroundColor = '#23272f';
+      bodyElement.style.backgroundColor = '#23272f';
+    } else {
+      htmlElement.style.backgroundColor = '#f8fafc';
+      bodyElement.style.backgroundColor = '#f8fafc';
+    }
+
+    // Cleanup on unmount - restore to default
+    return () => {
+      htmlElement.style.backgroundColor = '';
+      bodyElement.style.backgroundColor = '';
+    };
+  }, [darkMode]);
+
   return (
-    <div className={darkMode ? "dark" : ""} style={{ minHeight: '100vh', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
+    <div className={darkMode ? "dark" : ""} style={{ minHeight: '100vh', backgroundColor: darkMode ? '#23272f' : '#f8fafc', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
       {/* Background Animation */}
       {animationStyle === 'gears' && <BackgroundAnimationGears />}
       {animationStyle === 'blueprint' && <BackgroundAnimationBlueprint />}
