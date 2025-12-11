@@ -40,7 +40,7 @@ export const Portfolio = () => {
   }, []);
 
   return (
-    <div className={`${darkMode && "dark"} min-h-screen`} style={{ minHeight: '100vh', width: '100vw', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', backgroundAttachment: 'fixed', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
+    <div className={`${darkMode && "dark"} min-h-screen`} style={{ minHeight: '100%', width: '100vw', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
       {/* Background Animation */}
       {animationStyle === 'gears' && <BackgroundAnimationGears />}
       {animationStyle === 'blueprint' && <BackgroundAnimationBlueprint />}
@@ -56,7 +56,7 @@ export const Portfolio = () => {
           isCompact={showFloatingNav}
         />
       </div>
-      <main className="relative z-10 px-10 pt-24 md:pt-28">
+      <main className="relative z-10 px-10 pt-24 md:pt-28 pb-10">
         <div className="w-full max-w-[1500px] mx-auto px-4">
           <HeroSection />
           <FeaturedProjectsSection />
