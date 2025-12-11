@@ -40,7 +40,7 @@ export const Portfolio = () => {
   }, []);
 
   return (
-    <div className={`${darkMode && "dark"} min-h-screen`} style={{ width: '100%', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
+    <div className={darkMode ? "dark" : ""} style={{ minHeight: '100vh', background: darkMode ? 'var(--color-gradient-dark)' : 'var(--color-gradient-light)', color: darkMode ? 'var(--color-text-dark)' : 'var(--color-text-light)' }}>
       {/* Background Animation */}
       {animationStyle === 'gears' && <BackgroundAnimationGears />}
       {animationStyle === 'blueprint' && <BackgroundAnimationBlueprint />}
