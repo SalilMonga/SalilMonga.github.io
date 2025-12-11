@@ -38,21 +38,31 @@
   src: url("../public/Burtons.otf");
 }
 
-body {
-  background: transparent;
-  color: var(--color-text-light);
-}
-
-.dark body {
-  background: transparent;
-  color: var(--color-text-dark);
-}
-
-html, body {
+html {
   height: 100%;
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+}
+
+body {
+  min-height: 100%;
+  min-height: 100vh;
+  min-height: 100svh; /* Small viewport height for mobile */
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+  color: var(--color-text-light);
+}
+
+.dark html {
+  background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
+}
+
+.dark body {
+  background: linear-gradient(135deg, #18181b 0%, #23272f 100%);
+  color: var(--color-text-dark);
 }
 
 /* Custom animations for Featured Project Cards */
