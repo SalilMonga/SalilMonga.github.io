@@ -1,11 +1,11 @@
 "use client";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
-import { Bounded } from "./components/Bounded";
-import { Shapes } from "./shapes/Shapes";
-import { NavButton } from "./navButton/navButton";
+import { Bounded } from "../components/Bounded";
+import { Shapes } from "../shapes/Shapes";
+import { NavButton } from "../navButton/navButton";
 import Link from "next/link";
-import FlipTitle from "./components/FlipTitle";
+import FlipTitle from "../components/FlipTitle";
 
 export default function Home() {
   const component = useRef(null);
