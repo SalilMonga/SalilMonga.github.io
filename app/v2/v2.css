@@ -1,0 +1,94 @@
+/* V2 Design System — Engineer's Playground */
+
+:root {
+  /* Background */
+  --v2-bg-primary: #18181B;
+  --v2-bg-secondary: #23272f;
+  --v2-bg-elevated: #2a2f3a;
+
+  /* Accent — desaturated slate-blue, premium not SaaS-bright */
+  --v2-accent-primary: #6B9FC8;
+  --v2-accent-glow: rgba(107, 159, 200, 0.12);
+  --v2-accent-glow-strong: rgba(107, 159, 200, 0.22);
+
+  /* Text */
+  --v2-text-primary: #F4F4F5;
+  --v2-text-secondary: #A1A1AA;
+  --v2-text-muted: #71717A;
+
+  /* Typography */
+  --v2-hero-title-size: clamp(3.5rem, 10vw, 9rem);
+  --v2-hero-tagline-size: clamp(1rem, 2.5vw, 1.75rem);
+
+  /* Easing */
+  --v2-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --v2-ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --v2-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Spacing */
+  --v2-nav-height: 64px;
+}
+
+/* Hero background glow pulse */
+@keyframes v2-glow-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* SVG line stroke animation */
+@keyframes v2-stroke-drift {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Scroll indicator bounce */
+@keyframes v2-scroll-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+/* Role text clip-path reveal */
+@keyframes v2-clip-reveal {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Role text clip-path exit */
+@keyframes v2-clip-exit {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+/* Hotspot pulse */
+@keyframes v2-hotspot-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--v2-accent-glow-strong);
+  }
+  50% {
+    box-shadow: 0 0 0 12px transparent;
+  }
+}

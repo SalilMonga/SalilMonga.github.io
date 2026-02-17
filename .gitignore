@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+/dist
+/.playwright-mcp
 
 # lock files
 package-lock.json

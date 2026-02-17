@@ -146,15 +146,3 @@ export default function SkillsSection() {
     </section>
   );
 }
-
-// Add this to your global CSS (e.g., globals.css or Portfolio.scss):
-// .skills-marquee .marquee-content {
-//   animation: marquee 18s linear infinite;
-// }
-// .skills-marquee .reverse-marquee {
-//   animation-direction: reverse;
-// }
-// @keyframes marquee {
-//   0% { transform: translateX(0); }
-//   100% { transform: translateX(-50%); }
-// } 
