@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { V2Nav } from "./V2Nav";
 import { V2Hero } from "./V2Hero";
+import { DeskView } from "./desk/DeskView";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,7 +24,7 @@ export function V2Experience() {
     <div className="relative">
       <V2Nav />
       <V2Hero />
-      {/* Phase 2: <V2Desk /> */}
+      <DeskView />
       {/* Phase 3: Contact section */}
     </div>
   );

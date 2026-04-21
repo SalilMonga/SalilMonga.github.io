@@ -394,8 +394,8 @@ export function V2Hero() {
           <div className="flex flex-col justify-center pt-24 md:pt-0 order-2 md:order-1">
             <p
               ref={nameRef}
-              className="font-body text-[13px] tracking-[0.2em] uppercase opacity-0 mb-4"
-              style={{ color: "var(--v2-text-muted)" }}
+              className="font-body text-[13px] font-medium tracking-[0.12em] uppercase opacity-0 mb-2.5"
+              style={{ color: "var(--v2-text-secondary)" }}
             >
               Salil Monga
             </p>

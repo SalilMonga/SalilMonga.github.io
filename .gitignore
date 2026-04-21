@@ -20,6 +20,9 @@ pnpm-lock.yaml
 /.next/
 /out/
 
+# superpowers brainstorm artifacts
+.superpowers/
+
 # production
 /build
 
