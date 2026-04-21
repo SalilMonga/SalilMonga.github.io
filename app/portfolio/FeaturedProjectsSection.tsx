@@ -1,6 +1,27 @@
 import FeaturedProjectCard from './FeaturedProjectCard';
+import CompactProjectCard from './CompactProjectCard';
 
-const featuredProjects = [
+/* ── Hero tier: full-width cards with gradient, impact, full details ── */
+const heroProjects = [
+  {
+    title: 'SplitThyBill',
+    tagline: 'Fair Bill Splitting for T-Mobile Family Plans',
+    description:
+      'A mobile-first PWA that replaces Splitwise for splitting T-Mobile family plan bills. Parses PDF bills, splits shared charges evenly across voice lines, attributes per-line charges to each person, and generates shareable read-only links so friends can verify their share without signing up.',
+    role: 'Solo Developer',
+    impact: [
+      '9 active users splitting $470+/month bills every month',
+      'Template-based PDF parser tested against real bills (15 unit tests)',
+      'Shareable links with custom OG images showing bill amounts in iMessage previews',
+      'Complete design system built from scratch — colors, typography, motion, accessibility',
+    ],
+    techStack: ['Next.js 16', 'Supabase', 'pdf-parse', 'Tailwind CSS v4', 'Motion', 'Geist Mono', 'PWA'],
+    links: {
+      github: 'https://github.com/SalilMonga/SplitThyBill',
+      demo: 'https://split-thy-bill.vercel.app',
+    },
+    imagePlaceholder: 'bg-gradient-to-br from-emerald-600 via-green-500 to-teal-400',
+  },
   {
     title: 'Cupe Connect',
     tagline: 'Real-Time Social App for College Campuses',
@@ -20,80 +41,88 @@ const featuredProjects = [
     },
     imagePlaceholder: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400',
   },
+];
+
+/* ── Second tier: compact cards, no gradient header ── */
+const secondaryProjects = [
+  {
+    title: 'HeyDev',
+    tagline: 'Real-time AI CLI status in VS Code terminal tabs',
+    description:
+      'VS Code extension showing live working/waiting status for AI coding agents in terminal tabs.',
+    role: 'Solo Developer',
+    techStack: ['TypeScript', 'VS Code Extension API', 'Node.js', 'Shell Scripting', 'GitHub Actions'],
+    links: {
+      github: 'https://github.com/SalilMonga/HeyDev',
+      marketplace: 'https://marketplace.visualstudio.com/items?itemName=SalilMonga.heydev',
+    },
+  },
   {
     title: 'SpendWise',
-    tagline: 'AI-Powered Personal Finance Management',
+    tagline: 'AI-powered personal finance management',
     description:
-      'Built an intelligent budget tracking application that combines AI-powered chatbot assistance with comprehensive expense management. Users can track spending and get personalized insights through natural language.',
+      'Intelligent budget tracking with AI chatbot assistance and expense management.',
     role: 'Full-Stack Developer',
-    impact: [
-      'Implemented AI chatbot for natural language expense tracking',
-      'Built real-time analytics dashboard with data visualization',
-      'Designed category-based budgeting system with smart alerts',
-      'Integrated secure authentication and data encryption',
-    ],
-    techStack: ['Next.js', 'React', 'TypeScript', 'Node.js', 'OpenAI API', 'PostgreSQL', 'TailwindCSS'],
+    techStack: ['Next.js', 'React', 'TypeScript', 'OpenAI API', 'PostgreSQL', 'TailwindCSS'],
     links: {
       github: 'https://github.com/SalilMonga/BudgetWise_AI_expense_tracker',
     },
-    imagePlaceholder: 'bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500',
   },
   {
     title: 'XR Cobot Training Platform',
-    tagline: 'VR Safety Training for UR5 Collaborative Robots',
+    tagline: 'VR safety training for UR5 collaborative robots',
     description:
-      'Built a VR training prototype that teaches operators how to safely work with a UR5 cobot in industrial settings. Created a physics-accurate digital twin to help companies reduce safety incidents.',
-    role: 'Sole XR Developer and System Designer',
-    impact: [
-      'Built physics-accurate digital twin of UR5 cobot with inverse kinematics',
-      'Designed around real-world safety standards and usage patterns',
-      'Implemented interactive training steps in VR with OpenXR',
-      'Created modular training content system with web backend',
-    ],
-    techStack: ['Unity', 'C#', 'OpenXR', 'Meta Quest', 'Blender', 'Next.js', 'TypeScript', 'PostgreSQL'],
-    links: {
-    },
-    imagePlaceholder: 'bg-gradient-to-br from-cyan-500 via-blue-500 to-indigo-600',
+      'VR training prototype with physics-accurate digital twin for industrial cobot safety.',
+    role: 'XR Developer',
+    techStack: ['Unity', 'C#', 'OpenXR', 'Meta Quest', 'Blender', 'Next.js', 'PostgreSQL'],
+    links: {},
     ongoing: true,
   },
-
   {
     title: 'Industrial XR Training LMS',
-    tagline: 'Enterprise XR Learning Management System',
+    tagline: 'Enterprise XR learning management system',
     description:
-      'Built a comprehensive XR training management tool from concept to MVP for an enterprise SaaS platform. Created a web portal that injects 3D assets directly into Unity VR applications.',
+      'Web portal that injects 3D assets directly into Unity VR applications for enterprise training.',
     role: 'Full-Stack Engineer',
-    impact: [
-      'Designed and implemented complete system from concept to MVP',
-      'Built 3D asset injection pipeline from web portal to Unity VR app',
-      'Migrated PoC from Supabase to Azure with full CI/CD automation',
-      'Reduced operational overhead through automated asset management',
-    ],
-    techStack: ['Unity', 'React', 'Next.js', 'TypeScript', 'Azure', 'MySQL', 'Container Apps', 'Blob Storage'],
+    techStack: ['Unity', 'React', 'Next.js', 'TypeScript', 'Azure', 'MySQL', 'Container Apps'],
     links: {},
-    imagePlaceholder: 'bg-gradient-to-br from-violet-500 via-purple-500 to-fuchsia-500',
   },
 ];
 
 export default function FeaturedProjectsSection() {
   return (
-    <section id="featured-projects" className="py-16">
+    <section id="featured-projects" className="pt-16 pb-8">
       <div className="w-full max-w-6xl mx-auto px-4">
         <div className="mb-12 text-center">
           <h2 className="text-4xl font-bold mb-3 text-neutral-900 dark:text-neutral-100">
             Featured Projects
           </h2>
           <p className="text-lg text-neutral-600 dark:text-neutral-400">
-            Real products shipped—from social apps to VR training systems
+            Real products shipped — from fintech tools to developer extensions
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {featuredProjects.map((project, index) => (
+        {/* Hero tier: full-width cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+          {heroProjects.map((project, index) => (
             <div key={project.title} style={{ animationDelay: `${index * 150}ms` }}>
               <FeaturedProjectCard {...project} />
             </div>
           ))}
+        </div>
+
+        {/* Second tier: compact cards */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-4">
+            More Projects
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {secondaryProjects.map((project, index) => (
+              <div key={project.title} style={{ animationDelay: `${(index + 2) * 150}ms` }}>
+                <CompactProjectCard {...project} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

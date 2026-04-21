@@ -41,3 +41,12 @@ yarn-error.log*
 next-env.d.ts
 
 .next
+
+# superpowers/playwright artifacts
+.superpowers/
+.playwright-mcp/
+
+# debug screenshots and demo files
+*.png
+!public/**/*.png
+public/demo-*.html

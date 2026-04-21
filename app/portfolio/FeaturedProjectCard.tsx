@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRef, useState, useEffect } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaCheckCircle, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaCheckCircle, FaInstagram, FaPuzzlePiece } from 'react-icons/fa';
 
 interface FeaturedProjectCardProps {
   title: string;
@@ -14,6 +14,7 @@ interface FeaturedProjectCardProps {
     demo?: string;
     appStore?: string;
     instagram?: string;
+    marketplace?: string;
   };
   imagePlaceholder?: string;
   ongoing?: boolean;
@@ -77,7 +78,7 @@ export default function FeaturedProjectCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`group relative bg-neutral-100 dark:bg-neutral-900 rounded-xl shadow-md border border-neutral-200 dark:border-neutral-800 overflow-hidden transition-all duration-700 ${
+      className={`group relative bg-neutral-100 dark:bg-neutral-900 rounded-xl shadow-md border border-neutral-200 dark:border-neutral-800 overflow-hidden transition-all duration-700 h-full flex flex-col ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       } hover:shadow-2xl hover:scale-[1.02]`}
       style={{
@@ -112,7 +113,7 @@ export default function FeaturedProjectCard({
       </div>
 
       {/* Content Section */}
-      <div className="p-6">
+      <div className="p-6 flex-1 flex flex-col">
         {/* Role Badge */}
         <div className="mb-4">
           <span className="inline-block bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded-full text-sm font-semibold">
@@ -154,7 +155,7 @@ export default function FeaturedProjectCard({
         </div>
 
         {/* Links */}
-        <div className={'flex flex-wrap gap-3 mt-4'}>
+        <div className={'flex flex-wrap gap-3 mt-auto pt-4'}>
           {links.github && (
             <Link
               href={links.github}
@@ -197,6 +198,17 @@ export default function FeaturedProjectCard({
             >
               <FaInstagram />
               Instagram
+            </Link>
+          )}
+          {links.marketplace && (
+            <Link
+              href={links.marketplace}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors text-sm font-medium"
+            >
+              <FaPuzzlePiece />
+              VS Code Marketplace
             </Link>
           )}
         </div>
