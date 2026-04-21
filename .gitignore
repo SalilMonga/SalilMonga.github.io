@@ -42,6 +42,9 @@ next-env.d.ts
 
 .next
 
+# IDE settings
+.vscode/settings.json
+
 # superpowers/playwright artifacts
 .superpowers/
 .playwright-mcp/
